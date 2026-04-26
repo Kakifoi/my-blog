@@ -56,16 +56,23 @@ const posts = (await getCollection('blog')).sort(
 			<ul class="post-list">
 				{posts.map((post) => (
 					<li class="post-card">
-						<div class="post-meta">
-							{post.data.category && (
-								<a href={`/categories/${post.data.category}/`} class="cat-badge">{post.data.category}</a>
-							)}
-							<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+						{post.data.heroImage && (
+							<a href={`/blog/${post.id}/`} class="post-thumb">
+								<img src={post.data.heroImage} alt={post.data.title} />
+							</a>
+						)}
+						<div class="post-body">
+							<div class="post-meta">
+								{post.data.category && (
+									<a href={`/categories/${post.data.category}/`} class="cat-badge">{post.data.category}</a>
+								)}
+								<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+							</div>
+							<h3 class="post-title">
+								<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+							</h3>
+							<p class="post-desc">{post.data.description}</p>
 						</div>
-						<h3 class="post-title">
-							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-						</h3>
-						<p class="post-desc">{post.data.description}</p>
 					</li>
 				))}
 			</ul>
@@ -167,12 +174,31 @@ const posts = (await getCollection('blog')).sort(
 	background: #fff;
 	border: 1px solid #e8e8e8;
 	border-radius: 6px;
-	padding: 1.1em 1.4em;
 	box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 	transition: box-shadow 0.2s;
+	display: flex;
+	align-items: stretch;
+	overflow: hidden;
 }
 .post-card:hover {
 	box-shadow: 0 3px 10px rgba(0,0,0,0.09);
+}
+
+.post-thumb {
+	flex-shrink: 0;
+	width: 160px;
+}
+.post-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.post-body {
+	padding: 1.1em 1.4em;
+	flex: 1;
+	min-width: 0;
 }
 
 .post-meta {
@@ -211,5 +237,6 @@ const posts = (await getCollection('blog')).sort(
 
 @media (max-width: 560px) {
 	.cat-cards { grid-template-columns: 1fr; }
+	.post-thumb { width: 110px; }
 }
 </style>
