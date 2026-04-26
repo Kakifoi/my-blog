@@ -1,0 +1,116 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`プライバシー＆免責事項 | ${SITE_TITLE}`} description="プライバシーポリシーと免責事項" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1 class="section-heading">プライバシー＆免責事項</h1>
+
+			<div class="privacy-wrap">
+				<section>
+					<h2>当サイトに掲載されている広告について</h2>
+					<p>当サイトでは、第三者配信の広告サービス（Googleアドセンス、A8.net、Amazonアソシエイト、Canva、felmat、PRESCO、RENTRACKS、seedApp、TGアフィリエイト、アクセストレード、インフォトップ、バリューコマース、もしもアフィリエイト）を利用しています。</p>
+					<p>このような広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報『Cookie』(氏名、住所、メールアドレス、電話番号は含まれません) を使用することがあります。</p>
+					<p>またGoogleアドセンスに関して、このプロセスの詳細やこのような情報が広告配信事業者に使用されないようにする方法については、こちらをご覧ください。</p>
+					<p>当サイトで収集した情報について、広告配信事業者に対して以下の訪問者情報を送信しています。</p>
+					<ul>
+						<li>Cookie等の利用者を識別するための識別子</li>
+						<li>閲覧しているURLやサイトタイトル名の情報、閲覧時刻</li>
+						<li>ブラウザやOS、端末の種別、画面サイズやIPアドレスなどの利用環境に関する情報</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Amazonアソシエイト・プログラムについて</h2>
+					<p>当サイトは、amazon.co.jpを宣伝しリンクすることによって、サイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイト宣伝プログラムである「Amazonアソシエイト・プログラム」の参加者です。</p>
+					<p>Amazonのアソシエイトとして、カキフォイの日記は適格販売により収入を得ています。</p>
+				</section>
+
+				<section>
+					<h2>当サイトが使用しているアクセス解析ツールについて</h2>
+					<p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を利用しています。</p>
+					<p>このGoogleアナリティクスはトラフィックデータの収集のためにCookieを使用しています。このトラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
+					<p>この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。</p>
+					<p>当サイトで収集した情報のうち、ツール提供事業者に対して以下の訪問者情報を送信しています。</p>
+					<ul>
+						<li>Cookie等の利用者を識別するための識別子</li>
+						<li>閲覧しているURLやサイトタイトル名の情報、閲覧時刻</li>
+						<li>ブラウザやOS、端末の種別、画面サイズやIPアドレスなどの利用環境に関する情報</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>個人情報の利用目的について</h2>
+					<p>当サイトでは、お問い合わせやコメント投稿の際に氏名・メールアドレス等の個人情報を入力いただく場合があります。</p>
+					<p>取得した個人情報は、必要な連絡のみに利用させていただくもので、これらの目的以外では利用いたしません。</p>
+					<p>また、取得した個人情報は適切に管理し、以下に該当する場合を除いて第三者に開示することはありません。</p>
+					<ul>
+						<li>本人の同意が得られた場合</li>
+						<li>法令により開示が求められた場合</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>免責事項</h2>
+					<p>当サイトのコンテンツや情報において、可能な限り正確な情報を提供するよう努めておりますが、必ずしもその内容の正確性および完全性を保証するものではありません。当該情報に基づいて被ったいかなる損害について、一切責任を負うものではございませんのであらかじめご了承ください。</p>
+					<p>また、当サイトから移動された先のホームページは、当サイトが管理、運営するものではありません。移動先サイトで提供される情報の真偽、サービス等につきましても一切の責任も負いかねますので、ご了承ください。</p>
+				</section>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+.privacy-wrap {
+	max-width: 720px;
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 8px;
+	padding: 2em 2.5em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+section {
+	margin-bottom: 2em;
+}
+section:last-child {
+	margin-bottom: 0;
+}
+
+h2 {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #CC0000;
+	border-left: 3px solid #CC0000;
+	padding-left: 0.6em;
+	margin: 0 0 0.75em;
+}
+
+p {
+	font-size: 0.9rem;
+	color: #444;
+	line-height: 1.8;
+	margin-bottom: 0.75em;
+}
+
+ul {
+	margin: 0.5em 0 0.75em 1.2em;
+	padding: 0;
+}
+
+li {
+	font-size: 0.9rem;
+	color: #444;
+	line-height: 1.8;
+}
+</style>
