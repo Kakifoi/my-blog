@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -44,7 +43,7 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } = 
 					<!-- アイキャッチ画像 -->
 					{heroImage && (
 						<div class="hero-image">
-							<Image width={760} height={400} src={heroImage} alt={title} />
+							<img src={heroImage} alt={title} />
 						</div>
 					)}
 
