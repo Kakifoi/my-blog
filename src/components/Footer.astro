@@ -1,0 +1,56 @@
+---
+const today = new Date();
+---
+
+<footer>
+	<div class="footer-inner">
+		<div class="footer-links">
+			<a href="/blog">すべての記事</a>
+			<a href="/categories">カテゴリ一覧</a>
+			<a href="/tags">タグ一覧</a>
+			<a href="/search">検索</a>
+			<a href="/about">このサイトについて</a>
+			<a href="/rss.xml">RSS</a>
+		</div>
+		<p class="copyright">&copy; {today.getFullYear()} My Blog. All rights reserved.</p>
+	</div>
+</footer>
+
+<style>
+footer {
+	background: #CC0000;
+	color: rgba(255,255,255,0.85);
+	margin-top: 3em;
+}
+
+.footer-inner {
+	max-width: 780px;
+	margin: 0 auto;
+	padding: 1.75em 1em;
+	text-align: center;
+}
+
+.footer-links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.25em 1.5em;
+	margin-bottom: 1em;
+}
+
+.footer-links a {
+	color: rgba(255,255,255,0.85);
+	font-size: 0.85rem;
+	text-decoration: none;
+}
+.footer-links a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+.copyright {
+	font-size: 0.78rem;
+	color: rgba(255,255,255,0.65);
+	margin: 0;
+}
+</style>

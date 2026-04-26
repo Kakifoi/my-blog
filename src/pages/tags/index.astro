@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const posts = await getCollection('blog');
+const tagMap = new Map<string, number>();
+for (const post of posts) {
+	for (const tag of post.data.tags ?? []) {
+		tagMap.set(tag, (tagMap.get(tag) ?? 0) + 1);
+	}
+}
+const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`タグ一覧 | ${SITE_TITLE}`} description="タグ一覧" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1 class="section-heading">タグ一覧</h1>
+			{tags.length === 0 ? (
+				<p class="empty">タグはまだありません。</p>
+			) : (
+				<div class="wrap">
+					<div class="tag-cloud">
+						{tags.map(([tag, count]) => (
+							<a href={`/tags/${tag}/`} class="tag-item">
+								<span class="tag-pill">{tag}</span>
+								<span class="tag-count">{count}</span>
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+.wrap {
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 8px;
+	padding: 1.5em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.tag-cloud {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6em;
+}
+
+.tag-item {
+	display: flex;
+	align-items: center;
+	gap: 0.3em;
+	text-decoration: none;
+}
+.tag-item:hover { text-decoration: none; }
+
+.tag-count {
+	font-size: 0.72rem;
+	color: #999;
+	background: #f0f0f0;
+	border-radius: 10px;
+	padding: 0 6px;
+	line-height: 1.6;
+}
+
+.empty { color: #999; }
+</style>

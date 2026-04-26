@@ -1,0 +1,215 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+
+			<!-- 自己紹介ボックス -->
+			<div class="welcome-box">
+				<div class="welcome-icon-title">
+					<span class="welcome-icon">✈</span>
+					<div>
+						<div class="welcome-title">{SITE_TITLE}へようこそ</div>
+						<div class="welcome-sub">日常・旅行・テクノロジーを発信するブログ</div>
+					</div>
+				</div>
+				<p class="welcome-desc">{SITE_DESCRIPTION}</p>
+			</div>
+
+			<!-- カテゴリカード -->
+			<div class="cat-cards">
+				<a href="/categories/テクノロジー/" class="cat-card">
+					<span class="cat-card-icon">💻</span>
+					<div class="cat-card-title">テクノロジー</div>
+					<div class="cat-card-sub">最新技術・Web・アプリ</div>
+				</a>
+				<a href="/categories/ライフスタイル/" class="cat-card">
+					<span class="cat-card-icon">🌿</span>
+					<div class="cat-card-title">ライフスタイル</div>
+					<div class="cat-card-sub">日常・生活・Tips</div>
+				</a>
+				<a href="/blog" class="cat-card">
+					<span class="cat-card-icon">📝</span>
+					<div class="cat-card-title">すべての記事</div>
+					<div class="cat-card-sub">全カテゴリを見る</div>
+				</a>
+			</div>
+
+			<!-- 最新記事 -->
+			<h2 class="section-heading">最新記事</h2>
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li class="post-card">
+						<div class="post-meta">
+							{post.data.category && (
+								<a href={`/categories/${post.data.category}/`} class="cat-badge">{post.data.category}</a>
+							)}
+							<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+						</div>
+						<h3 class="post-title">
+							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+						</h3>
+						<p class="post-desc">{post.data.description}</p>
+					</li>
+				))}
+			</ul>
+
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+/* 自己紹介ボックス */
+.welcome-box {
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 8px;
+	padding: 1.5em 1.75em;
+	margin-bottom: 1.75em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.welcome-icon-title {
+	display: flex;
+	align-items: center;
+	gap: 0.75em;
+	margin-bottom: 0.75em;
+}
+
+.welcome-icon { font-size: 2rem; }
+
+.welcome-title {
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #222;
+}
+
+.welcome-sub {
+	font-size: 0.82rem;
+	color: #888;
+}
+
+.welcome-desc {
+	font-size: 0.9rem;
+	color: #555;
+	margin: 0;
+	line-height: 1.7;
+}
+
+/* カテゴリカード */
+.cat-cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1em;
+	margin-bottom: 2em;
+}
+
+.cat-card {
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 8px;
+	padding: 1.25em 1em;
+	text-align: center;
+	text-decoration: none;
+	color: inherit;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+	transition: box-shadow 0.2s, border-color 0.2s;
+}
+.cat-card:hover {
+	box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+	border-color: #CC0000;
+	text-decoration: none;
+	color: inherit;
+}
+
+.cat-card-icon { font-size: 1.8rem; display: block; margin-bottom: 0.4em; }
+
+.cat-card-title {
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: #222;
+	margin-bottom: 0.25em;
+}
+
+.cat-card-sub {
+	font-size: 0.78rem;
+	color: #888;
+}
+
+/* 記事リスト */
+.post-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75em;
+}
+
+.post-card {
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 6px;
+	padding: 1.1em 1.4em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+	transition: box-shadow 0.2s;
+}
+.post-card:hover {
+	box-shadow: 0 3px 10px rgba(0,0,0,0.09);
+}
+
+.post-meta {
+	display: flex;
+	align-items: center;
+	gap: 0.6em;
+	margin-bottom: 0.4em;
+}
+
+.post-date {
+	font-size: 0.8rem;
+	color: #999;
+}
+
+.post-title {
+	font-size: 1rem;
+	font-weight: 700;
+	margin: 0 0 0.4em;
+	line-height: 1.5;
+}
+.post-title a {
+	color: #222;
+	text-decoration: none;
+}
+.post-title a:hover {
+	color: #CC0000;
+	text-decoration: none;
+}
+
+.post-desc {
+	font-size: 0.85rem;
+	color: #666;
+	margin: 0;
+	line-height: 1.65;
+}
+
+@media (max-width: 560px) {
+	.cat-cards { grid-template-columns: 1fr; }
+}
+</style>

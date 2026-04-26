@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const tagSet = new Set<string>();
+	for (const post of posts) {
+		for (const tag of post.data.tags ?? []) tagSet.add(tag);
+	}
+	return [...tagSet].map((tag) => ({
+		params: { tag },
+		props: {
+			tag,
+			posts: posts
+				.filter((p) => p.data.tags?.includes(tag))
+				.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+		},
+	}));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`タグ: ${tag} | ${SITE_TITLE}`} description={`「${tag}」タグの記事一覧`} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<a href="/tags" class="back-link">← タグ一覧へ戻る</a>
+			<h1 class="section-heading">タグ: {tag}（{posts.length}件）</h1>
+
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li class="post-card">
+						<div class="post-meta">
+							{post.data.category && (
+								<a href={`/categories/${post.data.category}/`} class="cat-badge">{post.data.category}</a>
+							)}
+							<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+						</div>
+						<h2 class="post-title">
+							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+						</h2>
+						<p class="post-desc">{post.data.description}</p>
+					</li>
+				))}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+.back-link { font-size: 0.85rem; color: #CC0000; display: inline-block; margin-bottom: 0.75em; }
+.back-link:hover { text-decoration: underline; }
+
+.post-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75em; }
+
+.post-card {
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 6px;
+	padding: 1.1em 1.4em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+	transition: box-shadow 0.2s;
+}
+.post-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.09); }
+
+.post-meta { display: flex; align-items: center; gap: 0.6em; margin-bottom: 0.4em; }
+.post-date { font-size: 0.8rem; color: #999; }
+.post-title { font-size: 1rem; font-weight: 700; margin: 0 0 0.4em; line-height: 1.5; }
+.post-title a { color: #222; text-decoration: none; }
+.post-title a:hover { color: #CC0000; text-decoration: none; }
+.post-desc { font-size: 0.85rem; color: #666; margin: 0; line-height: 1.65; }
+</style>

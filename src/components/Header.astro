@@ -1,0 +1,107 @@
+---
+import { SITE_TITLE } from '../consts';
+---
+
+<header>
+	<!-- 上部：赤背景・サイト名 -->
+	<div class="header-top">
+		<div class="header-top-inner">
+			<a href="/" class="logo">
+				<span class="logo-icon">✈</span>
+				<span class="logo-text">{SITE_TITLE}</span>
+			</a>
+			<span class="tagline">ブログ × 旅行 × 日常</span>
+		</div>
+	</div>
+
+	<!-- 下部：白背景・ナビ -->
+	<div class="header-nav">
+		<nav class="nav-inner">
+			<a href="/categories/テクノロジー/">テクノロジー</a>
+			<a href="/categories/ライフスタイル/">ライフスタイル</a>
+			<a href="/blog">すべての記事</a>
+			<a href="/tags">タグ一覧</a>
+			<a href="/search">🔍 検索</a>
+		</nav>
+	</div>
+</header>
+
+<style>
+header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+.header-top {
+	background: #CC0000;
+}
+
+.header-top-inner {
+	max-width: 780px;
+	margin: 0 auto;
+	padding: 0.7em 1em;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 0.4em;
+	text-decoration: none;
+}
+.logo:hover { text-decoration: none; }
+
+.logo-icon {
+	font-size: 1.3rem;
+}
+
+.logo-text {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #fff;
+	letter-spacing: 0.02em;
+}
+
+.tagline {
+	font-size: 0.8rem;
+	color: rgba(255,255,255,0.85);
+}
+
+.header-nav {
+	background: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+.nav-inner {
+	max-width: 780px;
+	margin: 0 auto;
+	padding: 0 1em;
+	display: flex;
+	align-items: center;
+	gap: 0;
+}
+
+.nav-inner a {
+	display: inline-block;
+	padding: 0.65em 1.1em;
+	font-size: 0.85rem;
+	color: #444;
+	text-decoration: none;
+	border-bottom: 2px solid transparent;
+	transition: color 0.15s, border-color 0.15s;
+}
+.nav-inner a:hover {
+	color: #CC0000;
+	border-bottom-color: #CC0000;
+	text-decoration: none;
+}
+
+@media (max-width: 560px) {
+	.tagline { display: none; }
+	.nav-inner a { padding: 0.65em 0.6em; font-size: 0.78rem; }
+}
+</style>

@@ -1,0 +1,61 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`検索 | ${SITE_TITLE}`} description="サイト内検索" />
+		<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1 class="page-title">サイト内検索</h1>
+			<div id="search"></div>
+		</main>
+		<Footer />
+
+		<script src="/pagefind/pagefind-ui.js" is:inline></script>
+		<script is:inline>
+			window.addEventListener('DOMContentLoaded', () => {
+				new PagefindUI({
+					element: '#search',
+					showImages: true,
+					translations: {
+						placeholder: 'キーワードを入力...',
+						zero_results: '[QUERY] の検索結果はありませんでした。',
+					},
+				});
+			});
+		</script>
+	</body>
+</html>
+
+<style>
+.page-title {
+	font-size: 1.6rem;
+	font-weight: 700;
+	margin-bottom: 1.5em;
+}
+
+#search {
+	max-width: 760px;
+}
+
+:global(.pagefind-ui__search-input) {
+	border: 2px solid #ddd !important;
+	border-radius: 4px !important;
+	font-size: 1rem !important;
+}
+:global(.pagefind-ui__search-input:focus) {
+	border-color: #E60012 !important;
+	outline: none !important;
+}
+:global(.pagefind-ui__result-link) {
+	color: #E60012 !important;
+}
+</style>
