@@ -9,7 +9,6 @@ import { SITE_TITLE } from '../consts';
 <html lang="ja">
 	<head>
 		<BaseHead title={`お問い合わせ | ${SITE_TITLE}`} description="お問い合わせフォーム" />
-		<script src="https://www.google.com/recaptcha/api.js?render=6LduOswsAAAAAGh4kT26Iv0hFYbHiWVCeXNie4CC"></script>
 	</head>
 	<body>
 		<Header />
@@ -23,7 +22,6 @@ import { SITE_TITLE } from '../consts';
 					<input type="hidden" name="subject" value="カキフォイの日記 お問い合わせ" />
 					<input type="hidden" name="from_name" value="カキフォイの日記" />
 					<input type="hidden" name="redirect" value="https://kakifoi.net/contact/thanks" />
-					<input type="hidden" name="g-recaptcha-response" id="recaptchaToken" />
 					<input type="checkbox" name="botcheck" style="display:none" />
 
 					<div class="form-group">
@@ -48,23 +46,12 @@ import { SITE_TITLE } from '../consts';
 						</label>
 					</div>
 
-					<button type="button" id="submitBtn" class="btn-submit">送信する</button>
+					<button type="submit" class="btn-submit">送信する</button>
 				</form>
 			</div>
 		</main>
 		<Footer />
 
-		<script>
-			document.getElementById('submitBtn').addEventListener('click', function() {
-				grecaptcha.ready(function() {
-					grecaptcha.execute('6LduOswsAAAAAGh4kT26Iv0hFYbHiWVCeXNie4CC', { action: 'submit' })
-						.then(function(token) {
-							document.getElementById('recaptchaToken').value = token;
-							document.getElementById('contact-form').submit();
-						});
-				});
-			});
-		</script>
 	</body>
 </html>
 
