@@ -9,7 +9,6 @@ import { SITE_TITLE } from '../consts';
 <html lang="ja">
 	<head>
 		<BaseHead title={`お問い合わせ | ${SITE_TITLE}`} description="お問い合わせフォーム" />
-		<script src="https://www.google.com/recaptcha/api.js?render=6LduOswsAAAAAGh4kT26Iv0hFYbHiWVCeXNie4CC"></script>
 	</head>
 	<body>
 		<Header />
@@ -22,7 +21,7 @@ import { SITE_TITLE } from '../consts';
 					<input type="hidden" name="access_key" value="f41dc156-a402-4096-bc86-6a64538188d7" />
 					<input type="hidden" name="subject" value="カキフォイの日記 お問い合わせ" />
 					<input type="hidden" name="from_name" value="カキフォイの日記" />
-					<input type="hidden" name="g-recaptcha-response" id="recaptcha-token" />
+					<input type="hidden" name="redirect" value="https://kakifoi.net/contact/thanks" />
 					<input type="checkbox" name="botcheck" style="display:none" />
 
 					<div class="form-group">
@@ -42,85 +41,16 @@ import { SITE_TITLE } from '../consts';
 
 					<div class="form-group privacy-group">
 						<label class="checkbox-label">
-							<input type="checkbox" id="privacy" name="privacy" />
+							<input type="checkbox" id="privacy" required />
 							<span><a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="required">必須</span></span>
 						</label>
-						<p id="privacy-error" class="privacy-error" style="display:none">プライバシーポリシーへの同意が必要です。</p>
 					</div>
 
 					<button type="submit" class="btn-submit">送信する</button>
 				</form>
-
-				<div id="success-msg" class="success-msg" style="display:none">
-					<span class="success-icon">✅</span>
-					<p>お問い合わせを受け付けました。<br>ありがとうございます！</p>
-				</div>
-
-				<div id="error-msg" class="error-msg" style="display:none">
-					<p>送信に失敗しました。しばらく経ってからもう一度お試しください。</p>
-				</div>
 			</div>
 		</main>
 		<Footer />
-
-		<script>
-			const RECAPTCHA_SITE_KEY = '6LduOswsAAAAAGh4kT26Iv0hFYbHiWVCeXNie4CC';
-
-			const form = document.getElementById('contact-form') as HTMLFormElement;
-			const successMsg = document.getElementById('success-msg') as HTMLElement;
-			const errorMsg = document.getElementById('error-msg') as HTMLElement;
-			const privacyCheckbox = document.getElementById('privacy') as HTMLInputElement;
-			const privacyError = document.getElementById('privacy-error') as HTMLElement;
-			const recaptchaToken = document.getElementById('recaptcha-token') as HTMLInputElement;
-
-			form.addEventListener('submit', async (e) => {
-				e.preventDefault();
-
-				if (!privacyCheckbox.checked) {
-					privacyError.style.display = 'block';
-					privacyCheckbox.focus();
-					return;
-				}
-				privacyError.style.display = 'none';
-
-				const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-				btn.textContent = '送信中...';
-				btn.disabled = true;
-
-				try {
-					// reCAPTCHA v3 トークン取得（ready()でAPI準備完了を待つ）
-					const token = await new Promise<string>((resolve, reject) => {
-						(window as any).grecaptcha.ready(async () => {
-							try {
-								const t = await (window as any).grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'contact' });
-								resolve(t);
-							} catch (err) {
-								reject(err);
-							}
-						});
-					});
-					recaptchaToken.value = token;
-
-					const res = await fetch('https://api.web3forms.com/submit', {
-						method: 'POST',
-						body: new FormData(form),
-					});
-					const data = await res.json();
-
-					if (data.success) {
-						window.location.href = '/contact/thanks';
-					} else {
-						errorMsg.style.display = 'block';
-						btn.textContent = '送信する';
-						btn.disabled = false;
-					}
-				} catch {
-					errorMsg.style.display = 'block';
-					btn.textContent = '送信する';
-					btn.disabled = false;
-				}
-			});
-		</script>
 	</body>
 </html>
 
@@ -206,23 +136,6 @@ textarea {
 .btn-submit:hover { background: #aa0000; }
 .btn-submit:disabled { background: #ccc; cursor: not-allowed; }
 
-.success-msg {
-	text-align: center;
-	padding: 2em;
-	color: #333;
-}
-.success-icon { font-size: 2.5rem; display: block; margin-bottom: 0.5em; }
-
-.error-msg {
-	margin-top: 1em;
-	padding: 0.75em 1em;
-	background: #fff0f0;
-	border: 1px solid #ffb3b3;
-	border-radius: 5px;
-	color: #cc0000;
-	font-size: 0.9rem;
-}
-
 .privacy-group {
 	margin-bottom: 1.5em;
 }
@@ -246,11 +159,5 @@ textarea {
 .checkbox-label a {
 	color: #CC0000;
 	text-decoration: underline;
-}
-
-.privacy-error {
-	margin-top: 0.4em;
-	color: #cc0000;
-	font-size: 0.85rem;
 }
 </style>
