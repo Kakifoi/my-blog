@@ -38,6 +38,14 @@ import { SITE_TITLE } from '../consts';
 						<textarea id="message" name="message" required rows="6" placeholder="お問い合わせ内容を入力してください"></textarea>
 					</div>
 
+					<div class="form-group privacy-group">
+						<label class="checkbox-label">
+							<input type="checkbox" id="privacy" name="privacy" />
+							<span><a href="/privacy" target="_blank" rel="noopener">プライバシーポリシー</a>に同意する <span class="required">必須</span></span>
+						</label>
+						<p id="privacy-error" class="privacy-error" style="display:none">プライバシーポリシーへの同意が必要です。</p>
+					</div>
+
 					<button type="submit" class="btn-submit">送信する</button>
 				</form>
 
@@ -58,8 +66,19 @@ import { SITE_TITLE } from '../consts';
 			const successMsg = document.getElementById('success-msg') as HTMLElement;
 			const errorMsg = document.getElementById('error-msg') as HTMLElement;
 
+			const privacyCheckbox = document.getElementById('privacy') as HTMLInputElement;
+			const privacyError = document.getElementById('privacy-error') as HTMLElement;
+
 			form.addEventListener('submit', async (e) => {
 				e.preventDefault();
+
+				if (!privacyCheckbox.checked) {
+					privacyError.style.display = 'block';
+					privacyCheckbox.focus();
+					return;
+				}
+				privacyError.style.display = 'none';
+
 				const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
 				btn.textContent = '送信中...';
 				btn.disabled = true;
@@ -185,5 +204,36 @@ textarea {
 	border-radius: 5px;
 	color: #cc0000;
 	font-size: 0.9rem;
+}
+
+.privacy-group {
+	margin-bottom: 1.5em;
+}
+
+.checkbox-label {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	font-weight: normal;
+	cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+	width: 1.1em;
+	height: 1.1em;
+	accent-color: #CC0000;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.checkbox-label a {
+	color: #CC0000;
+	text-decoration: underline;
+}
+
+.privacy-error {
+	margin-top: 0.4em;
+	color: #cc0000;
+	font-size: 0.85rem;
 }
 </style>
