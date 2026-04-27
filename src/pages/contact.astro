@@ -99,8 +99,7 @@ import { SITE_TITLE } from '../consts';
 					const data = await res.json();
 
 					if (data.success) {
-						form.style.display = 'none';
-						successMsg.style.display = 'block';
+						window.location.href = '/contact/thanks';
 					} else {
 						errorMsg.style.display = 'block';
 						btn.textContent = '送信する';
