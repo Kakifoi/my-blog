@@ -9,6 +9,7 @@ import { SITE_TITLE } from '../consts';
 <html lang="ja">
 	<head>
 		<BaseHead title={`お問い合わせ | ${SITE_TITLE}`} description="お問い合わせフォーム" />
+		<script src="https://www.google.com/recaptcha/api.js?render=6LduOswsAAAAAGh4kT26Iv0hFYbHiWVCeXNie4CC"></script>
 	</head>
 	<body>
 		<Header />
@@ -17,10 +18,11 @@ import { SITE_TITLE } from '../consts';
 			<p class="lead">ご質問・ご意見などお気軽にどうぞ。通常2〜3日以内にご返信いたします。</p>
 
 			<div class="form-wrap">
-				<form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+				<form id="contact-form">
 					<input type="hidden" name="access_key" value="f41dc156-a402-4096-bc86-6a64538188d7" />
 					<input type="hidden" name="subject" value="カキフォイの日記 お問い合わせ" />
 					<input type="hidden" name="from_name" value="カキフォイの日記" />
+					<input type="hidden" name="g-recaptcha-response" id="recaptcha-token" />
 					<input type="checkbox" name="botcheck" style="display:none" />
 
 					<div class="form-group">
@@ -62,12 +64,14 @@ import { SITE_TITLE } from '../consts';
 		<Footer />
 
 		<script>
+			const RECAPTCHA_SITE_KEY = '6LduOswsAAAAAGh4kT26Iv0hFYbHiWVCeXNie4CC';
+
 			const form = document.getElementById('contact-form') as HTMLFormElement;
 			const successMsg = document.getElementById('success-msg') as HTMLElement;
 			const errorMsg = document.getElementById('error-msg') as HTMLElement;
-
 			const privacyCheckbox = document.getElementById('privacy') as HTMLInputElement;
 			const privacyError = document.getElementById('privacy-error') as HTMLElement;
+			const recaptchaToken = document.getElementById('recaptcha-token') as HTMLInputElement;
 
 			form.addEventListener('submit', async (e) => {
 				e.preventDefault();
@@ -84,11 +88,16 @@ import { SITE_TITLE } from '../consts';
 				btn.disabled = true;
 
 				try {
-					const res = await fetch('https://api.web3forms.com/submit', {
+					// reCAPTCHA v3 トークン取得
+					const token = await (window as any).grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'contact' });
+					recaptchaToken.value = token;
+
+					const res = await fetch('/api/contact', {
 						method: 'POST',
 						body: new FormData(form),
 					});
 					const data = await res.json();
+
 					if (data.success) {
 						form.style.display = 'none';
 						successMsg.style.display = 'block';
