@@ -14,7 +14,7 @@ import { SITE_TITLE } from '../consts';
 		<Header />
 		<main>
 			<div class="profile-card">
-				<div class="avatar">K</div>
+				<img src="/images/profile.png" alt="カキフォイ" class="avatar" />
 				<h1 class="profile-name">カキフォイ</h1>
 				<p class="profile-bio">広告・EC・AIを使い倒す自営業者。日常・テクノロジー・ライフスタイルを発信。</p>
 				<div class="profile-sns">
@@ -74,14 +74,9 @@ import { SITE_TITLE } from '../consts';
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
-	background: #CC0000;
-	color: #fff;
-	font-size: 2rem;
-	font-weight: 700;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	object-fit: cover;
 	margin: 0 auto 1em;
+	display: block;
 }
 
 .profile-name {
