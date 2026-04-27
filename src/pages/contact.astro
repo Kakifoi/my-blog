@@ -18,7 +18,7 @@ import { SITE_TITLE } from '../consts';
 			<p class="lead">ご質問・ご意見などお気軽にどうぞ。通常2〜3日以内にご返信いたします。</p>
 
 			<div class="form-wrap">
-				<form id="contact-form">
+				<form id="contact-form" action="/api/contact" method="POST">
 					<input type="hidden" name="access_key" value="f41dc156-a402-4096-bc86-6a64538188d7" />
 					<input type="hidden" name="subject" value="カキフォイの日記 お問い合わせ" />
 					<input type="hidden" name="from_name" value="カキフォイの日記" />
@@ -88,8 +88,17 @@ import { SITE_TITLE } from '../consts';
 				btn.disabled = true;
 
 				try {
-					// reCAPTCHA v3 トークン取得
-					const token = await (window as any).grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'contact' });
+					// reCAPTCHA v3 トークン取得（ready()でAPI準備完了を待つ）
+					const token = await new Promise<string>((resolve, reject) => {
+						(window as any).grecaptcha.ready(async () => {
+							try {
+								const t = await (window as any).grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'contact' });
+								resolve(t);
+							} catch (err) {
+								reject(err);
+							}
+						});
+					});
 					recaptchaToken.value = token;
 
 					const res = await fetch('/api/contact', {
