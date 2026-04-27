@@ -19,7 +19,7 @@ import { SITE_TITLE } from '../consts';
 			<div class="form-wrap">
 				<form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
 					<input type="hidden" name="access_key" value="f41dc156-a402-4096-bc86-6a64538188d7" />
-					<input type="hidden" name="subject" value="カキフォイの日記 お問い合わせ" />
+
 					<input type="hidden" name="from_name" value="カキフォイの日記" />
 					<input type="hidden" name="redirect" value="https://kakifoi.net/contact/thanks" />
 					<input type="checkbox" name="botcheck" style="display:none" />
@@ -27,6 +27,11 @@ import { SITE_TITLE } from '../consts';
 					<div class="form-group">
 						<label for="name">お名前 <span class="required">必須</span></label>
 						<input type="text" id="name" name="name" required placeholder="例：山田 太郎" />
+					</div>
+
+					<div class="form-group">
+						<label for="subject">件名 <span class="required">必須</span></label>
+						<input type="text" id="subject" name="subject" required placeholder="例：ブログの記事について" />
 					</div>
 
 					<div class="form-group">
