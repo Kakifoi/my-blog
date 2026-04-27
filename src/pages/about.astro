@@ -1,80 +1,149 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="このサイトについて"
-	description="Kakifoiのプロフィールとブログについて"
-	pubDate={new Date('April 26 2026')}
->
-	<p><strong>はじめまして、Kakifoiです。</strong></p>
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`このサイトについて | ${SITE_TITLE}`} description="Kakifoiのプロフィールとブログについて" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="profile-card">
+				<div class="avatar">K</div>
+				<h1 class="profile-name">Kakifoi</h1>
+				<p class="profile-bio">広告・EC・AIを使い倒す自営業者。日常・テクノロジー・ライフスタイルを発信。</p>
+				<div class="profile-sns">
+					<a href="https://x.com/amekagari" target="_blank" rel="noopener" class="sns-btn" aria-label="X (Twitter)">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+							<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+						</svg>
+						@amekagari
+					</a>
+				</div>
+			</div>
 
-	<p>
-		広告系の小さな会社を経営しながら、Amazon FBAを使ったリテール（小売）事業も個人で並行して回している、いわゆる「二足のわらじ」の自営業者です。妻と幼い子ども2人の4人家族で、育児・家事と仕事を毎日バタバタとこなしながら生きています。
-	</p>
+			<div class="prose-wrap">
+				<p>
+					広告系の小さな会社を経営しながら、Amazon FBAを使ったリテール（小売）事業も個人で並行して回している、いわゆる「二足のわらじ」の自営業者です。妻と幼い子ども2人の4人家族で、育児・家事と仕事を毎日バタバタとこなしながら生きています。
+				</p>
 
-	<div class="social-links">
-		<a href="https://x.com/amekagari" target="_blank" rel="noopener" class="social-btn" aria-label="X (Twitter)">
-			<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-				<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-			</svg>
-			@amekagari
-		</a>
-	</div>
+				<p>
+					仕事では、税務・会計から顧客対応まで、とにかくAIを積極的に使い倒すのがスタイルです。消費税の計算方法の選択とか、経費の仕訳とか、正直ちょっと複雑な処理もAIに壁打ちしながら整理しています。メイン機はMac Mini M4。ゲーム専用には自作PC（ATXマザボ＋ロープロGPUでコンパクトにまとめた構成）を別で組んでいます。
+				</p>
 
-	<p>
-		仕事では、税務・会計から顧客対応まで、とにかくAIを積極的に使い倒すのがスタイルです。消費税の計算方法の選択とか、経費の仕訳とか、正直ちょっと複雑な処理もAIに壁打ちしながら整理しています。メイン機はMac Mini M4。ゲーム専用には自作PC（ATXマザボ＋ロープロGPUでコンパクトにまとめた構成）を別で組んでいます。
-	</p>
+				<h2>趣味・ハマっていること</h2>
 
-	<h2>趣味・ハマっていること</h2>
+				<p>🎮 <strong>ゲーム</strong> ── 最近のブームは<strong>マリオカートワールド</strong>と<strong>エルデンリング ナイトレイン</strong>。マリカーは妻と一緒に盛り上がれるのがいいし、ナイトレインは夜な夜なソロで粛々と鍛錬して週末は友人と深き夜に潜ります。</p>
 
-	<p>
-		🎮 <strong>ゲーム</strong> ── 最近のブームは<strong>マリオカートワールド</strong>と<strong>エルデンリング ナイトレイン</strong>。マリカーは妻と一緒に盛り上がれるのがいいし、ナイトレインは夜な夜なソロで粛々と鍛錬して週末は友人と深き夜に潜ります。
-	</p>
+				<p>🖥️ <strong>PC自作</strong> ── ATXマザボにロープロGPUを組み合わせて、コンパクトかつしっかり動く構成を追求するのが好きです。ケースの中をすっきりまとめる達成感がたまりません。</p>
 
-	<p>
-		🖥️ <strong>PC自作</strong> ── ATXマザボにロープロGPUを組み合わせて、コンパクトかつしっかり動く構成を追求するのが好きです。ケースの中をすっきりまとめる達成感がたまりません。
-	</p>
+				<p>🏃 <strong>ジョギング</strong> ── 6kmを隔日ペースで継続中。10km 55分切りと体重−5kgを目標に地道にトレーニングしています。Zone 2ペース（脂肪燃焼ゾーン）を意識したスロージョグが最近のテーマです。</p>
 
-	<p>
-		🏃 <strong>ジョギング</strong> ── 6kmを隔日ペースで継続中。10km 55分切りと体重−5kgを目標に地道にトレーニングしています。Zone 2ペース（脂肪燃焼ゾーン）を意識したスロージョグが最近のテーマです。
-	</p>
+				<p>💳 <strong>クレカ・ポイント最適化</strong> ── マリオットプレミアムなどのカードをフル活用して、ポイントと年会費をきっちり回収するのが密かな楽しみです。</p>
 
-	<p>
-		💳 <strong>クレカ・ポイント最適化</strong> ── マリオットプレミアムなどのカードをフル活用して、ポイントと年会費をきっちり回収するのが密かな楽しみです。
-	</p>
+				<p>📈 <strong>投資</strong> ── eMAXIS Slim 全世界株式を中心としたシンプルなインデックス積立。難しいことはせず、ほったらかしに近いスタイルです。</p>
 
-	<p>
-		📈 <strong>投資</strong> ── eMAXIS Slim 全世界株式を中心としたシンプルなインデックス積立。難しいことはせず、ほったらかしに近いスタイルです。
-	</p>
+				<h2>このブログについて</h2>
 
-	<h2>このブログについて</h2>
-
-	<p>
-		仕事・育児・趣味・日々の出来事など、<strong>等身大の日常</strong>をゆるっと綴っていくつもりです。誰かの役に立つこともあれば、ただの日記になることもありますが、気楽にお付き合いいただければ嬉しいです。
-	</p>
-</Layout>
+				<p>
+					仕事・育児・趣味・日々の出来事など、<strong>等身大の日常</strong>をゆるっと綴っていくつもりです。誰かの役に立つこともあれば、ただの日記になることもありますが、気楽にお付き合いいただければ嬉しいです。
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
 
 <style>
-.social-links {
-	margin: 0.25em 0 1.5em;
+.profile-card {
+	max-width: 620px;
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 12px;
+	padding: 2.5em 2em 2em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+	text-align: center;
+	margin-bottom: 1.5em;
 }
 
-.social-btn {
+.avatar {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background: #CC0000;
+	color: #fff;
+	font-size: 2rem;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto 1em;
+}
+
+.profile-name {
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: #111;
+	margin: 0 0 0.5em;
+}
+
+.profile-bio {
+	font-size: 0.9rem;
+	color: #555;
+	line-height: 1.7;
+	margin: 0 0 1.25em;
+}
+
+.profile-sns {
+	display: flex;
+	justify-content: center;
+	gap: 0.5em;
+}
+
+.sns-btn {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.4em;
-	color: #555;
+	color: #444;
 	text-decoration: none;
-	font-size: 0.88rem;
-	padding: 0.4em 0.8em;
+	font-size: 0.85rem;
+	padding: 0.4em 0.9em;
 	border: 1px solid #ddd;
 	border-radius: 20px;
 	transition: color 0.15s, border-color 0.15s;
 }
-
-.social-btn:hover {
+.sns-btn:hover {
 	color: #000;
 	border-color: #999;
+}
+
+.prose-wrap {
+	max-width: 620px;
+	background: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 12px;
+	padding: 2em 2.5em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+	font-size: 0.95rem;
+	line-height: 1.8;
+	color: #333;
+}
+
+.prose-wrap p {
+	margin-bottom: 1em;
+}
+
+.prose-wrap h2 {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #CC0000;
+	border-left: 3px solid #CC0000;
+	padding-left: 0.6em;
+	margin: 1.75em 0 0.75em;
 }
 </style>
