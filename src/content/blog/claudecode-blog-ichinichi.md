@@ -2,6 +2,7 @@
 title: 'プログラミング知識ゼロ・ブログの年間費用は1500円・1日でブログを作った話【Claude Code活用】'
 description: 'AIに全部お願いしたら、マジで1日でそれなりのブログができあがりました。しかも費用は年間1500円ちょっとです。'
 pubDate: '2026-04-27T13:00:00+09:00'
+heroImage: '/images/claudecode-blog.png'
 category: 'テクノロジー'
 tags: ['Claude Code', 'AI', 'ブログ', 'Cloudflare', 'Astro']
 ---
