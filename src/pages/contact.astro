@@ -18,7 +18,7 @@ import { SITE_TITLE } from '../consts';
 			<p class="lead">ご質問・ご意見などお気軽にどうぞ。通常2〜3日以内にご返信いたします。</p>
 
 			<div class="form-wrap">
-				<form id="contact-form" action="/api/contact" method="POST">
+				<form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
 					<input type="hidden" name="access_key" value="f41dc156-a402-4096-bc86-6a64538188d7" />
 					<input type="hidden" name="subject" value="カキフォイの日記 お問い合わせ" />
 					<input type="hidden" name="from_name" value="カキフォイの日記" />
@@ -101,7 +101,7 @@ import { SITE_TITLE } from '../consts';
 					});
 					recaptchaToken.value = token;
 
-					const res = await fetch('/api/contact', {
+					const res = await fetch('https://api.web3forms.com/submit', {
 						method: 'POST',
 						body: new FormData(form),
 					});
