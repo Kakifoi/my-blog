@@ -2,6 +2,7 @@
 title: 'ABCマートでレジに行く寸前でAmazonに軍配。スケッチャーズ スリップインズを買った話'
 description: '店頭で14,000円の靴をレジ直前にAmazonで調べたら7,769円だった話。スケッチャーズ スリップインズ「ガルザ ガービン」の正直レビュー。'
 pubDate: '2026-05-01T12:00:00+09:00'
+heroImage: '/images/skechers-eyecatch.jpg'
 category: 'ライフスタイル'
 tags: ['スケッチャーズ', '靴', 'Amazon', 'お買い物', '節約']
 ---
