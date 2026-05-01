@@ -51,6 +51,22 @@ const posts = (await getCollection('blog')).sort(
 				</a>
 			</div>
 
+			<!-- おすすめ商品 -->
+			<h2 class="section-heading">おすすめ商品</h2>
+			<div class="product-card">
+				<span class="pr-label">PR</span>
+				<div class="product-inner">
+					<a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="product-img-link">
+						<img src="https://m.media-amazon.com/images/I/71APPUvrrCL._AC_SX695_.jpg" alt="SKECHERS ハンズフリー スリップインズ ガルザ ガービン" class="product-img" />
+					</a>
+					<div class="product-info">
+						<p class="product-name">SKECHERS（スケッチャーズ） ハンズフリー スリップインズ ガルザ ガービン 205046 メンズ スニーカー</p>
+						<p class="product-price">¥7,670</p>
+						<a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+					</div>
+				</div>
+			</div>
+
 			<!-- 最新記事 -->
 			<h2 class="section-heading">最新記事</h2>
 			<ul class="post-list">
@@ -235,8 +251,89 @@ const posts = (await getCollection('blog')).sort(
 	line-height: 1.65;
 }
 
+/* おすすめ商品カード */
+.product-card {
+	position: relative;
+	background: #fff;
+	border: 2px solid #e8e8e8;
+	border-radius: 8px;
+	padding: 1.25em;
+	margin-bottom: 2em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.pr-label {
+	position: absolute;
+	top: -1px;
+	right: 12px;
+	background: #999;
+	color: #fff;
+	font-size: 0.65rem;
+	font-weight: 700;
+	padding: 2px 7px;
+	border-radius: 0 0 4px 4px;
+	letter-spacing: 0.05em;
+}
+
+.product-inner {
+	display: flex;
+	gap: 1.25em;
+	align-items: center;
+}
+
+.product-img-link {
+	flex-shrink: 0;
+}
+
+.product-img {
+	width: 130px;
+	height: 130px;
+	object-fit: contain;
+	display: block;
+	border-radius: 4px;
+}
+
+.product-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.product-name {
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: #222;
+	line-height: 1.55;
+	margin: 0 0 0.5em;
+}
+
+.product-price {
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #CC0000;
+	margin: 0 0 0.75em;
+}
+
+.btn-amazon {
+	display: inline-block;
+	background: #FF9900;
+	color: #111;
+	font-size: 0.88rem;
+	font-weight: 700;
+	padding: 0.55em 1.5em;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+.btn-amazon:hover {
+	background: #e68900;
+	text-decoration: none;
+	color: #111;
+}
+
 @media (max-width: 560px) {
 	.cat-cards { grid-template-columns: 1fr; }
 	.post-thumb { width: 110px; }
+	.product-img { width: 100px; height: 100px; }
+	.product-name { font-size: 0.82rem; }
 }
 </style>
