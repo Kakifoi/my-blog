@@ -108,6 +108,96 @@ table th { background: #f5f5f5; }
 }
 .tag-pill:hover { background: #e0e0e0; color: var(--text); text-decoration: none; }
 
+/* おすすめ商品カード（トップ・記事共通） */
+.product-card {
+	position: relative;
+	background: #fff;
+	border: 2px solid #e8e8e8;
+	border-radius: 8px;
+	padding: 1.25em;
+	margin-bottom: 2em;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.pr-label {
+	position: absolute;
+	top: -1px;
+	right: 12px;
+	background: #999;
+	color: #fff;
+	font-size: 0.65rem;
+	font-weight: 700;
+	padding: 2px 7px;
+	border-radius: 0 0 4px 4px;
+	letter-spacing: 0.05em;
+}
+.product-inner {
+	display: flex;
+	gap: 1.25em;
+	align-items: center;
+}
+.product-img-link { flex-shrink: 0; }
+.product-img {
+	width: 130px;
+	height: 130px;
+	object-fit: contain;
+	display: block;
+	border-radius: 4px;
+}
+.product-info { flex: 1; min-width: 0; }
+.product-name {
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: #222;
+	line-height: 1.55;
+	margin: 0 0 0.85em;
+}
+.btn-group {
+	display: flex;
+	gap: 0.6em;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.btn-amazon {
+	display: inline-block;
+	background: #FF9900;
+	color: #111;
+	font-size: 0.85rem;
+	font-weight: 700;
+	padding: 0.55em 1.2em;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+.btn-amazon:hover { background: #e68900; text-decoration: none; color: #111; }
+.btn-rakuten {
+	display: inline-block;
+	background: #BF0000;
+	color: #fff;
+	font-size: 0.85rem;
+	font-weight: 700;
+	padding: 0.55em 1.2em;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+.btn-rakuten:hover { background: #990000; text-decoration: none; color: #fff; }
+.btn-yahoo {
+	display: inline-block;
+	background: #FF0033;
+	color: #fff;
+	font-size: 0.85rem;
+	font-weight: 700;
+	padding: 0.55em 1.2em;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+.btn-yahoo:hover { background: #cc0029; text-decoration: none; color: #fff; }
+@media (max-width: 560px) {
+	.product-img { width: 100px; height: 100px; }
+	.product-name { font-size: 0.82rem; }
+}
+
 /* セクションタイトル */
 .section-heading {
 	font-size: 1.05rem;

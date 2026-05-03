@@ -59,4 +59,21 @@ GW前の山梨旅行でマリオットホテルに泊まった際、初めてこ
 
 ちなみに今ちょうどAmazonで「Smileセール」5/3（日）23:59まで開催中。通常より安く買えるチャンスです。もし気になった方はぜひチェックしてみてください。
 
+<div class="product-card">
+  <span class="pr-label">PR</span>
+  <div class="product-inner">
+    <a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="product-img-link">
+      <img src="https://m.media-amazon.com/images/I/71APPUvrrCL._AC_SX695_.jpg" alt="SKECHERS ハンズフリー スリップインズ ガルザ ガービン" class="product-img" />
+    </a>
+    <div class="product-info">
+      <p class="product-name">SKECHERS（スケッチャーズ） ハンズフリー スリップインズ ガルザ ガービン 205046 メンズ スニーカー</p>
+      <div class="btn-group">
+        <a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+        <a href="https://hb.afl.rakuten.co.jp/hgc/39881198.5dba11f4.39881199.0eb4a102/?pc=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fdee6177f8f1ebd59f8e7fee0786ea3eb%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+        <a href="https://shopping.yahoo.co.jp/search/%E3%82%B9%E3%82%B1%E3%83%83%E3%83%81%E3%83%A3%E3%83%BC%E3%82%BA+%E3%82%AC%E3%83%AB%E3%82%B6+%E3%82%AC%E3%83%BC%E3%83%93%E3%83%B3+205046/0/?first=1&ss_first=1&ts=1777793593&mcr=5bd3d6ff90f1731c8009520a82708f71&tab_ex=commerce&sretry=0&sc_i=shopping-pc-web-result-suggest-h_srch-srchbtn-sgstfrom-result-item-h_srch-srchbox" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 *※本記事にはAmazonアソシエイトのリンクが含まれます。*
