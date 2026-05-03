@@ -89,15 +89,15 @@ MNが持ってきたインスタントの火鍋も凄かった。水を入れて
 <div class="product-card">
   <span class="pr-label">PR</span>
   <div class="product-inner">
-    <a href="https://www.amazon.co.jp/dp/B0BKZMBCZN" target="_blank" rel="noopener sponsored" class="product-img-link">
+    <a href="https://amzn.to/4w7qHWI" target="_blank" rel="noopener sponsored" class="product-img-link">
       <img src="https://m.media-amazon.com/images/I/81IXgPYNs2L._AC_SX695_.jpg" alt="アラジン 焼き焼きグリル CAG-MG7A" class="product-img" />
     </a>
     <div class="product-info">
       <p class="product-name">アラジン 焼き焼きグリル CAG-MG7A グラファイトミニグリラー</p>
       <div class="btn-group">
-        <a href="https://www.amazon.co.jp/dp/B0BKZMBCZN" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
-        <a href="https://search.rakuten.co.jp/search/mall/%E3%82%A2%E3%83%A9%E3%82%B8%E3%83%B3+CAG-MG7A/" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-        <a href="https://shopping.yahoo.co.jp/search/%E3%82%A2%E3%83%A9%E3%82%B8%E3%83%B3+CAG-MG7A/" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+        <a href="https://amzn.to/4w7qHWI" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+        <a href="https://hb.afl.rakuten.co.jp/hgc/39881198.5dba11f4.39881199.0eb4a102/?pc=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fdc5692d91abac39e4d481b77f1dae5b3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+        <a href="https://shopping.yahoo.co.jp/products/8fa49001ad?sc_i=shopping-pc-web-result-item-rsltlst-cmp" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
       </div>
     </div>
   </div>
