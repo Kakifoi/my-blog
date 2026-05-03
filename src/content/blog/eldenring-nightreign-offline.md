@@ -2,7 +2,7 @@
 title: '物置で焼肉しながらエルデンリング ナイトレイン。大人のオフ会が最高だった話'
 description: '中学・大学時代の友人と物置で焼肉＋エルデンリング ナイトレインのオフ会を約12時間。アラジン焼肉グリルとふじやまビールで始まった最高の1日の記録。'
 pubDate: '2026-05-02T22:00:00+09:00'
-heroImage: ''
+heroImage: '/images/eldenring-eyecatch.jpg'
 category: 'ライフスタイル'
 tags: ['エルデンリング', 'ゲーム', 'オフ会', '焼肉', 'アラジン']
 ---
@@ -85,5 +85,24 @@ MNが持ってきたインスタントの火鍋も凄かった。水を入れて
 ナイトレインは、ソウル系の「難しさ」ではなく「達成感」を、はじめて触れる人にも届けようとしているゲームだ。気になっているなら、まず試してみる価値は十分にある。
 
 そして焼肉のお供に、アラジンの焼肉グリル（CAG-MG7A）は本当におすすめ。室内焼肉のハードルをぐっと下げてくれる名機だった。
+
+<div class="product-card">
+  <span class="pr-label">PR</span>
+  <div class="product-inner">
+    <a href="https://www.amazon.co.jp/dp/B0BKZMBCZN" target="_blank" rel="noopener sponsored" class="product-img-link">
+      <img src="https://m.media-amazon.com/images/I/81IXgPYNs2L._AC_SX695_.jpg" alt="アラジン 焼き焼きグリル CAG-MG7A" class="product-img" />
+    </a>
+    <div class="product-info">
+      <p class="product-name">アラジン 焼き焼きグリル CAG-MG7A グラファイトミニグリラー</p>
+      <div class="btn-group">
+        <a href="https://www.amazon.co.jp/dp/B0BKZMBCZN" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+        <a href="https://search.rakuten.co.jp/search/mall/%E3%82%A2%E3%83%A9%E3%82%B8%E3%83%B3+CAG-MG7A/" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+        <a href="https://shopping.yahoo.co.jp/search/%E3%82%A2%E3%83%A9%E3%82%B8%E3%83%B3+CAG-MG7A/" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+このブログのトップページや記事末尾にある商品リンクからAmazon・楽天・Yahoo!ショッピングで日用品や消耗品などを買ってもらえると、ブログを応援してもらえる仕組みにもなっているので、それも少し嬉しかったりします😊
 
 *※本記事にはAmazonアソシエイト・楽天アフィリエイト・Yahoo!ショッピングアフィリエイトのリンクが含まれます。*
