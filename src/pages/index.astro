@@ -62,8 +62,9 @@ const posts = (await getCollection('blog')).sort(
 					<div class="product-info">
 						<p class="product-name">SKECHERS（スケッチャーズ） ハンズフリー スリップインズ ガルザ ガービン 205046 メンズ スニーカー</p>
 						<div class="product-prices">
-							<span class="product-price-item"><span class="shop-label">Amazon</span>¥7,670</span>
-							<span class="product-price-item"><span class="shop-label">楽天</span>¥8,700</span>
+							<span class="product-price-item">¥7,670<span class="shop-label">（Amazon）</span></span>
+							<span class="product-price-sep">／</span>
+							<span class="product-price-item">¥8,700<span class="shop-label">（楽天）</span></span>
 						</div>
 						<div class="btn-group">
 							<a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
@@ -316,29 +317,35 @@ const posts = (await getCollection('blog')).sort(
 
 .product-prices {
 	display: flex;
-	gap: 1.2em;
-	margin: 0 0 0.75em;
+	align-items: baseline;
+	justify-content: center;
+	gap: 0.4em;
+	margin: 0 0 0.85em;
 	flex-wrap: wrap;
 }
 
 .product-price-item {
-	font-size: 1rem;
+	font-size: 1.05rem;
 	font-weight: 700;
 	color: #CC0000;
 }
 
+.product-price-sep {
+	font-size: 0.9rem;
+	color: #bbb;
+}
+
 .shop-label {
-	font-size: 0.72rem;
-	font-weight: 600;
+	font-size: 0.75rem;
+	font-weight: 400;
 	color: #888;
-	display: block;
-	margin-bottom: 0.1em;
 }
 
 .btn-group {
 	display: flex;
 	gap: 0.6em;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .btn-amazon {
