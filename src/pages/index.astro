@@ -61,8 +61,16 @@ const posts = (await getCollection('blog')).sort(
 					</a>
 					<div class="product-info">
 						<p class="product-name">SKECHERS（スケッチャーズ） ハンズフリー スリップインズ ガルザ ガービン 205046 メンズ スニーカー</p>
-						<p class="product-price">¥7,670</p>
-						<a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+						<div class="product-prices">
+							<span class="product-price-item"><span class="shop-label">Amazon</span>¥7,670</span>
+							<span class="product-price-item"><span class="shop-label">楽天</span>¥8,700</span>
+						</div>
+						<div class="btn-group">
+							<a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+							<a href="https://hb.afl.rakuten.co.jp/ichiba/5368c1c7.6427f93d.5368c1c8.81b893c3/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsports-bazaar%2Fs-70ske-205046-bbk%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9" target="_blank" rel="noopener sponsored" class="btn-rakuten">楽天で見る</a>
+							<!-- Yahoo!ショッピング審査中：後で追加予定 -->
+							<!-- <a href="#" target="_blank" rel="noopener sponsored" class="btn-yahoo">Yahoo!で見る</a> -->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -306,20 +314,40 @@ const posts = (await getCollection('blog')).sort(
 	margin: 0 0 0.5em;
 }
 
-.product-price {
-	font-size: 1.1rem;
+.product-prices {
+	display: flex;
+	gap: 1.2em;
+	margin: 0 0 0.75em;
+	flex-wrap: wrap;
+}
+
+.product-price-item {
+	font-size: 1rem;
 	font-weight: 700;
 	color: #CC0000;
-	margin: 0 0 0.75em;
+}
+
+.shop-label {
+	font-size: 0.72rem;
+	font-weight: 600;
+	color: #888;
+	display: block;
+	margin-bottom: 0.1em;
+}
+
+.btn-group {
+	display: flex;
+	gap: 0.6em;
+	flex-wrap: wrap;
 }
 
 .btn-amazon {
 	display: inline-block;
 	background: #FF9900;
 	color: #111;
-	font-size: 0.88rem;
+	font-size: 0.85rem;
 	font-weight: 700;
-	padding: 0.55em 1.5em;
+	padding: 0.55em 1.2em;
 	border-radius: 4px;
 	text-decoration: none;
 	transition: background 0.15s;
@@ -329,6 +357,42 @@ const posts = (await getCollection('blog')).sort(
 	text-decoration: none;
 	color: #111;
 }
+
+.btn-rakuten {
+	display: inline-block;
+	background: #BF0000;
+	color: #fff;
+	font-size: 0.85rem;
+	font-weight: 700;
+	padding: 0.55em 1.2em;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+.btn-rakuten:hover {
+	background: #990000;
+	text-decoration: none;
+	color: #fff;
+}
+
+/* Yahoo!ショッピング審査中：後で追加予定
+.btn-yahoo {
+	display: inline-block;
+	background: #FF0033;
+	color: #fff;
+	font-size: 0.85rem;
+	font-weight: 700;
+	padding: 0.55em 1.2em;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: background 0.15s;
+}
+.btn-yahoo:hover {
+	background: #cc0029;
+	text-decoration: none;
+	color: #fff;
+}
+*/
 
 @media (max-width: 560px) {
 	.cat-cards { grid-template-columns: 1fr; }
