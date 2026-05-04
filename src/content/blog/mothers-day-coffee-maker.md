@@ -2,7 +2,7 @@
 title: '母の日にコーヒーメーカーを用意した話。目的を忘れない買い物のすすめ【タイガー ADC-B061KM】'
 description: '実家のコーヒーメーカーが壊れたのを機に、母の日プレゼントとしてタイガー ADC-B061KMを購入。4年使い続けた前モデルの実績から同シリーズを選んだ理由と、目的を忘れない買い物の考え方。'
 pubDate: '2026-05-03T22:00:00+09:00'
-heroImage: '/images/coffee-maker-eyecatch.jpg'
+heroImage: '/images/tiger-coffee-maker-eyecatch.jpg'
 category: 'ライフスタイル'
 tags: ['母の日', 'コーヒーメーカー', 'タイガー', 'プレゼント', '買い物']
 ---
