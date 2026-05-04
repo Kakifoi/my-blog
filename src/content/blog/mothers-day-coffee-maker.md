@@ -59,13 +59,13 @@ tags: ['母の日', 'コーヒーメーカー', 'タイガー', 'プレゼント
 <div class="product-card">
   <span class="pr-label">PR</span>
   <div class="product-inner">
-    <a href="https://www.amazon.co.jp/dp/B0CD3RY999" target="_blank" rel="noopener sponsored" class="product-img-link">
-      <img src="https://m.media-amazon.com/images/I/61jEZOaDjvL._AC_SX695_.jpg" alt="タイガー コーヒーメーカー ADC-B061KM マットブラック" class="product-img" />
+    <a href="https://www.amazon.co.jp/dp/B0CY17VZ7B" target="_blank" rel="noopener sponsored" class="product-img-link">
+      <img src="https://m.media-amazon.com/images/I/41R8FZVJcQL._AC_SX695_.jpg" alt="タイガー コーヒーメーカー ADC-B061KM マットブラック" class="product-img" />
     </a>
     <div class="product-info">
       <p class="product-name">タイガー コーヒーメーカー ADC-B061KM マットブラック</p>
       <div class="btn-group">
-        <a href="https://www.amazon.co.jp/dp/B0CD3RY999" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+        <a href="https://www.amazon.co.jp/dp/B0CY17VZ7B" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
         <a href="#" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
         <a href="#" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
       </div>
