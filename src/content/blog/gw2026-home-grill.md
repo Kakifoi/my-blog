@@ -2,7 +2,7 @@
 title: 'GWをぐだぐだ過ごした話。でも毎日1個はイベントがあった。'
 description: '富士・山中湖旅行から帰ってきてからがGW本番。出かけるより家グリルを楽しんだ結果、ぐだぐだしたけど毎日1個はイベントがあった5日間。'
 pubDate: '2026-05-07T12:00:00+09:00'
-heroImage: '/images/aladdin-cag-mg7a.jpg'
+heroImage: '/images/gw2026-eyecatch.jpg'
 category: 'ライフスタイル'
 tags: ['GW', '焼肉', 'アラジン', 'ポケモン', '子育て', '節約']
 ---
