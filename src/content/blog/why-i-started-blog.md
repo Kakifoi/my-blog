@@ -2,6 +2,7 @@
 title: 'なぜブログを始めたのか。自己満足と、記録することの大切さ。'
 description: '収益化が目的ではない。mixiの日記から始まった記録への思い、AIの登場、そしてDIE WITH ZEROから学んだ「思い出は財産」という考え方。'
 pubDate: '2026-05-08T12:00:00+09:00'
+heroImage: '/images/why-i-started-blog-eyecatch.jpg'
 category: 'ライフスタイル'
 tags: ['ブログ', '日記', 'DIE WITH ZERO', '副業', 'mixi', '自己満足']
 ---
@@ -74,7 +75,7 @@ tags: ['ブログ', '日記', 'DIE WITH ZERO', '副業', 'mixi', '自己満足']
   <span class="pr-label">PR</span>
   <div class="product-inner">
     <a href="https://amzn.to/3OTBwLv" target="_blank" rel="noopener sponsored" class="product-img-link">
-      <img src="https://m.media-amazon.com/images/I/71nKq4pBpDL._AC_UY436_QL65_.jpg" alt="DIE WITH ZERO 人生が豊かになりすぎる究極のルール" class="product-img" />
+      <img src="https://m.media-amazon.com/images/I/71Gop9CPTpL._SL1458_.jpg" alt="DIE WITH ZERO 人生が豊かになりすぎる究極のルール" class="product-img" />
     </a>
     <div class="product-info">
       <p class="product-name">DIE WITH ZERO 人生が豊かになりすぎる究極のルール</p>
