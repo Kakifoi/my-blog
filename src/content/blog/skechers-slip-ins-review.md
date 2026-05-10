@@ -70,7 +70,7 @@ GW前の山梨旅行でマリオットホテルに泊まった際、初めてこ
       <div class="btn-group">
         <a href="https://amzn.to/4d3dgyB" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
         <a href="https://hb.afl.rakuten.co.jp/hgc/39881198.5dba11f4.39881199.0eb4a102/?pc=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fdee6177f8f1ebd59f8e7fee0786ea3eb%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-        <a href="https://shopping.yahoo.co.jp/search/%E3%82%B9%E3%82%B1%E3%83%83%E3%83%81%E3%83%A3%E3%83%BC%E3%82%BA+%E3%82%AC%E3%83%AB%E3%82%B6+%E3%82%AC%E3%83%BC%E3%83%93%E3%83%B3+205046/0/?first=1&ss_first=1&ts=1777793593&mcr=5bd3d6ff90f1731c8009520a82708f71&tab_ex=commerce&sretry=0&sc_i=shopping-pc-web-result-suggest-h_srch-srchbtn-sgstfrom-result-item-h_srch-srchbox" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+        <a href="https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892609900&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%2F%25E3%2582%25B9%25E3%2582%25B1%25E3%2583%2583%25E3%2583%2581%25E3%2583%25A3%25E3%2583%25BC%25E3%2582%25BA%2B%25E3%2582%25AC%25E3%2583%25AB%25E3%2582%25B6%2B%25E3%2582%25AC%25E3%2583%25BC%25E3%2583%2593%25E3%2583%25B3%2B205046%2F0%2F%3Ffirst%3D1%26ss_first%3D1%26ts%3D1777793593%26mcr%3D5bd3d6ff90f1731c8009520a82708f71%26tab_ex%3Dcommerce%26sretry%3D0%26sc_i%3Dshopping-pc-web-result-suggest-h_srch-srchbtn-sgstfrom-result-item-h_srch-srchbox" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
       </div>
     </div>
   </div>
