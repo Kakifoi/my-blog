@@ -82,7 +82,7 @@ tags: ['ブログ', '日記', 'DIE WITH ZERO', '副業', 'mixi', '自己満足']
       <div class="btn-group">
         <a href="https://amzn.to/3OTBwLv" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
         <a href="https://a.r10.to/h5RmNj" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-        <a href="https://store.shopping.yahoo.co.jp/ebookjapan/b00162455341.html?sc_i=shopping-pc-web-result-item-rsltlst-title&ea=" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+        <a href="https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892609898&vc_url=https%3A%2F%2Fstore.shopping.yahoo.co.jp%2Febookjapan%2Fb00162455341.html%3Fsc_i%3Dshopping-pc-web-result-item-rsltlst-title%26ea%3D" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
       </div>
     </div>
   </div>
