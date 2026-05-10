@@ -67,7 +67,7 @@ tags: ['母の日', 'コーヒーメーカー', 'タイガー', 'プレゼント
       <div class="btn-group">
         <a href="https://amzn.to/48DjAeE" target="_blank" rel="nofollow sponsored noopener" class="btn-amazon">Amazonで見る</a>
         <a href="https://a.r10.to/hkksNO" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-        <a href="https://shopping.yahoo.co.jp/search/4904710436950/0/?first=1&tab_ex=commerce&fr=shp-prop&mcr=cc68d17a650e3bc04eb4e0915db3c65f&ts=1777883856&sretry=1&sc_i=shopping-pc-web-search-suggest-h_srch-srchbtn-sgstfrom-detail-item-h_srch-kwd" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+        <a href="https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892609900&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%2F4904710436950%2F0%2F%3Ffirst%3D1%26tab_ex%3Dcommerce%26fr%3Dshp-prop%26mcr%3Dcc68d17a650e3bc04eb4e0915db3c65f%26ts%3D1777883856%26sretry%3D1%26sc_i%3Dshopping-pc-web-search-suggest-h_srch-srchbtn-sgstfrom-detail-item-h_srch-kwd" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
       </div>
     </div>
   </div>
