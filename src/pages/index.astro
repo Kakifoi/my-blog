@@ -70,6 +70,23 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 			</div>
 
+			<!-- Prime Video 商品カード -->
+			<div class="product-card">
+				<span class="pr-label">PR</span>
+				<div class="product-inner">
+					<a href="https://www.amazon.co.jp/gp/video/storefront?benefitId=default&tag=kakifoi-blog-22" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
+						<img src="https://m.media-amazon.com/images/G/01/primevideo/seo/primevideo-seo-logo.png" alt="Amazon Prime Video" class="product-img prime-video-img" />
+					</a>
+					<div class="product-info">
+						<p class="product-name">Amazon Prime Video</p>
+						<p class="product-desc-text">映画・ドラマ・アニメが見放題。30日間無料体験あり。</p>
+						<div class="btn-group">
+							<a href="https://www.amazon.co.jp/gp/video/storefront?benefitId=default&tag=kakifoi-blog-22" target="_blank" rel="nofollow sponsored noopener" class="btn-amazon">Amazonで見る</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<!-- 最新記事 -->
 			<h2 class="section-heading">最新記事</h2>
 			<ul class="post-list">
@@ -252,6 +269,21 @@ const posts = (await getCollection('blog')).sort(
 	color: #666;
 	margin: 0;
 	line-height: 1.65;
+}
+
+/* Prime Video画像 */
+.prime-video-img {
+	background: #1a1a2e;
+	padding: 1em;
+	box-sizing: border-box;
+}
+
+/* 商品カード内の説明文 */
+.product-desc-text {
+	font-size: 0.88rem;
+	color: #555;
+	margin: 0.3em 0 0.75em;
+	line-height: 1.6;
 }
 
 @media (max-width: 560px) {
