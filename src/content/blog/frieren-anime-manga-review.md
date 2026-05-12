@@ -69,7 +69,7 @@ heroImage: '/images/frieren-eyecatch.jpg'
   <span class="pr-label">PR</span>
   <div class="product-inner">
     <a href="https://amzn.to/4eC4UAi" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
-      <img src="/images/frieren-eyecatch.jpg" alt="葬送のフリーレン 1巻（山田鐘人・アベツカサ著）" class="product-img" />
+      <img src="https://m.media-amazon.com/images/I/61QLzRU9rOL._SL500_.jpg" alt="葬送のフリーレン 1巻（山田鐘人・アベツカサ著）" class="product-img" />
     </a>
     <div class="product-info">
       <p class="product-name">葬送のフリーレン 1巻（山田鐘人・アベツカサ著）</p>
