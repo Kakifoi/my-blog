@@ -13,8 +13,6 @@ heroImage: '/images/dyson-dryer-hd08-eyecatch.jpg'
 
 細いノズルから高圧な風が出ている感じで、子供のロングヘアがあっという間に乾いた。正直、家で使っているドライヤーより速い。気になって型番だけ撮っておいた。
 
-![ダイソン ヘアドライヤー Supersonic HD08](/images/dyson-dryer-hd08.jpg)
-
 「ReFa BEAUTECH DRYER SMART RE-AN-02A」、2024年製だった。
 
 ## ⏱ うちの子供のロングヘア問題
