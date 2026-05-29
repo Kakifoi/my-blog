@@ -85,6 +85,23 @@ EH-NA99は8年近く使っているが、壊れる気配もなく特に不満も
 
 - リファ S+：速乾・軽さ・仕上がりのバランス型。価格36,000円前後
 
+<div class="product-card">
+  <span class="pr-label">PR</span>
+  <div class="product-inner">
+    <a href="https://amzn.to/4uDQZPr" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
+      <img src="https://m.media-amazon.com/images/I/61wFtU-ajbL._AC_SL1500_.jpg" alt="ReFa BEAUTECH DRYER S+" class="product-img" />
+    </a>
+    <div class="product-info">
+      <p class="product-name">ReFa BEAUTECH DRYER S+</p>
+      <div class="btn-group">
+        <a href="https://amzn.to/4uDQZPr" target="_blank" rel="nofollow sponsored noopener" class="btn-amazon">Amazonで見る</a>
+        <a href="https://a.r10.to/h8oyCM" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+        <a href="https://shopping.yahoo.co.jp/search/4974011808503/0/?first=1&tab_ex=commerce&fr=shp-prop&mcr=db9bf1c6456f1c0ef041a37ce2a018d6&ts=1780038990&sretry=1&sc_i=shopping-pc-web-search-suggest-h_srch-srchbtn-sgstfrom-top--h_srch-kwd" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 口コミを読み込んでいくと、圧倒的な風量という観点ではやはりダイソンだというのが見えてきた。リファやパナソニックも風量はあるが、時短を目的とするなら選択肢はダイソンになる。価格と風量を考えてダイソンに絞ることにした。
 
 ## 🛒 Amazon Smileセールでダイソン HD08を22,000円でポチった
