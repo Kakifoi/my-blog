@@ -1,7 +1,7 @@
 ---
 title: iPhoneのDiscordで相手の声の頭が切れる問題を調査・解決した話。
 description: iPhoneのDiscordボイスチャットで相手の声の冒頭が聞こえない問題を調査。VADやノイズ抑制設定の変更、イヤホン接続に切り替えることでElden Ring Nightreign通話中の音声トラブルを解決した記録。
-pubDate: '2026-05-29T12:00:00+09:00'
+pubDate: '2026-05-28T12:00:00+09:00'
 category: 'ゲーム・ガジェット'
 tags: ['Discord', 'ボイスチャット', 'iPhone', 'Elden Ring Nightreign', '音声トラブル', 'イヤホン']
 heroImage: '/images/discord-voice-head-cut-fix-eyecatch.jpg'
