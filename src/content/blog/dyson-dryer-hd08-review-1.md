@@ -65,6 +65,24 @@ EH-NA99は8年近く使っているが、壊れる気配もなく特に不満も
 </div>
 
 - パナソニック イオニティ EH-NE7N：実測風速でコスパ最強。価格6,000〜7,000円
+
+<div class="product-card">
+  <span class="pr-label">PR</span>
+  <div class="product-inner">
+    <a href="https://amzn.to/4nToaMa" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
+      <img src="https://m.media-amazon.com/images/I/61kZAW37q6L._AC_SL1500_.jpg" alt="パナソニック ヘアードライヤー イオニティ EH-NE7N-H" class="product-img" />
+    </a>
+    <div class="product-info">
+      <p class="product-name">パナソニック ヘアードライヤー イオニティ EH-NE7N-H</p>
+      <div class="btn-group">
+        <a href="https://amzn.to/4nToaMa" target="_blank" rel="nofollow sponsored noopener" class="btn-amazon">Amazonで見る</a>
+        <a href="https://a.r10.to/h5ExEs" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+        <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892609898&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%2F4550719001479%2F0%2F%3Ffirst%3D1%26ss_first%3D1%26ts%3D1780038375%26mcr%3D61971683a78ba593c8788f0ce8897154%26tab_ex%3Dcommerce%26sretry%3D0%26sc_i%3Dshopping-pc-web-result-suggest-h_srch-srchbtn-sgstfrom-result-item-h_srch-srchbox" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 - リファ S+：速乾・軽さ・仕上がりのバランス型。価格36,000円前後
 
 口コミを読み込んでいくと、圧倒的な風量という観点ではやはりダイソンだというのが見えてきた。リファやパナソニックも風量はあるが、時短を目的とするなら選択肢はダイソンになる。価格と風量を考えてダイソンに絞ることにした。
