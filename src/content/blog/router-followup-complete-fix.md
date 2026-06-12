@@ -7,7 +7,9 @@ tags: ['ルーター', 'ASUS', 'マリオカートワールド', 'Switch2', 'Wi-
 heroImage: '/images/router-followup-eyecatch.jpg'
 ---
 
-以前の記事でASUS ROG Strix GS-BE7200Xに買い替えた話を書いたが、実はルーター交換だけでは完全には解決しなかった。その後に発覚した問題と、全部解決するまでの話をまとめる。
+前回の記事：[マリオカートワールドで回線落ちが多発。原因はルーターだった。](/blog/router-asus-rog-gs-be7200x/)
+
+[前回の記事](/blog/router-asus-rog-gs-be7200x/)でASUS ROG Strix GS-BE7200Xに買い替えた話を書いたが、実はルーター交換だけでは完全には解決しなかった。その後に発覚した問題と、全部解決するまでの話をまとめる。
 
 ## 🔄 振り返り：ルーター交換後に残っていた問題
 
