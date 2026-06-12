@@ -3,7 +3,7 @@ title: 'マリオカートワールドで回線落ちが多発。原因はルー
 description: 'Nintendo Switch 2でマリオカートワールドを遊んでいたら頻繁に回線落ち。原因は旧ルーターの処理能力限界だった。Wi-Fi 7対応のASUS ROG Strix GS-BE7200Xへの買い替え経緯と速度測定結果を紹介。'
 pubDate: '2026-05-16T12:00:00+09:00'
 category: 'ゲーム・ガジェット'
-tags: ['ルーター', 'ASUS', 'マリオカートワールド', 'Switch2', 'Wi-Fi', '回線落ち']
+tags: ['ルーター', 'ASUS', 'マリオカートワールド', 'Switch2', 'Wi-Fi']
 heroImage: '/images/router-eyecatch.jpg'
 ---
 

@@ -4,7 +4,7 @@ description: 'AIに全部お願いしたら、マジで1日でそれなりのブ
 pubDate: '2026-04-27T13:00:00+09:00'
 heroImage: '/images/claudecode-blog.png'
 category: 'テクノロジー'
-tags: ['Claude Code', 'AI', 'ブログ', 'Cloudflare', 'Astro']
+tags: ['AI', 'ブログ']
 ---
 
 飲み会の帰りの電車で友人のM氏と結構楽しく話をしてたんですが、「マジでClaudeっていうAI凄いよ、ChatGPTみたいなチャットモードとコードモードがあって、全部AIで完結するんよ」って話をしてたんだけど。当の本人が、ちょっと触って凄いって言ってるだけじゃあまり伝わらないと思いまして・・・。1日でブログを作っちゃいました。

@@ -4,7 +4,7 @@ description: '2026年4月3日に深谷市にグランドオープンしたフラ
 pubDate: '2026-06-07T12:00:00+09:00'
 heroImage: '/images/flying-garden-fukaya-2026-eyecatch.jpg'
 category: 'グルメ・日常'
-tags: ['フライングガーデン', '深谷', 'ハンバーグ', 'ファミレス', '爆弾ハンバーグ', 'EPARK']
+tags: ['フライングガーデン', '深谷', 'ハンバーグ', 'ファミレス', 'EPARK']
 ---
 
 ## 🍽️ フライングガーデン深谷店ってどんなとこ？

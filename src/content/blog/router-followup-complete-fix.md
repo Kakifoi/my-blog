@@ -3,7 +3,7 @@ title: 'マリオカートワールドの回線落ちが完全解決した話。
 description: 'ルーター交換後も残っていた回線落ち問題が、LANケーブルのCAT6A化・Switch2冷却ファン導入・SSID分離の3つを追加することで完全解決した経緯をまとめた記事。'
 pubDate: '2026-05-22T12:00:00+09:00'
 category: 'ゲーム・ガジェット'
-tags: ['ルーター', 'ASUS', 'マリオカートワールド', 'Switch2', 'LANケーブル', '冷却ファン', 'Wi-Fi']
+tags: ['ルーター', 'ASUS', 'マリオカートワールド', 'Switch2', 'Wi-Fi', '冷却ファン']
 heroImage: '/images/router-followup-eyecatch.jpg'
 ---
 
