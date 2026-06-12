@@ -3,8 +3,8 @@ title: 'なぜブログを始めたのか。自己満足と、記録すること
 description: '収益化が目的ではない。mixiの日記から始まった記録への思い、AIの登場、そしてDIE WITH ZEROから学んだ「思い出は財産」という考え方。'
 pubDate: '2026-05-08T12:00:00+09:00'
 heroImage: '/images/why-i-started-blog-eyecatch.jpg'
-category: 'ライフスタイル'
-tags: ['ブログ', '日記', 'DIE WITH ZERO', '自営業', 'mixi']
+category: '子育て・日常'
+tags: ['ブログ', '日記', 'DIE WITH ZERO', '自営業', 'mixi', 'ライフスタイル']
 ---
 
 このブログを始めた理由を書いておきたい。

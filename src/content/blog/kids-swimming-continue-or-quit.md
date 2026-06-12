@@ -2,7 +2,7 @@
 title: 子供のスイミング、目的を達成したらやめるべき？5歳で泳げるようになった子供の話
 description: 5歳の子供がスイミングでクロール12.5mを達成。目的を果たした今、続けるべきかやめるべきか。区切りの付け方と「本人が楽しんでいる限り続ける」という結論に至るまでを書きました。
 pubDate: '2026-06-04T12:00:00+09:00'
-category: '子育て・習い事'
+category: '子育て・日常'
 tags: ['スイミング', '習い事', '子育て']
 heroImage: '/images/kids-swimming-continue-or-quit-eyecatch.jpg'
 ---

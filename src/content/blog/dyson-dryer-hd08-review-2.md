@@ -2,7 +2,7 @@
 title: 'ダイソン Supersonic HD08 使用感レポート。子供のロングヘアが2/3の時間で乾くようになった。【後編】'
 description: 'ダイソン Supersonic HD08の使用感後編。コンセントアダプターの干渉問題・風量・乾く速さ・冷風ボタンの効果など、実際に使ってわかったことをレポート。'
 pubDate: '2026-06-08T12:00:00+09:00'
-category: 'ガジェット・家電'
+category: 'ガジェット・テクノロジー'
 tags: ['ダイソン', 'ドライヤー', '時短', '家電購入']
 heroImage: '/images/dyson-dryer-hd08-review-2-eyecatch.jpg'
 ---

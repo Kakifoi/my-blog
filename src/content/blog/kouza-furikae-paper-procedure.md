@@ -2,7 +2,7 @@
 title: '口座振替の紙の手続きがいまだに面倒くさい話'
 description: '子どものスイミングスクールの月謝口座振替のために信用金庫へ。紙に手書き＆銀行印という手続きの面倒さと、ペーパーレス化への期待について書きました。'
 pubDate: '2026-06-05T12:00:00+09:00'
-category: '日常・お金'
+category: 'お金・投資'
 tags: ['口座振替', '信用金庫', 'ペーパーレス', 'スイミング', '習い事', '手続き']
 heroImage: '/images/kouza-furikae-paper-procedure-eyecatch.jpg'
 ---

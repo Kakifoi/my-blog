@@ -2,7 +2,7 @@
 title: '花粉症でジョギング休んでたら、なんか色々ダメになってた話'
 description: '花粉症で3ヶ月走れなかったら夜に動けない・ゲームのやる気が出ない状態に。GW明けにジョギング再開したら割と早く復活した体験談。'
 pubDate: '2026-06-02T12:00:00+09:00'
-category: 'ジョギング・健康'
+category: '健康・ランニング'
 tags: ['ジョギング', '花粉症', '健康']
 heroImage: '/images/jogging-restart-2026-eyecatch.jpg'
 ---
