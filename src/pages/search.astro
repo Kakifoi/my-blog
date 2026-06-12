@@ -9,33 +9,162 @@ import { SITE_TITLE } from '../consts';
 <html lang="ja">
 	<head>
 		<BaseHead title={`検索 | ${SITE_TITLE}`} description="サイト内検索" />
-		<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 	</head>
 	<body>
 		<Header />
 		<main>
 			<h1 class="page-title">サイト内検索</h1>
-			<div id="search"></div>
+			<div id="search">
+				<input type="text" id="search-input" placeholder="キーワードを入力..." autocomplete="off" />
+				<p id="search-status" hidden></p>
+				<ol id="search-results"></ol>
+			</div>
 		</main>
 		<Footer />
 
-		<script src="/pagefind/pagefind-ui.js" is:inline></script>
 		<script is:inline>
+			// Pagefindの日本語インデックスは分かち書きが文脈依存で、
+			// 「ナイトレイン」が「ナイト|レイン」と分割されたページに
+			// 1語クエリが届かない。そのため連続するかな漢字語は全ての
+			// 2分割パターンでも検索し、スコアの高いものだけ統合する。
+			const VARIANT_SCORE_MIN = 5;
+			const CJK_RE = /[぀-ヿ㐀-鿿]/;
+
+			// pagefind.jsはブラウザのIntl.Segmenterでクエリを自動分割するが、
+			// その分割がインデックス側トークンと一致せず0件になる。
+			// このページ内では空白分割のみのSegmenterに差し替えて、
+			// クエリ分割をsmartSearch側で制御する。
+			Intl.Segmenter = class {
+				segment(input) {
+					const out = [];
+					const re = /\S+/g;
+					let m;
+					while ((m = re.exec(input))) {
+						out.push({ segment: m[0], index: m.index, input, isWordLike: true });
+					}
+					return out;
+				}
+				resolvedOptions() {
+					return { granularity: 'word' };
+				}
+			};
+
+			let pagefind;
+			async function initPagefind() {
+				if (!pagefind) {
+					// Worker内では上記のSegmenter差し替えが届かないため、
+					// import前にWorkerを外してメインスレッド実行にフォールバックさせる
+					// （hasWorkerSupportはモジュール読み込み時に判定される）
+					const RealWorker = window.Worker;
+					window.Worker = undefined;
+					try {
+						pagefind = await import('/pagefind/pagefind.js');
+						await pagefind.init();
+					} finally {
+						window.Worker = RealWorker;
+					}
+				}
+				return pagefind;
+			}
+
+			async function smartSearch(query) {
+				const pf = await initPagefind();
+				const seen = new Map();
+				const add = (results) => {
+					for (const res of results) {
+						const prev = seen.get(res.id);
+						if (!prev || prev.score < res.score) seen.set(res.id, res);
+					}
+				};
+				const direct = await pf.search(query);
+				add(direct.results);
+
+				const terms = query.trim().split(/\s+/);
+				for (let i = 0; i < terms.length; i++) {
+					const t = terms[i];
+					if (t.length < 2 || !CJK_RE.test(t)) continue;
+					for (let p = 1; p < t.length; p++) {
+						const variant = [...terms.slice(0, i), t.slice(0, p), t.slice(p), ...terms.slice(i + 1)].join(' ');
+						const r = await pf.search(variant);
+						if (r.results.length && r.results[0].score >= VARIANT_SCORE_MIN) add(r.results);
+					}
+				}
+				return [...seen.values()].sort((a, b) => b.score - a.score);
+			}
+
+			const input = document.getElementById('search-input');
+			const statusEl = document.getElementById('search-status');
+			const resultsEl = document.getElementById('search-results');
+
+			let timer;
+			let searchSeq = 0;
+			input.addEventListener('input', () => {
+				clearTimeout(timer);
+				timer = setTimeout(runSearch, 300);
+			});
+
+			async function runSearch() {
+				const query = input.value.trim();
+				const seq = ++searchSeq;
+				if (!query) {
+					statusEl.hidden = true;
+					resultsEl.innerHTML = '';
+					return;
+				}
+				const results = await smartSearch(query);
+				if (seq !== searchSeq) return; // 古い検索結果は破棄
+
+				resultsEl.innerHTML = '';
+				if (results.length === 0) {
+					statusEl.textContent = `${query} の検索結果はありませんでした。`;
+					statusEl.hidden = false;
+					return;
+				}
+				statusEl.textContent = `${results.length}件ヒットしました`;
+				statusEl.hidden = false;
+
+				const items = await Promise.all(results.slice(0, 30).map((r) => r.data()));
+				if (seq !== searchSeq) return;
+				for (const d of items) {
+					const li = document.createElement('li');
+					li.className = 'result';
+
+					const link = document.createElement('a');
+					link.className = 'result-title';
+					link.href = d.url;
+					link.textContent = d.meta?.title || d.url;
+
+					const excerpt = document.createElement('p');
+					excerpt.className = 'result-excerpt';
+					excerpt.innerHTML = d.excerpt; // Pagefind生成のハイライト付き抜粋
+
+					const body = document.createElement('div');
+					body.className = 'result-body';
+					body.append(link, excerpt);
+
+					if (d.meta?.image) {
+						const img = document.createElement('img');
+						img.className = 'result-image';
+						img.src = d.meta.image;
+						img.alt = '';
+						img.loading = 'lazy';
+						li.append(img);
+					}
+					li.append(body);
+					resultsEl.append(li);
+				}
+			}
+
+			// 入力前にインデックスを温めておく
 			window.addEventListener('DOMContentLoaded', () => {
-				new PagefindUI({
-					element: '#search',
-					showImages: true,
-					translations: {
-						placeholder: 'キーワードを入力...',
-						zero_results: '[QUERY] の検索結果はありませんでした。',
-					},
-				});
+				initPagefind();
+				input.focus();
 			});
 		</script>
 	</body>
 </html>
 
-<style>
+<style is:global>
 .page-title {
 	font-size: 1.6rem;
 	font-weight: 700;
@@ -46,16 +175,77 @@ import { SITE_TITLE } from '../consts';
 	max-width: 760px;
 }
 
-:global(.pagefind-ui__search-input) {
-	border: 2px solid #ddd !important;
-	border-radius: 4px !important;
-	font-size: 1rem !important;
+#search-input {
+	width: 100%;
+	padding: 0.7em 1em;
+	border: 2px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	box-sizing: border-box;
 }
-:global(.pagefind-ui__search-input:focus) {
-	border-color: #E60012 !important;
-	outline: none !important;
+#search-input:focus {
+	border-color: #E60012;
+	outline: none;
 }
-:global(.pagefind-ui__result-link) {
-	color: #E60012 !important;
+
+#search-status {
+	margin: 1em 0 0;
+	font-size: 0.9rem;
+	color: #555;
+}
+
+#search-results {
+	list-style: none;
+	margin: 1em 0 0;
+	padding: 0;
+}
+
+.result {
+	display: flex;
+	gap: 1em;
+	padding: 1.1em 0;
+	border-bottom: 1px solid #eee;
+}
+
+.result-image {
+	width: 120px;
+	height: 68px;
+	object-fit: cover;
+	border-radius: 6px;
+	flex-shrink: 0;
+}
+
+.result-body {
+	min-width: 0;
+}
+
+.result-title {
+	display: block;
+	color: #E60012;
+	font-weight: 700;
+	text-decoration: none;
+	margin-bottom: 0.35em;
+}
+.result-title:hover {
+	text-decoration: underline;
+}
+
+.result-excerpt {
+	font-size: 0.88rem;
+	color: #444;
+	line-height: 1.7;
+	margin: 0;
+}
+.result-excerpt mark {
+	background: #ffe3e6;
+	color: inherit;
+	font-weight: 700;
+}
+
+@media (max-width: 600px) {
+	.result-image {
+		width: 90px;
+		height: 51px;
+	}
 }
 </style>
