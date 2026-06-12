@@ -47,6 +47,9 @@ const { title, description, pubDate, updatedDate, heroImage, category, tags } = 
 						</div>
 					)}
 
+					<!-- 広告表記 -->
+					<p class="affiliate-notice">※本記事にはアフィリエイト広告（Amazonアソシエイト・楽天アフィリエイト・Yahoo!ショッピング）を含みます。</p>
+
 					<!-- 本文 -->
 					<div class="prose">
 						<slot />
@@ -103,6 +106,15 @@ h1 {
 	object-fit: cover;
 	border-radius: 0;
 	display: block;
+}
+
+.affiliate-notice {
+	margin: 0;
+	padding: 0.6em 1.75em;
+	font-size: 0.8rem;
+	color: #555;
+	background: #f7f7f7;
+	border-bottom: 1px solid #efefef;
 }
 
 .prose {
