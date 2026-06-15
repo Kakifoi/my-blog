@@ -24,7 +24,7 @@ heroImage: '/images/ushigama-yakiniku-eyecatch.jpg'
       <img src="/images/amaike-ushikama-product.jpg" alt="うし釜 秘伝のタレ漬け焼肉セット 1.3kg" class="product-img" />
     </a>
     <div class="product-info">
-      <p class="product-name">【期間限定・6/9限り】うし釜 秘伝のタレ漬け焼肉セット 1.3kg</p>
+      <p class="product-name">うし釜 秘伝のタレ漬け焼肉セット 1.3kg</p>
       <div class="btn-group">
         <a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
       </div>
