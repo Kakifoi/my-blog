@@ -68,4 +68,6 @@ heroImage: '/images/senpai-jagaimo-potechi-eyecatch.jpg'
   </div>
 </div>
 
+---
+
 このブログの商品リンクから飛んで、そのままAmazon・楽天・Yahoo!ショッピングで別の商品（日用品や消耗品など）を買ってもらっても、ブログへの応援になります😊リンク先の商品を買わなくてもOKです。もし使う機会があればぜひ活用してください✌️
