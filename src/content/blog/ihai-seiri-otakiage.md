@@ -85,6 +85,21 @@ heroImage: '/images/ihai-seiri-eyecatch.jpg'
 
 曽祖父母以前の位牌を、お寺に預けてお焚き上げに出してきた。木の過去帳から見つかった明治の彫り間違いとか、20分で終わった当日のあっさりした感じとか、いろいろ印象に残ることがあった。お布施は調べて3万円で落ち着いたし、過去帳についても住職の配慮なりの形で進んでいる。先祖代々のものを大事にする気持ちはあるけど、それをどう引き継ぐかは、時代に合わせて自分たちなりに決めていけばいいんだと思う。
 
+<div class="product-card">
+  <span class="pr-label">PR</span>
+  <div class="product-inner">
+    <a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
+      <img src="/images/amaike-ushikama-product.jpg" alt="うし釜 秘伝のタレ漬け焼肉セット 1.3kg" class="product-img" />
+    </a>
+    <div class="product-info">
+      <p class="product-name">うし釜 秘伝のタレ漬け焼肉セット 1.3kg</p>
+      <div class="btn-group">
+        <a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 ---
 
 このブログの商品リンクから飛んで、そのままAmazon・楽天・Yahoo!ショッピングで別の商品（日用品や消耗品など）を買ってもらっても、ブログへの応援になります😊リンク先の商品を買わなくてもOKです。もし使う機会があればぜひ活用してください✌️
