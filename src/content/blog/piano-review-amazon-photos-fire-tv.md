@@ -1,7 +1,7 @@
 ---
 title: 'ピアノのレッスン動画を家族で振り返り。Amazonフォト＋Fire TVでテレビ視聴がベストだった'
 description: '上の子が幼稚園でピアノを習い始めた。レッスン後にLINEで届く振り返り動画を、AmazonフォトにアップしてFire TV Stickでテレビの大画面で見る仕組みにたどり着いた話。'
-pubDate: '2026-06-24T12:00:00+09:00'
+pubDate: '2026-06-23T12:00:00+09:00'
 category: '子育て・日常'
 tags: ['ピアノ', '習い事', '子育て', 'Amazonフォト', 'Fire TV Stick', 'Amazonプライム']
 heroImage: '/images/piano-review-amazon-photos-fire-tv-eyecatch.jpg'
