@@ -15,6 +15,8 @@ heroImage: '/images/pokemon-center-hanyu-eyecatch.jpg'
 
 ![入口パネル](/images/pokemon-hanyu-entrance.jpg)
 
+![ポケモンセンター出張所の様子](/images/pokemon-hanyu-entrance2.jpg)
+
 ![ピカチュウバルーン](/images/pokemon-hanyu-pikachu-balloon.jpg)
 
 ## 😣 本命のメガリザードンXが売り切れていた
