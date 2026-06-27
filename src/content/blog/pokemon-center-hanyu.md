@@ -13,6 +13,8 @@ heroImage: '/images/pokemon-center-hanyu-eyecatch.jpg'
 
 入口のガラスがカントー御三家とかパルデア御三家、ピカチュウやニャースでびっしり埋め尽くされてて、入る前から下の子のテンションが上がってた。中に入るとデカいピカチュウのバルーンが出迎えてくれて、これだけでもう来た甲斐があったと思う。
 
+![イオンモール羽生の入口（ピカチュウの装飾）](/images/pokemon-hanyu-entrance0.jpg)
+
 ![入口パネル](/images/pokemon-hanyu-entrance.jpg)
 
 ![ポケモンセンター出張所の様子](/images/pokemon-hanyu-entrance2.jpg)
