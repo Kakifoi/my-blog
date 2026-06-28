@@ -73,6 +73,21 @@ heroImage: '/images/koppe-tajima-eyecatch.jpg'
 
 もう1つはS&Bのチューブタイプの柚子胡椒。これをかけて食べたら、完全に飲み屋のつまみになった。ビールが欲しくなるやつだ。冷蔵庫にビールを切らしていて飲めなかったけど、これは間違いなくビールの相棒。この牛タン、めっちゃ良かった。
 
+<div class="product-card">
+  <span class="pr-label">PR</span>
+  <div class="product-inner">
+    <a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
+      <img src="/images/amaike-ushikama-product.jpg" alt="うし釜 秘伝のタレ漬け焼肉セット 1.3kg" class="product-img" />
+    </a>
+    <div class="product-info">
+      <p class="product-name">うし釜 秘伝のタレ漬け焼肉セット 1.3kg</p>
+      <div class="btn-group">
+        <a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 ## ✍️ まとめ
 
 台風に身構えた週末だったけど、ふたを開けたらコッペパンと焼肉で最高の休日になった。引きこもる予定が、午前は本庄でコッペパン、夜は家で焼肉。結果オーライだ。
