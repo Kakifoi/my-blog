@@ -94,6 +94,18 @@ Y+左スティック押し込みで足元にピンが刺せるんだけど、最
 
 そしてもう1つ。今年の夏に、Switch2でフロムからの新作のテストプレイが始まる。これがデカい。タイトルは『The Duskbloods（ダスクブラッド）』。ダークソウルやエルデンリングでおなじみのフロム・ソフトウェアが作る、Switch2専用の完全新作だ。最大8人のPvPvEアクションで、2026年夏にクローズドネットワークテストが実施されることが発表された。参加にはNintendo Switch Onlineへの加入が必要らしい。発売は2026年内が決定してる。
 
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/ZHEB4tmezDk"
+    title="The Duskbloods 公式トレーラー"
+    frameborder="0"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+  ></iframe>
+</div>
+
 結局、このフロム新作はSwitch2のプロコンでプレイすることになる。だったら今のうちに、ナイトレインでSwitch2のプロコンの感覚を合わせておこうと思った。ナイトレインのときも同じようにネットワークテストがあったから、流れとしては前作と同じだ。今から準備しておく。
 
 ## 🎮 まとめ
