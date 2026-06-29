@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import AudibleCard from '../components/AudibleCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -53,6 +54,10 @@ const posts = (await getCollection('blog')).sort(
 
 			<!-- おすすめ商品 -->
 			<h2 class="section-heading">おすすめ商品</h2>
+
+			<!-- Audible カード（先頭） -->
+			<AudibleCard />
+
 			<div class="product-card">
 				<span class="pr-label">PR</span>
 				<div class="product-inner">
@@ -61,6 +66,7 @@ const posts = (await getCollection('blog')).sort(
 					</a>
 					<div class="product-info">
 						<p class="product-name">アラジン 焼き焼きグリル CAG-MG7A グラファイトミニグリラー</p>
+						<p class="product-desc-text">煙が出にくいグラファイトヒーターで、自宅でも本格的な焼肉が楽しめるアラジンのグリラー。我が家では毎週末の焼肉で大活躍中です。一気に高温で焼き上げるので外はこんがり・中はジューシー、プレートを外して洗うだけのお手入れの手軽さも気に入っています。</p>
 						<div class="btn-group">
 							<a href="https://amzn.to/4w7qHWI" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
 							<a href="https://hb.afl.rakuten.co.jp/hgc/39881198.5dba11f4.39881199.0eb4a102/?pc=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fdc5692d91abac39e4d481b77f1dae5b3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
@@ -70,7 +76,7 @@ const posts = (await getCollection('blog')).sort(
 				</div>
 			</div>
 
-			<!-- Prime Video 商品カード -->
+			<!-- Prime Video 商品カード（比較用・不要になったら削除可） -->
 			<div class="product-card">
 				<span class="pr-label">PR</span>
 				<div class="product-inner">
