@@ -1,9 +1,9 @@
 ---
 title: 'Switch2のプロコンに買い替えたら、ナイトレインのスキル不発が完全に消えた話'
 description: 'Switch2のプロコンに替えただけで、ナイトレインのダッシュ誤爆からのスキル不発が完全に消えた。原因を突き止めるまでの試行錯誤と、プロコン2の進化ポイントをまとめた。'
-pubDate: '2026-06-29T12:00:00+09:00'
+pubDate: '2026-06-28T12:00:00+09:00'
 category: 'ゲーム・エンタメ'
-tags: ['Switch2', 'プロコン', 'ナイトレイン', 'The Duskbloods', 'Steam', 'ゲーム周辺機器']
+tags: ['Switch2', 'プロコン', 'Nintendo Switch 2 Proコントローラー', 'ナイトレイン', 'The Duskbloods', 'Steam', 'ゲーム周辺機器']
 heroImage: '/images/switch2-procon-eyecatch.jpg'
 ---
 
