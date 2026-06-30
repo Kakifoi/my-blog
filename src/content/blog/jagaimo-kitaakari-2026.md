@@ -4,7 +4,7 @@ description: '子連れでじゃがいも掘り体験。品種は「きたあか
 pubDate: '2026-05-31T12:00:00+09:00'
 heroImage: '/images/jagaimo-kitaakari-2026-eyecatch.jpg'
 category: '旅行・おでかけ'
-tags: ['じゃがいも掘り', '焼肉', 'アラジン', '実家', '子連れ']
+tags: ['じゃがいも掘り', '焼肉', 'アラジン', '実家', '子育て']
 ---
 
 ## 🥔 じゃがいも掘りへ
