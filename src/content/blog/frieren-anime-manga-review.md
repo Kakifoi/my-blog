@@ -63,8 +63,6 @@ heroImage: '/images/frieren-eyecatch.jpg'
 
 サンデーのHPで漫画の1.2話が無料で公開されているので、気になった方はどうぞ。
 
----
-
 <div class="product-card">
   <span class="pr-label">PR</span>
   <div class="product-inner">
@@ -81,6 +79,8 @@ heroImage: '/images/frieren-eyecatch.jpg'
     </div>
   </div>
 </div>
+
+---
 
 このブログの商品リンクから飛んで、そのままAmazon・楽天・Yahoo!ショッピングで別の商品（日用品や消耗品など）を買ってもらっても、ブログへの応援になります😊リンク先の商品を買わなくてもOKです。もし使う機会があればぜひ活用してください✌️
 
