@@ -49,6 +49,8 @@ heroImage: '/images/dyson-dryer-hd08-review-2-eyecatch.jpg'
 
 Smileセールで22,000円という価格で買えたのは良かった。定価で買うかどうかは悩むところだが、セール時を狙う価値は十分にあると思う。
 
+---
+
 <div class="product-card">
   <span class="pr-label">PR</span>
   <div class="product-inner">
