@@ -30,8 +30,11 @@
 - リポジトリ: GitHub `Kakifoi/my-blog`（公開）
 - 技術: Astro / MDX・Markdown / Pagefind / Cloudflare Pages
 - デプロイ: `git push origin main` で自動ビルド → kakifoi.net に反映
-- 認証: SSH鍵で認証する。リモートがhttpsなら
-  `git@github.com:Kakifoi/my-blog.git` に切り替える。
+- 認証: そのPCで既にpushが通っている方法（`git remote -v` の現状）を
+  そのまま使う。remoteのURLは勝手に切り替えない。
+  （このMacはHTTPS＝osxkeychainで認証が通る。SSH鍵は未設定なので
+  SSHに切り替えると失敗し遠回りになる。別PCでSSHを使っている場合は
+  そのPCのremote設定を尊重する＝要は「動いている方法を変えない」）
   pushがrejectされたら `git pull --rebase origin main` 後に再push。
 - コミットは末尾に `Co-Authored-By: Claude <noreply@anthropic.com>`
 
