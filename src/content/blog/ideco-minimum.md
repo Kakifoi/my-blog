@@ -27,6 +27,17 @@ heroImage: '/images/ideco-minimum-eyecatch.jpg'
 
 久しぶりにその動画を見返したけど、今見ても参考になる。高配当ETFの解説動画なのに、最後は「配当は資金力がないとパワーが出ない。資金が少ないうちは事業所得＝種銭を増やす方が大事」「自分への投資は利回り無限大」っていうオチになってる。まさに参考にした行動そのものだ。
 
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe
+    src="https://www.youtube.com/embed/vVUI_RKQtZI"
+    title="YouTube video"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+  ></iframe>
+</div>
+
 ## 🔀 高配当より、含み益でトータルリターンを取る方が俺には合ってた
 
 入り口は高配当株の動画だったけど、実際にやってみて、俺は高配当じゃないなと気づいた。この話は前の記事で詳しく書いたから軽めにするけど、配当をもらってキャッシュフローが良くなることより、含み益でトータルリターンが優れてる方が、俺の目的には合ってた。
