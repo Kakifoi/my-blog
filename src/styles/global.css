@@ -210,8 +210,8 @@ table th { background: #f5f5f5; }
 
 /* 表・図の下の補足注記（本文より小さく薄い色で表示） */
 .table-note {
-	font-size: 0.8rem;
+	font-size: 0.72rem;
 	color: #999;
 	line-height: 1.6;
-	margin: -0.5em 0 1.5em;
+	margin: 0.5em 0 1.5em;
 }
