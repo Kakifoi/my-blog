@@ -27,7 +27,7 @@ heroImage: '/images/ideco-minimum-eyecatch.jpg'
 
 久しぶりにその動画を見返したけど、今見ても参考になる。高配当ETFの解説動画なのに、最後は「配当は資金力がないとパワーが出ない。資金が少ないうちは事業所得＝種銭を増やす方が大事」「自分への投資は利回り無限大」っていうオチになってる。まさに参考にした行動そのものだ。
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 2em;">
   <iframe
     src="https://www.youtube.com/embed/vVUI_RKQtZI"
     title="YouTube video"
