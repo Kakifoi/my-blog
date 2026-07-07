@@ -64,7 +64,7 @@ AirPods 4にはノイズキャンセリング（ANC）搭載モデルと非搭�
       <div class="btn-group">
         <a href="https://amzn.to/4vhsuXA" target="_blank" rel="nofollow sponsored noopener" class="btn-amazon">Amazonで見る</a>
         <a href="https://a.r10.to/h5QIck" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-        <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892609900&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%2FMXP63J%252FA%2F0%2F%3Ffirst%3D1%26tab_ex%3Dcommerce%26fr%3Dshp-prop%26mcr%3D4811fb1e384b66cb623977e80cfa62ac%26ts%3D1783408350%26sretry%3D1%26sc_i%3Dshopping-pc-web-search-suggest-h_srch-srchbtn-sgstfrom-promotion-feature-h_srch-kwd" target="_blank" rel="nofollow" class="btn-yahoo"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3769589&pid=892609900" height="1" width="0" border="0">Yahoo!で見る</a>
+        <a href="//ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892609900&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%2FMXP63J%2F0%2F%3Ffirst%3D1%26ss_first%3D1%26ts%3D1783408354%26mcr%3D823acf9615c02a33691b41a6c43f632f%26tab_ex%3Dcommerce%26sretry%3D1%26prom%3D1%26sc_i%3Dshopping-pc-web-result-suggest-h_srch-srchbtn-sgstfrom-result-item-h_srch-srchbox" target="_blank" rel="nofollow" class="btn-yahoo"><img src="//ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3769589&pid=892609900" height="1" width="0" border="0">Yahoo!で見る</a>
       </div>
     </div>
   </div>
