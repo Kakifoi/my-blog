@@ -2,7 +2,7 @@
 title: '元4万円超が6,109円。NZXT Relay SpeakersをPCとテレビで使ったレビュー'
 description: '発売時42,570円だったNZXT Relay Speakersを、PCモニターと実家のテレビで使用したレビュー。音質や接続方法、自動スタンバイの対策、注意点をまとめ、2026年8月3日時点で6,109円まで値下がりした現在のコストパフォーマンスを紹介する。'
 pubDate: '2026-08-03T12:00:00+09:00'
-heroImage: '/images/nzxt-relay-speakers-review-eyecatch.jpg'
+heroImage: '/images/nzxt-relay-speakers-review-eyecatch-v2.jpg'
 category: 'ガジェット・テクノロジー'
 tags: ['節約', '家電購入', '買い物', 'ゲーム', '日記', 'ライフスタイル']
 ---
