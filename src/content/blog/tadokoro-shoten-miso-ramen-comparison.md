@@ -4,7 +4,7 @@ description: '北海道旅行から数日後、田所商店深谷店で北海道
 pubDate: '2026-08-07T12:00:00+09:00'
 category: 'グルメ'
 tags: ['埼玉グルメ', '深谷', 'ラーメン', '家族', '子育て', '北海道']
-heroImage: '/images/tadokoro-shoten-miso-ramen-comparison-eyecatch.jpg'
+heroImage: '/images/tadokoro-shoten-super-butter-eyecatch.jpg'
 ---
 
 北海道旅行から帰って数日。[新千歳空港の北海道ラーメン道場で食べた、弟子屈の味噌ラーメン](/blog/hokkaido-trip-day4-new-chitose-airport/)がまだ頭に残っていた。ここ最近食べた味噌ラーメンでは、ダントツで一番美味かった一杯だ。
