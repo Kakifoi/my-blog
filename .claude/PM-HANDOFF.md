@@ -2,7 +2,7 @@
 
 このファイルを読んだら、あなたはkakifoi.net（Astroブログ）のPM（責任者）として動く。
 
-> 文書の役割: 内容ルールの原本はリポジトリ直下の `CLAUDE.md`。本ファイルはPM手順、`.claude/CHAT-PROJECT.md` はChat（claude.ai Project）用の要約。ルール変更時は原本→複写の順で必ず同期する。
+> 文書の役割: 内容ルールの原本はリポジトリ直下の `CLAUDE.md`。本ファイルはPM手順、`.claude/CHAT-PROJECT.md` はChat（claude.ai Project）用の要約、`.claude/SNS-POSTING.md` はSNS投稿の詳細原本。内容ルールの変更時は原本→関係する要約文書の順で同期し、SNS固有の詳細はSNS原本に集約する。
 
 ## 役割（優先順位つき）
 - 【最優先】重い作業・まとまった作業は原則すべて部下（サブエージェント）に
@@ -65,23 +65,60 @@
 - 間接的・概念的につながるタグ → 残して進め、報告に判断が分かれる旨を添える
   （過去例: 案件掘り起こし記事の「時短」は残す判断になった）。
 
-## 投稿後の検品（PM必須）
+## 投稿・修正後の検品（PM必須・リスク別）
 
-投稿・修正のたびに、以下をPMが必ず実施する。
+- 部下（サブエージェント）は編集、素材照合、変更箇所に限定した自己確認まで行う。
+- **PMが最終責任者として `verify:post` を1回だけ実行する。** 部下とPMが同じfull build・postcheckを二重実行しない。
+- `verify:post` は変更範囲を作業ツリーから確認するため、原則としてcommit前に実行する。
+- 画像変換は `npm run image:prepare -- --input <元画像> --output <出力先> --mode hero|body` に統一する。
+- 統合コマンドが未実装の環境では、該当モードと同等の項目を個別に1回だけ確認する。重複実行はしない。
+- ERRORがあれば公開状態のまま放置しない。
 
-1. `python3 scripts/postcheck.py <slug>` を実行し、**ERROR 0件**を確認する。
-   （全記事一括なら `python3 scripts/postcheck.py`。ERRORがあれば公開状態のまま放置しない）
-2. プレビューで **PC幅とスマホ幅（375px）の両方** のスクリーンショットを撮り、
-   表・画像・埋め込みの崩れがないか目視確認する。
+### A. full
+
+対象: 新規記事、表、商品カード、動画、HTML/CSS・レイアウト変更。
+
+1. PMが `npm run verify:post -- --slug <slug> --mode full` を1回実行する。
+2. PC幅とスマホ幅（375px）の両方をPMが目視し、表・画像・埋め込み・レイアウトの崩れを確認する。
    （過去にスマホ幅で表の1列目が縦潰れした事故あり。表がある記事は特に注意）
-3. **部下（サブエージェント）の完了報告を鵜呑みにしない。**
-   上記1・2はPMが独立に実行し、自分の目で確認してから完了とする。
-4. **本番反映の確認（push後・必須）**: push から2〜3分待ち、
-   `curl -s "https://kakifoi.net/blog/<slug>/" | grep 記事固有の文字列` で
-   本番に実際に出たことを確認する。5分待っても未反映なら、
-   ビルド通知の取りこぼしなので空コミットで再トリガーする:
-   `git commit --allow-empty -m "chore: ビルド再トリガー" && git push origin main`
-   → 再度2〜3分後に確認。（2026-07-20に取りこぼし事故あり。空コミットで即復旧した）
+
+### B. text-only
+
+対象: 公開済み記事本文の1〜数文字だけを直し、frontmatter・Markdown構造を変えない修正。
+
+1. PMが `npm run verify:post -- --slug <slug> --mode text-only` を1回実行する。
+2. ビルドは統合検品内の1回だけとし、PC幅・375px幅の毎回の目視は省略する。
+
+### C. image-only
+
+対象: `heroImage` の参照先を変えず、アイキャッチ画像ファイルだけを差し替える修正。
+
+1. PMが `npm run verify:post -- --slug <slug> --mode image-only` を1回実行する。
+2. postcheck、1200×675pxの寸法、変更範囲が対象画像だけであることを確認する。
+3. 全ページbuildとPC幅・375px幅の確認は省略する。
+4. push後は本番画像とローカル画像のハッシュ一致を確認する。
+
+### D. SNSカード画像を確実に更新するアイキャッチ再変更
+
+対象: 公開済み記事で、Xなどに残った古いSNSカード画像を確実に更新したい再差し替え。
+
+- 原則として `-v2` などを付けた**新しい画像ファイル名**で保存し、記事の `heroImage` も更新する。
+- 旧画像は他の参照やキャッシュ調査に必要な可能性があるため、無断で削除しない。
+- frontmatterを変更するため `image-only` ではなく、PMが `npm run verify:post -- --slug <slug> --mode full` を1回実行する。
+
+## 本番反映の確認（push後・必須）
+
+1. 固定で2〜3分待たず、直ちに `verify:production` を開始してポーリングする。
+2. 新規記事・本文修正では `npm run verify:production -- --slug <slug> --contains '<今回追加・修正した固有文字列>'` を使う。
+3. アイキャッチ変更では `--image public/images/<画像名>` も必ず付け、記事内の画像参照と本番画像のハッシュ一致を確認する。
+4. canonical URLもスクリプト内で確認する。
+5. timeoutになっても空コミットを自動実行しない。まずpush済みコミットとCloudflareの状況を確認する。
+6. 再トリガーが必要だと切り分けられた場合だけ、手動で実施して再確認する。
+
+## SNS投稿
+
+SNS投稿の詳細手順・UTM・画像比率・公開前確認は `.claude/SNS-POSTING.md` を参照する。
+本ファイルへSNS固有ルールを複製しない。
 
 ## Cloudflare関連の注意
 - リモートに `cloudflare/workers-autoconfig` 系のブランチが存在する

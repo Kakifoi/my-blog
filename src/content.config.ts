@@ -10,8 +10,16 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
-		category: z.string().optional(),
-		tags: z.array(z.string()).optional(),
+		category: z.enum([
+			'グルメ',
+			'旅行・おでかけ',
+			'子育て・日常',
+			'ゲーム・エンタメ',
+			'ガジェット・テクノロジー',
+			'お金・投資',
+			'健康・ランニング',
+		]),
+		tags: z.array(z.string()).min(1),
 	}),
 });
 

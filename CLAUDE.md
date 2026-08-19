@@ -6,8 +6,10 @@
 ## 文書の役割
 
 内容ルールの**原本はこのファイル（CLAUDE.md）**。
-PM手順は `.claude/PM-HANDOFF.md`、Chat（claude.aiのProject）用の要約は `.claude/CHAT-PROJECT.md`。
-ルール変更時は **原本（CLAUDE.md）→ 複写（PM-HANDOFF.md / CHAT-PROJECT.md）の順で必ず同期する**。
+PM手順は `.claude/PM-HANDOFF.md`、Chat（claude.aiのProject）用の要約は `.claude/CHAT-PROJECT.md`、
+SNS投稿の詳細原本は `.claude/SNS-POSTING.md`。
+内容ルールの変更時は **原本（CLAUDE.md）→ 関係する要約文書** の順で必ず同期する。
+SNS固有の詳細は重複記載せず、`.claude/SNS-POSTING.md` に集約する。
 
 ## カテゴリ（固定リスト）
 
@@ -41,6 +43,7 @@ PM手順は `.claude/PM-HANDOFF.md`、Chat（claude.aiのProject）用の要約�
 - 記事: `src/content/blog/[slug].md`
 - 画像: `public/images/`（記事内パスは `/images/xxx.jpg`）
 - アイキャッチ: 1200×675px、`heroImage` にpublicパス文字列で指定
+- 画像変換は共通コマンド `npm run image:prepare -- --input <元画像> --output <出力先> --mode hero|body` を使う
 - 商品カードのCSSは `global.css` に集約済み
 - 表のセルは**全角20文字以内を推奨**（長いとPC幅で末尾1文字だけ折り返される）
 - 表・図の下の補足注記は `<p class="table-note">※…</p>` で書く（global.cssにスタイル定義済み）
