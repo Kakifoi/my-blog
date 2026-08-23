@@ -108,12 +108,14 @@
 
 ## 本番反映の確認（push後・必須）
 
-1. 固定で2〜3分待たず、直ちに `verify:production` を開始してポーリングする。
+1. 固定で2〜3分待たず、直ちに `verify:production` を開始する。既定timeoutは90秒とし、5分間待ち続けない。
 2. 新規記事・本文修正では `npm run verify:production -- --slug <slug> --contains '<今回追加・修正した固有文字列>'` を使う。
 3. アイキャッチ変更では `--image public/images/<画像名>` も必ず付け、記事内の画像参照と本番画像のハッシュ一致を確認する。
 4. canonical URLもスクリプト内で確認する。
-5. timeoutになっても空コミットを自動実行しない。まずpush済みコミットとCloudflareの状況を確認する。
-6. 再トリガーが必要だと切り分けられた場合だけ、手動で実施して再確認する。
+5. 90秒でtimeoutになった場合は通常のポーリングを終了し、スクリプトがGitHub公開APIから出力するローカルHEADの `Cloudflare Pages` の状態・結果・詳細URLで切り分ける。`Workers Builds` の失敗は本番反映の判定に使わない。
+6. GitHub APIの追加診断に失敗しても、元の本番確認エラーを優先する。追加診断不能の表示を確認し、必要ならGitHubまたはCloudflare管理画面で状態を確認する。
+7. timeoutになっても空コミットを自動実行しない。まずpush済みコミットとCloudflare Pagesの状況を確認する。
+8. 再トリガーが必要だと切り分けられた場合だけ、手動で実施して再確認する。
 
 ## SNS投稿
 

@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto';
+import { execFile } from 'node:child_process';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLIC_DIR = path.join(ROOT, 'public');
+const execFileAsync = promisify(execFile);
 const HELP = `kakifoi.netの記事と画像が本番反映されるまで自動確認します。
 
 使い方:
@@ -20,7 +23,7 @@ const HELP = `kakifoi.netの記事と画像が本番反映されるまで自動�
   --contains <text>   本番HTMLに含まれるべき記事固有文字列
   --image <path>      public配下のローカル画像
                        例: public/images/example.jpg, /images/example.jpg
-  --timeout <秒>      最大待機時間（既定: 300）
+  --timeout <秒>      最大待機時間（既定: 90）
   --interval <秒>     確認間隔（既定: 10）
   --help              このヘルプを表示
 
@@ -34,7 +37,7 @@ function fail(message) {
 }
 
 function parseArgs(argv) {
-	const options = { slug: undefined, contains: undefined, image: undefined, timeout: 300, interval: 10, help: false };
+	const options = { slug: undefined, contains: undefined, image: undefined, timeout: 90, interval: 10, help: false };
 	const names = new Set(['slug', 'contains', 'image', 'timeout', 'interval']);
 	for (let index = 0; index < argv.length; index += 1) {
 		const token = argv[index];
@@ -122,6 +125,91 @@ async function sleep(milliseconds) {
 	await new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
+function parseGitHubRepository(remoteUrl) {
+	const normalized = remoteUrl.trim().replace(/\.git$/i, '');
+	const patterns = [
+		/^https?:\/\/github\.com\/([^/]+)\/([^/]+)$/i,
+		/^git@github\.com:([^/]+)\/([^/]+)$/i,
+		/^ssh:\/\/git@github\.com\/([^/]+)\/([^/]+)$/i,
+	];
+	for (const pattern of patterns) {
+		const match = normalized.match(pattern);
+		if (match) return { owner: match[1], repository: match[2] };
+	}
+	throw new Error('originが対応するGitHubリポジトリ形式ではありません');
+}
+
+function statusInJapanese(status) {
+	const labels = {
+		queued: '待機中',
+		in_progress: '処理中',
+		completed: '完了',
+		waiting: '待機中',
+		pending: '保留中',
+		requested: '開始待ち',
+	};
+	return labels[status] ?? '不明';
+}
+
+function conclusionInJapanese(conclusion) {
+	if (!conclusion) return '未確定';
+	const labels = {
+		success: '成功',
+		failure: '失敗',
+		neutral: '中立',
+		cancelled: 'キャンセル',
+		skipped: 'スキップ',
+		timed_out: 'タイムアウト',
+		action_required: '要対応',
+		stale: '無効',
+		startup_failure: '開始失敗',
+	};
+	return labels[conclusion] ?? '不明';
+}
+
+async function diagnoseCloudflarePages() {
+	const [{ stdout: headOutput }, { stdout: remoteOutput }] = await Promise.all([
+		execFileAsync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }),
+		execFileAsync('git', ['remote', 'get-url', 'origin'], { cwd: ROOT, encoding: 'utf8' }),
+	]);
+	const head = headOutput.trim();
+	if (!/^[0-9a-f]{40}$/i.test(head)) throw new Error('ローカルHEADコミットを取得できませんでした');
+	const { owner, repository } = parseGitHubRepository(remoteOutput);
+	const apiUrl = new URL(
+		`https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}/commits/${head}/check-runs`,
+	);
+	apiUrl.searchParams.set('per_page', '100');
+	const response = await fetch(apiUrl, {
+		signal: AbortSignal.timeout(10_000),
+		headers: {
+			accept: 'application/vnd.github+json',
+			'user-agent': 'kakifoi-verify-production',
+			'x-github-api-version': '2022-11-28',
+		},
+	});
+	if (!response.ok) throw new Error(`GitHub API: HTTP ${response.status} ${response.statusText}`);
+	const result = await response.json();
+	if (!Array.isArray(result.check_runs)) throw new Error('GitHub APIの応答形式が想定と異なります');
+
+	const cloudflarePagesRuns = result.check_runs.filter(
+		(run) => typeof run?.name === 'string' && run.name.toLowerCase().includes('cloudflare pages'),
+	);
+	console.error(`追加診断: ローカルHEAD ${head.slice(0, 7)} のCloudflare Pages状態`);
+	if (cloudflarePagesRuns.length === 0) {
+		console.error('  Cloudflare Pagesのcheck-runは見つかりませんでした。Workers Buildsは本番判定の対象外です。');
+		return;
+	}
+	for (const run of cloudflarePagesRuns) {
+		const status = typeof run.status === 'string' ? run.status : 'unknown';
+		const conclusion = typeof run.conclusion === 'string' ? run.conclusion : null;
+		const detailsUrl = typeof run.details_url === 'string' && run.details_url ? run.details_url : 'なし';
+		console.error(`  ${run.name}`);
+		console.error(`    状態 (status): ${status}（${statusInJapanese(status)}）`);
+		console.error(`    結果 (conclusion): ${conclusion ?? 'null'}（${conclusionInJapanese(conclusion)}）`);
+		console.error(`    詳細URL (details_url): ${detailsUrl}`);
+	}
+}
+
 async function main() {
 	const options = parseArgs(process.argv.slice(2));
 	if (options.help) {
@@ -187,7 +275,14 @@ async function main() {
 		await sleep(Math.min(intervalSeconds * 1000, Math.max(0, deadline - Date.now())));
 	} while (Date.now() <= deadline);
 
-	fail(`本番反映を${timeoutSeconds}秒以内に確認できませんでした。最終状態: ${lastReason}`);
+	const productionError = `本番反映を${timeoutSeconds}秒以内に確認できませんでした。最終状態: ${lastReason}`;
+	try {
+		await diagnoseCloudflarePages();
+	} catch (error) {
+		const reason = error instanceof Error ? error.message : String(error);
+		console.error(`追加診断不能: GitHub公開APIからCloudflare Pagesの状態を取得できませんでした。${reason}`);
+	}
+	fail(productionError);
 }
 
 main().catch((error) => fail(error instanceof Error ? error.message : String(error)));
