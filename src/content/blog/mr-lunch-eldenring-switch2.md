@@ -121,8 +121,6 @@ MRが買ったなら、俺も買って一緒に話しながら遊ぶのは面白
 
 購入価格は8,560円で、ポイントが10％付いた。ヤマダネットより支払額そのものは高いが、この日は数百円の差より今夜遊べるほうを取った。こういう買い方は普段の俺ならあまりしないが、今回はそれでよかった。
 
-![コジマで購入したNintendo Switch 2版ELDEN RING Tarnished Editionのパッケージ](/images/mr-lunch-eldenring-switch2-05-elden-ring-switch2.jpg)
-
 <div class="product-card">
   <span class="pr-label">PR</span>
   <div class="product-inner">
