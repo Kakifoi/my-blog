@@ -4,6 +4,7 @@ description: '友人MRに物を渡すだけの朝が、熊谷のらーめん埜�
 pubDate: '2026-08-29T12:00:00+09:00'
 category: 'ゲーム・エンタメ'
 tags: ['エルデンリング', 'ナイトレイン', 'Switch2', '友人', 'ゲーム', '熊谷', 'ランチ']
+heroImage: '/images/mr-lunch-eldenring-switch2-eyecatch.jpg'
 ---
 
 8月29日。朝から友人MRに物を渡す約束をしていて、LINEでやりとりしていた。最初は本当にそれだけの予定だった。
