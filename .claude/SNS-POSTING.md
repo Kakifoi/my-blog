@@ -9,9 +9,10 @@
 - 記事告知は、本番反映を確認できた記事の**直接URL**を使う。ブログトップへ誘導しない。
 - 記事が未公開、または正確なURLを確認できない場合は投稿準備を停止する。存在しないURLを推測しない。
 - UTMは記事スラッグから自動生成する。
-  - X（post01）: `?utm_source=x&utm_medium=organic_social&utm_campaign=<slug>&utm_content=post01`
+  - X（post01）: `?utm_source=x&utm_medium=social&utm_campaign=<slug>&utm_content=post01`
   - Instagramプロフィール: `?utm_source=instagram&utm_medium=organic_social&utm_campaign=<slug>&utm_content=profile`
   - Instagramストーリーズ: `?utm_source=instagram&utm_medium=organic_social&utm_campaign=<slug>&utm_content=story`
+- Xの今後のリンクは `utm_medium=social` に統一する。過去の `x / organic_social` はGA4で未分類に入るため、過去分の評価は `t.co / referral` と合算する。既存投稿の削除・再投稿はしない。
 - 記事URLに既存のクエリがある場合だけ、先頭の `?` を `&` に替える。
 
 ### 素材とプライバシー

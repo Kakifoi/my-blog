@@ -9,6 +9,14 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+const latestPosts = posts.slice(0, 6);
+const categories = [
+	{ name: 'グルメ', icon: '🍜', description: '熊谷・深谷の食べ歩き' },
+	{ name: '旅行・おでかけ', icon: '✈️', description: '家族で出かけた日の記録' },
+	{ name: '子育て・日常', icon: '🌿', description: '2人の子供との日々' },
+	{ name: 'ガジェット・テクノロジー', icon: '🎧', description: '買って使った感想' },
+];
+const moreCategories = ['ゲーム・エンタメ', 'お金・投資', '健康・ランニング'];
 ---
 
 <!doctype html>
@@ -20,83 +28,35 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 
-			<!-- 自己紹介ボックス -->
-			<div class="welcome-box">
-				<div class="welcome-icon-title">
-					<span class="welcome-icon">✈</span>
-					<div>
-						<div class="welcome-title">{SITE_TITLE}へようこそ</div>
-						<div class="welcome-sub">日常・旅行・グルメを発信するブログ</div>
-					</div>
+			<section class="welcome-box" aria-labelledby="welcome-title">
+				<h1 id="welcome-title" class="welcome-title">熊谷・深谷の食べ歩きと、<br />家族で出かけた日の記録。</h1>
+				<p class="welcome-desc">埼玉在住、2児の父・カキフォイが、行った場所や使ったものを写真と本音でつづります。ゲームや買い物、日々の出来事も。</p>
+			</section>
+
+			<nav aria-label="カテゴリから探す" class="category-nav">
+				<div class="cat-cards">
+					{categories.map(({ name, icon, description }) => (
+						<a href={`/categories/${name}/`} class="cat-card">
+							<span class="cat-card-icon" aria-hidden="true">{icon}</span>
+							<span class="cat-card-title">{name}</span>
+							<span class="cat-card-sub">{description}</span>
+						</a>
+					))}
 				</div>
-				<p class="welcome-desc">{SITE_DESCRIPTION}</p>
-			</div>
-
-			<!-- カテゴリカード -->
-			<div class="cat-cards">
-				<a href="/categories/旅行・おでかけ/" class="cat-card">
-					<span class="cat-card-icon">✈️</span>
-					<div class="cat-card-title">旅行・おでかけ</div>
-					<div class="cat-card-sub">国内・家族旅行の記録</div>
-				</a>
-				<a href="/categories/子育て・日常/" class="cat-card">
-					<span class="cat-card-icon">🌿</span>
-					<div class="cat-card-title">子育て・日常</div>
-					<div class="cat-card-sub">日常・生活・Tips</div>
-				</a>
-				<a href="/blog" class="cat-card">
-					<span class="cat-card-icon">📝</span>
-					<div class="cat-card-title">すべての記事</div>
-					<div class="cat-card-sub">全カテゴリを見る</div>
-				</a>
-			</div>
-
-			<!-- おすすめ商品 -->
-			<h2 class="section-heading">おすすめ商品</h2>
-
-			<div class="product-card">
-				<span class="pr-label">PR</span>
-				<div class="product-inner">
-					<a href="https://amzn.to/4w7qHWI" target="_blank" rel="noopener sponsored" class="product-img-link">
-						<img src="https://m.media-amazon.com/images/I/81IXgPYNs2L._AC_SX695_.jpg" alt="アラジン 焼き焼きグリル CAG-MG7A" class="product-img" />
-					</a>
-					<div class="product-info">
-						<p class="product-name">アラジン 焼き焼きグリル CAG-MG7A グラファイトミニグリラー</p>
-						<p class="product-desc-text">煙が出にくいグラファイトヒーターで、自宅でも本格的な焼肉が楽しめるアラジンのグリラー。我が家では毎週末の焼肉で大活躍中です。一気に高温で焼き上げるので外はこんがり・中はジューシー、プレートを外して洗うだけのお手入れの手軽さも気に入っています。</p>
-						<div class="btn-group">
-							<a href="https://amzn.to/4w7qHWI" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
-							<a href="https://hb.afl.rakuten.co.jp/hgc/39881198.5dba11f4.39881199.0eb4a102/?pc=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fdc5692d91abac39e4d481b77f1dae5b3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-							<a href="https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892608926&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fproducts%2F8fa49001ad%3Fsc_i%3Dshopping-pc-web-result-item-rsltlst-cmp" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
-						</div>
-					</div>
+				<div class="more-categories">
+					{moreCategories.map((name) => <a href={`/categories/${name}/`}>{name}</a>)}
+					<a href="/categories/">カテゴリ一覧 →</a>
 				</div>
-			</div>
-
-			<!-- うし釜 焼肉セット 商品カード（楽天限定） -->
-			<div class="product-card">
-				<span class="pr-label">PR</span>
-				<div class="product-inner">
-					<a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
-						<img src="/images/amaike-ushikama-product.jpg" alt="うし釜 秘伝のタレ漬け焼肉セット 1.3kg" class="product-img" />
-					</a>
-					<div class="product-info">
-						<p class="product-name">うし釜 秘伝のタレ漬け焼肉セット 1.3kg</p>
-						<p class="product-desc-text">牛カルビ・韓国風ぐるぐるカルビ・牛タンがセットになった焼肉パック。味付け済みだから下ごしらえ不要、焼くだけで本格的な味が楽しめます。定価7,980円のところ、50%OFFの3,990円で買えるタイミングが多く、コスパ抜群でリピートしています。</p>
-						<div class="btn-group">
-							<a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-						</div>
-					</div>
-				</div>
-			</div>
+			</nav>
 
 			<!-- 最新記事 -->
 			<h2 class="section-heading">最新記事</h2>
 			<ul class="post-list">
-				{posts.map((post) => (
+				{latestPosts.map((post, index) => (
 					<li class="post-card">
 						{post.data.heroImage && (
 							<a href={`/blog/${post.id}/`} class="post-thumb">
-								<img src={post.data.heroImage} alt={post.data.title} />
+								<img src={post.data.heroImage} alt={post.data.title} width="1200" height="675" loading={index === 0 ? "eager" : "lazy"} decoding="async" />
 							</a>
 						)}
 						<div class="post-body">
@@ -114,7 +74,51 @@ const posts = (await getCollection('blog')).sort(
 					</li>
 				))}
 			</ul>
+			<p class="all-posts"><a href="/blog/" class="all-posts-link">すべての記事を見る（{posts.length}件） →</a></p>
 
+			<!-- 実際に使った商品の紹介 -->
+			<h2 class="section-heading">使って・食べてよかったもの</h2>
+
+			<div class="product-card">
+				<span class="pr-label">PR</span>
+				<div class="product-inner">
+					<a href="https://amzn.to/4w7qHWI" target="_blank" rel="noopener sponsored" class="product-img-link">
+						<img src="https://m.media-amazon.com/images/I/81IXgPYNs2L._AC_SX695_.jpg" alt="アラジン 焼き焼きグリル CAG-MG7A" class="product-img" width="130" height="130" loading="lazy" decoding="async" />
+					</a>
+					<div class="product-info">
+						<p class="product-name">アラジン 焼き焼きグリル CAG-MG7A</p>
+						<p class="product-desc-text">家で牛タンやシマチョウ、ステーキを焼いて楽しんでいます。ゴールデンウィークに家族で使った日の記録をまとめました。</p>
+						<p class="product-review-link"><a href="/blog/gw2026-home-grill/">家でグリルを楽しんだ記事を読む →</a></p>
+						<div class="btn-group">
+							<a href="https://amzn.to/4w7qHWI" target="_blank" rel="noopener sponsored" class="btn-amazon">Amazonで見る</a>
+							<a href="https://hb.afl.rakuten.co.jp/hgc/39881198.5dba11f4.39881199.0eb4a102/?pc=https%3A%2F%2Fproduct.rakuten.co.jp%2Fproduct%2F-%2Fdc5692d91abac39e4d481b77f1dae5b3%2F&link_type=text&ut=eyJwYWdlIjoidXJsIiwidHlwZSI6InRleHQiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+							<a href="https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&pid=892608926&vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fproducts%2F8fa49001ad%3Fsc_i%3Dshopping-pc-web-result-item-rsltlst-cmp" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- うし釜 焼肉セット 商品カード（楽天限定） -->
+			<div class="product-card">
+				<span class="pr-label">PR</span>
+				<div class="product-inner">
+					<a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
+						<img src="/images/ushigama-frozen-meat.jpg" alt="実際に届いた、うし釜の冷凍肉3袋" class="product-img" width="1200" height="900" loading="lazy" decoding="async" />
+					</a>
+					<div class="product-info">
+						<p class="product-name">うし釜 秘伝のタレ漬け焼肉セット 1.3kg</p>
+						<p class="product-desc-text">味付きの牛カルビは、濃い味でご飯が進み、子供もよく食べました。脂は多めで、解凍した肉はばらけやすい印象。届いた3種類のうち、まず牛カルビを食べた記録です。</p>
+						<p class="product-review-link"><a href="/blog/ushigama-yakiniku-set/">届いた肉と実食の感想を読む →</a></p>
+						<div class="btn-group">
+							<a href="https://a.r10.to/hHWcVT" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section class="first-visit" aria-labelledby="first-visit-title">
+				<h2 id="first-visit-title" class="section-heading">はじめての方へ</h2>
+				<p><a href="/about/">カキフォイについて</a> · <a href="/blog/why-i-started-blog/">ブログを始めた理由</a></p>
+			</section>
 		</main>
 		<Footer />
 	</body>
@@ -131,24 +135,12 @@ const posts = (await getCollection('blog')).sort(
 	box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
-.welcome-icon-title {
-	display: flex;
-	align-items: center;
-	gap: 0.75em;
-	margin-bottom: 0.75em;
-}
-
-.welcome-icon { font-size: 2rem; }
-
 .welcome-title {
-	font-size: 1.1rem;
+	font-size: 1.3rem;
+	line-height: 1.6;
+	margin-bottom: 0.65em;
 	font-weight: 700;
 	color: #222;
-}
-
-.welcome-sub {
-	font-size: 0.82rem;
-	color: #888;
 }
 
 .welcome-desc {
@@ -161,9 +153,9 @@ const posts = (await getCollection('blog')).sort(
 /* カテゴリカード */
 .cat-cards {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 1em;
-	margin-bottom: 2em;
+	margin-bottom: 0.75em;
 }
 
 .cat-card {
@@ -187,6 +179,7 @@ const posts = (await getCollection('blog')).sort(
 .cat-card-icon { font-size: 1.8rem; display: block; margin-bottom: 0.4em; }
 
 .cat-card-title {
+	display: block;
 	font-size: 0.95rem;
 	font-weight: 700;
 	color: #222;
@@ -194,6 +187,7 @@ const posts = (await getCollection('blog')).sort(
 }
 
 .cat-card-sub {
+	display: block;
 	font-size: 0.78rem;
 	color: #888;
 }
@@ -242,6 +236,7 @@ const posts = (await getCollection('blog')).sort(
 .post-meta {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 0.6em;
 	margin-bottom: 0.4em;
 }
@@ -281,8 +276,25 @@ const posts = (await getCollection('blog')).sort(
 	line-height: 1.6;
 }
 
+.category-nav { margin-bottom: 1.75em; }
+.more-categories { display: flex; flex-wrap: wrap; gap: 0.4em 1.25em; font-size: 0.85rem; }
+.more-categories a { padding: 0.3em 0; }
+.all-posts { margin: 1em 0 2.5em; text-align: center; }
+.all-posts-link { display: inline-block; padding: 0.75em 1.25em; border: 1px solid #CC0000; border-radius: 6px; background: #fff; font-weight: 700; }
+.product-review-link { margin: 0 0 1em; font-size: 0.88rem; font-weight: 700; }
+.first-visit { margin-top: 2em; }
 @media (max-width: 560px) {
-	.cat-cards { grid-template-columns: 1fr; }
-	.post-thumb { width: 110px; }
+	.welcome-box { padding: 1.1em; margin-bottom: 1em; }
+	.welcome-title { font-size: 1.15rem; }
+	.cat-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6em; }
+	.cat-card { padding: 0.75em 0.5em; }
+	.cat-card-icon { font-size: 1.3rem; margin-bottom: 0.2em; }
+	.cat-card-title { font-size: 0.82rem; }
+	.cat-card-sub { font-size: 0.72rem; }
+	.post-thumb { width: 100px; }
+	.post-body { padding: 0.85em; }
+	.product-inner { flex-direction: column; align-items: stretch; }
+	.product-img-link { align-self: center; }
+	.product-img { width: 150px; height: 150px; }
 }
 </style>

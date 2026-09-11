@@ -215,3 +215,14 @@ table th { background: #f5f5f5; }
 	line-height: 1.6;
 	margin: 0.5em 0 1.5em;
 }
+
+/* 記事冒頭の体験と注意点 */
+.article-summary {
+	padding: 1em 1.25em;
+	margin-bottom: 1.75em;
+	border-left: 4px solid var(--red);
+	background: #fff8f8;
+	border-radius: 0 6px 6px 0;
+}
+.prose .article-summary p { margin: 0 0 0.65em; }
+.prose .article-summary p:last-child { margin-bottom: 0; }
