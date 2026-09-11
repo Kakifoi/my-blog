@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const HELP = `ブログ画像を既定サイズのJPEGへ変換します。
@@ -95,6 +96,20 @@ function formatBytes(bytes) {
 	return `${(bytes / 1024 ** 2).toFixed(2)} MiB`;
 }
 
+// 投稿準備と公開用の軽量画像で、回転補正・色・縮小の処理を共有する。
+export async function prepareImage({ inputPath, outputPath, mode, position = 'centre', quality = 85 }) {
+	if (path.resolve(inputPath) === path.resolve(outputPath)) throw new Error('入力ファイル自身は上書きできません');
+	if (!['hero', 'body'].includes(mode)) throw new Error('mode は hero または body を指定してください');
+	await mkdir(path.dirname(outputPath), { recursive: true });
+	let pipeline = sharp(inputPath).rotate().flatten({ background: '#ffffff' }).toColourspace('srgb');
+	if (mode === 'hero') {
+		pipeline = pipeline.resize(1200, 675, { fit: 'cover', position });
+	} else {
+		pipeline = pipeline.resize({ width: 1200, height: 1200, fit: 'inside', withoutEnlargement: true });
+	}
+	return pipeline.jpeg({ quality, chromaSubsampling: '4:2:0' }).toFile(outputPath);
+}
+
 async function main() {
 	const options = parseArgs(process.argv.slice(2));
 	if (options.help) {
@@ -132,26 +147,9 @@ async function main() {
 		if (error?.code !== 'ENOENT') throw error;
 	}
 
-	await mkdir(path.dirname(outputPath), { recursive: true });
-
 	// 透過PNGは白背景へ合成してからRGB化する。removeAlpha()だけだと、
 	// 透明部分の元画素色がそのままJPEGへ出ることがある。
-	let pipeline = sharp(inputPath).rotate().flatten({ background: '#ffffff' }).toColourspace('srgb');
-	if (options.mode === 'hero') {
-		pipeline = pipeline.resize(1200, 675, {
-			fit: 'cover',
-			position: options.position,
-		});
-	} else {
-		pipeline = pipeline.resize({
-			width: 1200,
-			height: 1200,
-			fit: 'inside',
-			withoutEnlargement: true,
-		});
-	}
-
-	await pipeline.jpeg({ quality, chromaSubsampling: '4:2:0' }).toFile(outputPath);
+	await prepareImage({ inputPath, outputPath, mode: options.mode, position: options.position, quality });
 	const [metadata, outputStats, digest] = await Promise.all([
 		sharp(outputPath).metadata(),
 		stat(outputPath),
@@ -170,4 +168,6 @@ async function main() {
 	console.log(`  sha256 : ${digest}`);
 }
 
-main().catch((error) => fail(error instanceof Error ? error.message : String(error)));
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+	main().catch((error) => fail(error instanceof Error ? error.message : String(error)));
+}

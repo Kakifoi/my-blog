@@ -71,6 +71,7 @@
 - **PMが最終責任者として `verify:post` を1回だけ実行する。** 部下とPMが同じfull build・postcheckを二重実行しない。
 - `verify:post` は変更範囲を作業ツリーから確認するため、原則としてcommit前に実行する。
 - 画像変換は `npm run image:prepare -- --input <元画像> --output <出力先> --mode hero|body` に統一する。
+- 公開時のJPEG軽量化・画像寸法・遅延読み込みは `npm run build` に含まれる。元画像は保持される。画像の最終確認はビルド後の `npm run preview` を使用する（詳細はCLAUDE.md）。
 - 統合コマンドが未実装の環境では、該当モードと同等の項目を個別に1回だけ確認する。重複実行はしない。
 - ERRORがあれば公開状態のまま放置しない。
 

@@ -7,12 +7,13 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build && node scripts/optimize-build-images.mjs && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "image:prepare": "node scripts/prepare-image.mjs",
     "verify:post": "node scripts/verify-post.mjs",
-    "verify:production": "node scripts/verify-production.mjs"
+    "verify:production": "node scripts/verify-production.mjs",
+    "test:images": "node --test scripts/optimize-build-images.test.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
@@ -20,6 +21,7 @@
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.9",
     "pagefind": "^1.5.2",
-    "sharp": "^0.34.3"
+    "sharp": "^0.34.3",
+    "parse5": "^7.3.0"
   }
 }

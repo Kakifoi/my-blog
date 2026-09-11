@@ -44,6 +44,7 @@ SNS固有の詳細は重複記載せず、`.claude/SNS-POSTING.md` に集約す�
 - 画像: `public/images/`（記事内パスは `/images/xxx.jpg`）
 - アイキャッチ: 1200×675px、`heroImage` にpublicパス文字列で指定
 - 画像変換は共通コマンド `npm run image:prepare -- --input <元画像> --output <出力先> --mode hero|body` を使う
+- 公開ビルドで記事内の大きなJPEGを表示用に軽量化する（512KiB以上、長辺1200px以内、品質85、20%以上縮む場合のみ）。元画像は保持し、記事原稿とOGPは元画像を参照したまま、表示用ファイルを `dist/images/optimized/` に自動生成する。本文写真は元サイズを開けるリンク付き。記事の先頭画像以外は遅延読み込み、ローカル画像には寸法を付ける。画質確認は `npm run build` 後のプレビューで行う。
 - 商品カードのCSSは `global.css` に集約済み
 - 表のセルは**全角20文字以内を推奨**（長いとPC幅で末尾1文字だけ折り返される）
 - 表・図の下の補足注記は `<p class="table-note">※…</p>` で書く（global.cssにスタイル定義済み）
