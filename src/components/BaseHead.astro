@@ -64,11 +64,23 @@ const ogImageUrl = ogImage ?? new URL(image.src, Astro.url).toString();
   var vc_pid = "892605885";
 </script><script type="text/javascript" src="//aml.valuecommerce.com/vcdal.js" async></script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DH093PJDW2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-DH093PJDW2');
-</script>
+<!-- 開発中は出力しない。静的ビルドの確認用URLでも、実際の閲覧先を確認する。 -->
+{import.meta.env.PROD && (
+  <script is:inline id="ga4-production-only">
+    (() => {
+      if (window.location.origin !== 'https://kakifoi.net') return;
+      if (document.getElementById('ga4-library')) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-DH093PJDW2');
+
+      const script = document.createElement('script');
+      script.id = 'ga4-library';
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DH093PJDW2';
+      document.head.appendChild(script);
+    })();
+  </script>
+)}

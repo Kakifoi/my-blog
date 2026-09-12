@@ -14,7 +14,8 @@
     "verify:post": "node scripts/verify-post.mjs",
     "verify:production": "node scripts/verify-production.mjs",
     "test:images": "node --test scripts/optimize-build-images.test.mjs",
-    "test:search": "node --test scripts/search.test.mjs"
+    "test:search": "node --test scripts/search.test.mjs",
+    "test:analytics": "node --test scripts/analytics.test.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
