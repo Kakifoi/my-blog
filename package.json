@@ -13,7 +13,8 @@
     "image:prepare": "node scripts/prepare-image.mjs",
     "verify:post": "node scripts/verify-post.mjs",
     "verify:production": "node scripts/verify-production.mjs",
-    "test:images": "node --test scripts/optimize-build-images.test.mjs"
+    "test:images": "node --test scripts/optimize-build-images.test.mjs",
+    "test:search": "node --test scripts/search.test.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",

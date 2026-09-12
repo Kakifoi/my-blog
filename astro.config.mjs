@@ -3,11 +3,13 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
+import rehypeAffiliateSearch from './scripts/rehype-affiliate-search.mjs';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://kakifoi.net',
 	integrations: [mdx(), sitemap()],
+	markdown: { rehypePlugins: [rehypeAffiliateSearch] },
 	fonts: [
 		{
 			provider: fontProviders.local(),

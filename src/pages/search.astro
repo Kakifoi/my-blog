@@ -15,9 +15,10 @@ import { SITE_TITLE } from '../consts';
 		<main>
 			<h1 class="page-title">サイト内検索</h1>
 			<div id="search">
-				<input type="text" id="search-input" placeholder="キーワードを入力..." autocomplete="off" />
-				<p id="search-status" hidden></p>
+				<input type="text" id="search-input" aria-label="検索キーワード" placeholder="キーワードを入力..." autocomplete="off" />
+				<p id="search-status" role="status" hidden></p>
 				<ol id="search-results"></ol>
+				<button type="button" id="search-more" aria-controls="search-results" hidden>もっと見る</button>
 			</div>
 		</main>
 		<Footer />
@@ -29,6 +30,7 @@ import { SITE_TITLE } from '../consts';
 			// 2分割パターンでも検索し、スコアの高いものだけ統合する。
 			const VARIANT_SCORE_MIN = 5;
 			const CJK_RE = /[぀-ヿ㐀-鿿]/;
+			const normalizeSearchText = (text) => text.normalize('NFKC').toLowerCase().replace(/[\s\u200b]/g, '');
 
 			// pagefind.jsはブラウザのIntl.Segmenterでクエリを自動分割するが、
 			// その分割がインデックス側トークンと一致せず0件になる。
@@ -49,44 +51,60 @@ import { SITE_TITLE } from '../consts';
 				}
 			};
 
-			let pagefind;
+			let pagefindPromise;
 			async function initPagefind() {
-				if (!pagefind) {
+				if (!pagefindPromise) {
 					// Worker内では上記のSegmenter差し替えが届かないため、
 					// import前にWorkerを外してメインスレッド実行にフォールバックさせる
 					// （hasWorkerSupportはモジュール読み込み時に判定される）
-					const RealWorker = window.Worker;
-					window.Worker = undefined;
-					try {
-						pagefind = await import('/pagefind/pagefind.js');
-						await pagefind.init();
-					} finally {
-						window.Worker = RealWorker;
-					}
+					pagefindPromise = (async () => {
+						const RealWorker = window.Worker;
+						window.Worker = undefined;
+						try {
+							const pagefind = await import('/pagefind/pagefind.js');
+							await pagefind.init();
+							return pagefind;
+						} finally {
+							window.Worker = RealWorker;
+						}
+					})().catch((error) => {
+						pagefindPromise = undefined;
+						throw error;
+					});
 				}
-				return pagefind;
+				return pagefindPromise;
 			}
 
 			async function smartSearch(query) {
 				const pf = await initPagefind();
+				const terms = query.trim().split(/\s+/);
+				const normalizedTerms = terms.map(normalizeSearchText);
 				const seen = new Map();
-				const add = (results) => {
-					for (const res of results) {
+				const contentCache = new Map();
+				const add = async (results) => {
+					// 分かち書きや英字の補完で、入力語と無関係な記事が混ざるのを防ぐ。
+					// Pagefind の分かち書きを戻した本文に、各入力語があるか照合する。
+					const verified = await Promise.all(results.map(async (res) => {
+						if (!contentCache.has(res.id)) contentCache.set(res.id, res.data().then((data) => normalizeSearchText(data.content)));
+						const content = await contentCache.get(res.id);
+						return normalizedTerms.every((term) => content.includes(term)) ? res : null;
+					}));
+					for (const res of verified) {
+						if (!res) continue;
 						const prev = seen.get(res.id);
 						if (!prev || prev.score < res.score) seen.set(res.id, res);
 					}
 				};
 				const direct = await pf.search(query);
-				add(direct.results);
+				await add(direct.results);
 
-				const terms = query.trim().split(/\s+/);
 				for (let i = 0; i < terms.length; i++) {
 					const t = terms[i];
 					if (t.length < 2 || !CJK_RE.test(t)) continue;
 					for (let p = 1; p < t.length; p++) {
 						const variant = [...terms.slice(0, i), t.slice(0, p), t.slice(p), ...terms.slice(i + 1)].join(' ');
 						const r = await pf.search(variant);
-						if (r.results.length && r.results[0].score >= VARIANT_SCORE_MIN) add(r.results);
+						if (r.results.length && r.results[0].score >= VARIANT_SCORE_MIN) await add(r.results);
 					}
 				}
 				return [...seen.values()].sort((a, b) => b.score - a.score);
@@ -95,69 +113,110 @@ import { SITE_TITLE } from '../consts';
 			const input = document.getElementById('search-input');
 			const statusEl = document.getElementById('search-status');
 			const resultsEl = document.getElementById('search-results');
+			const moreButton = document.getElementById('search-more');
+			const PAGE_SIZE = 30;
 
 			let timer;
 			let searchSeq = 0;
+			let allResults = [];
+			let shownCount = 0;
+			let loading = false;
 			input.addEventListener('input', () => {
 				clearTimeout(timer);
-				timer = setTimeout(runSearch, 300);
-			});
-
-			async function runSearch() {
-				const query = input.value.trim();
+				// 入力が変わった時点で、前の検索と追加読み込みを無効にする。
 				const seq = ++searchSeq;
-				if (!query) {
-					statusEl.hidden = true;
-					resultsEl.innerHTML = '';
-					return;
-				}
-				const results = await smartSearch(query);
-				if (seq !== searchSeq) return; // 古い検索結果は破棄
+				const query = input.value.trim();
+				allResults = [];
+				shownCount = 0;
+				loading = false;
+				resultsEl.replaceChildren();
+				resultsEl.setAttribute('aria-busy', String(Boolean(query)));
+				moreButton.hidden = true;
+				moreButton.disabled = false;
+				moreButton.textContent = 'もっと見る';
+				statusEl.hidden = !query;
+				statusEl.textContent = query ? '検索しています…' : '';
+				if (query) timer = setTimeout(() => runSearch(query, seq), 300);
+			});
+			moreButton.addEventListener('click', () => showMore(searchSeq, true));
 
-				resultsEl.innerHTML = '';
-				if (results.length === 0) {
-					statusEl.textContent = `${query} の検索結果はありませんでした。`;
-					statusEl.hidden = false;
-					return;
-				}
-				statusEl.textContent = `${results.length}件ヒットしました`;
-				statusEl.hidden = false;
-
-				const items = await Promise.all(results.slice(0, 30).map((r) => r.data()));
-				if (seq !== searchSeq) return;
-				for (const d of items) {
-					const li = document.createElement('li');
-					li.className = 'result';
-
-					const link = document.createElement('a');
-					link.className = 'result-title';
-					link.href = d.url;
-					link.textContent = d.meta?.title || d.url;
-
-					const excerpt = document.createElement('p');
-					excerpt.className = 'result-excerpt';
-					excerpt.innerHTML = d.excerpt; // Pagefind生成のハイライト付き抜粋
-
-					const body = document.createElement('div');
-					body.className = 'result-body';
-					body.append(link, excerpt);
-
-					if (d.meta?.image) {
-						const img = document.createElement('img');
-						img.className = 'result-image';
-						img.src = d.meta.image;
-						img.alt = '';
-						img.loading = 'lazy';
-						li.append(img);
+			async function runSearch(query, seq) {
+				try {
+					const results = await smartSearch(query);
+					if (seq !== searchSeq) return;
+					allResults = results;
+					if (results.length === 0) {
+						statusEl.textContent = `${query} の検索結果はありませんでした。`;
+					} else {
+						await showMore(seq);
 					}
-					li.append(body);
-					resultsEl.append(li);
+				} catch {
+					if (seq === searchSeq) statusEl.textContent = '検索できませんでした。時間をおいて、キーワードを入力し直してください。';
+				} finally {
+					if (seq === searchSeq) resultsEl.setAttribute('aria-busy', 'false');
+				}
+			}
+
+			async function showMore(seq, focusNewResult = false) {
+				if (loading || seq !== searchSeq || shownCount >= allResults.length) return;
+				loading = true;
+				moreButton.disabled = true;
+				moreButton.textContent = '読み込み中…';
+				resultsEl.setAttribute('aria-busy', 'true');
+				try {
+					const items = await Promise.all(allResults.slice(shownCount, shownCount + PAGE_SIZE).map((r) => r.data()));
+					if (seq !== searchSeq) return;
+					let firstLink;
+					for (const d of items) {
+						const li = document.createElement('li');
+						li.className = 'result';
+
+						const link = document.createElement('a');
+						link.className = 'result-title';
+						link.href = d.url;
+						link.textContent = d.meta?.title || d.url;
+						firstLink ??= link;
+
+						const excerpt = document.createElement('p');
+						excerpt.className = 'result-excerpt';
+						excerpt.innerHTML = d.excerpt; // Pagefind生成のハイライト付き抜粋
+
+						const body = document.createElement('div');
+						body.className = 'result-body';
+						body.append(link, excerpt);
+
+						if (d.meta?.image) {
+							const img = document.createElement('img');
+							img.className = 'result-image';
+							img.src = d.meta.image;
+							img.alt = '';
+							img.loading = 'lazy';
+							li.append(img);
+						}
+						li.append(body);
+						resultsEl.append(li);
+					}
+					shownCount += items.length;
+					statusEl.textContent = `${allResults.length}件中${shownCount}件を表示しています`;
+					moreButton.hidden = shownCount >= allResults.length;
+					if (focusNewResult) firstLink?.focus();
+				} catch {
+					if (seq !== searchSeq) return;
+					statusEl.textContent = '検索結果を読み込めませんでした。「もっと見る」で再試行してください。';
+					moreButton.hidden = false;
+				} finally {
+					if (seq === searchSeq) {
+						loading = false;
+						moreButton.disabled = false;
+						moreButton.textContent = 'もっと見る';
+						resultsEl.setAttribute('aria-busy', 'false');
+					}
 				}
 			}
 
 			// 入力前にインデックスを温めておく
 			window.addEventListener('DOMContentLoaded', () => {
-				initPagefind();
+				initPagefind().catch(() => {}); // 入力時に再試行し、失敗は検索欄に表示する
 				input.focus();
 			});
 		</script>
@@ -199,6 +258,22 @@ import { SITE_TITLE } from '../consts';
 	margin: 1em 0 0;
 	padding: 0;
 }
+
+#search-more {
+	width: 100%;
+	margin: 1.5em 0;
+	padding: 0.8em 1.2em;
+	border: 2px solid #E60012;
+	border-radius: 6px;
+	background: #fff;
+	color: #E60012;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+}
+#search-more:hover { background: #fff3f4; }
+#search-more:focus-visible { outline: 3px solid #333; outline-offset: 3px; }
+#search-more:disabled { opacity: 0.6; cursor: wait; }
 
 .result {
 	display: flex;
