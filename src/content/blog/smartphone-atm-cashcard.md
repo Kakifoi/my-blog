@@ -19,9 +19,9 @@ heroImage: '/images/smartphone-atm-cashcard-hero.jpg'
 
 住信SBIネット銀行は、現在のドコモSMTBネット銀行。ここでは馴染みのある「旧住信SBI」と書く。
 
-旧住信SBIの「アプリでATM」は、10月 29, 2020[に始まっている](https://www.netbk.co.jp/contents/company/press/2020/corp_news_20201030.html)。開始時からセブン銀行ATMとローソン銀行ATMに対応していた。ただし、当時のローソン銀行では新型ATMが対象だった。
+[旧住信SBI](https://www.netbk.co.jp/contents/company/press/2020/corp_news_20201030.html)の「アプリでATM」は、2020年10月29日に始まっている。開始時からセブン銀行ATMとローソン銀行ATMに対応していた。ただし、当時のローソン銀行では新型ATMが対象だった。
 
-楽天銀行の「スマホATM」は、12月 9, 2025[に始まった](https://www.rakuten-bank.co.jp/press/2025/251210.html)。旧住信SBIから約5年後だ。こちらも開始当初からセブン銀行・ローソン銀行の両方に対応していた。
+[楽天銀行](https://www.rakuten-bank.co.jp/press/2025/251210.html)の「スマホATM」は、2025年12月9日に始まった。旧住信SBIから約5年後だ。こちらも開始当初からセブン銀行・ローソン銀行の両方に対応していた。
 
 普段使う銀行で対応してくれれば、キャッシュカードを持ち歩く理由がひとつ減る。俺にとっては、そういう便利さだった。
 
