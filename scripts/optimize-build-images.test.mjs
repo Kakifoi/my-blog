@@ -20,6 +20,38 @@ function elements(html, tag) {
 }
 const attrs = (node) => Object.fromEntries(node.attrs.map(({ name, value }) => [name, value]));
 
+test('list thumbnails are small WebP files and do not replace article or unmarked images', async (t) => {
+	const root = await mkdtemp(path.join(os.tmpdir(), 'blog-images-thumbnails-'));
+	t.after(() => rm(root, { recursive: true, force: true }));
+	await mkdir(path.join(root, 'public/images'), { recursive: true });
+	await mkdir(path.join(root, 'dist/images'), { recursive: true });
+	const original = await sharp({ create: { width: 640, height: 360, channels: 3, background: '#cc0000' } }).png().toBuffer();
+	await writeFile(path.join(root, 'public/images/photo.png'), original);
+	await writeFile(path.join(root, 'dist/images/photo.png'), original);
+	const unmarked = '<img src="/images/photo.png" alt="そのまま">';
+	const card = '<a href="/blog/example/"><img src="/images/photo.png" data-list-thumbnail width="1200" height="675" loading="eager" alt=""></a>';
+	await writeFile(path.join(root, 'dist/index.html'), `${card}${card}${unmarked}<article data-pagefind-body><div class="hero-image"><img src="/images/photo.png" alt="記事写真"></div></article>`);
+	const report = await optimizeBuildImages({ root });
+	assert.equal(report.optimizedImages.length, 1, 'duplicate thumbnails share a generated file');
+	const output = await readFile(path.join(root, 'dist/index.html'), 'utf8');
+	const images = elements(output, 'img').map(attrs);
+	assert.equal(images[0].src, images[1].src);
+	assert.match(images[0].src, /\.webp$/);
+	assert.equal(images[0].width, '320');
+	assert.equal(images[0].height, '180');
+	assert.equal(images[0].loading, 'eager');
+	const generated = await readFile(path.join(root, 'dist', images[0].src));
+	const metadata = await sharp(generated).metadata();
+	assert.equal(metadata.width, 320);
+	assert.equal(metadata.height, 180);
+	assert.ok(generated.length < original.length);
+	assert.ok(output.includes(unmarked));
+	assert.equal(images[3].src, '/images/photo.png', 'article uses its own image variant');
+	assert.deepEqual(elements(output, 'a').map(n => attrs(n).href), ['/blog/example/', '/blog/example/']);
+	assert.equal(digest(await readFile(path.join(root, 'public/images/photo.png'))), digest(original));
+	assert.equal(digest(await readFile(path.join(root, 'dist/images/photo.png'))), digest(original));
+});
+
 test('large photos become smaller, retain orientation and originals, and keep merchant links and text', async (t) => {
 	const root = await mkdtemp(path.join(os.tmpdir(), 'blog-images-test-'));
 	t.after(() => rm(root, { recursive: true, force: true }));

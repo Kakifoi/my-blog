@@ -25,7 +25,7 @@ async function htmlFiles(directory) {
 }
 
 // 元のHTMLは再シリアライズしない。画像タグの位置だけを置換し、本文や広告リンクを保つ。
-function articleImages(html) {
+function pageImages(html) {
 	const images = [];
 	function visit(node, inArticle = false, inProse = false, inLink = false, hero = false, inPicture = false) {
 		const attrs = attrsOf(node);
@@ -34,7 +34,8 @@ function articleImages(html) {
 		inLink ||= node.tagName === 'a';
 		hero ||= hasClass(node, 'hero-image');
 		inPicture ||= node.tagName === 'picture';
-		if (inArticle && node.tagName === 'img' && node.sourceCodeLocation) images.push({ node, attrs, inProse, inLink, hero, inPicture });
+		const thumbnail = 'data-list-thumbnail' in attrs;
+		if ((inArticle || thumbnail) && node.tagName === 'img' && node.sourceCodeLocation) images.push({ node, attrs, inProse, inLink, hero, inPicture, thumbnail });
 		for (const child of node.childNodes ?? []) visit(child, inArticle, inProse, inLink, hero, inPicture);
 	}
 	visit(parse(html, { sourceCodeLocationInfo: true }));
@@ -46,8 +47,9 @@ export async function optimizeBuildImages({ root = ROOT, dist = path.join(root, 
 	const cache = new Map();
 	const report = { optimizedImages: [], pages: [], lazyImages: 0, dimensionedImages: 0 };
 
-	async function prepare(src) {
-		if (cache.has(src)) return cache.get(src);
+	async function prepare(src, thumbnail = false) {
+		const cacheKey = `${thumbnail ? 'thumbnail' : 'article'}:${src}`;
+		if (cache.has(cacheKey)) return cache.get(cacheKey);
 		const work = (async () => {
 			const url = new URL(src, 'https://kakifoi.net');
 			if (!src.startsWith('/images/') || url.search || url.hash) return null;
@@ -57,6 +59,17 @@ export async function optimizeBuildImages({ root = ROOT, dist = path.join(root, 
 			const [metadata, inputStat] = await Promise.all([sharp(input).metadata(), stat(input)]);
 			const rotated = metadata.orientation >= 5 && metadata.orientation <= 8;
 			const image = { source: src, output: src, width: rotated ? metadata.height : metadata.width, height: rotated ? metadata.width : metadata.height, beforeBytes: inputStat.size, afterBytes: inputStat.size };
+			// 一覧用だけ小さなWebPを作り、記事本文と元画像は保持する。
+			if (thumbnail) {
+				const digest = createHash('sha256').update(await readFile(input)).update('list-320x180-webp-q80-v1').digest('hex').slice(0, 16);
+				const output = `/images/optimized/${path.parse(input).name}.${digest}.webp`;
+				const destination = path.join(dist, output);
+				await mkdir(path.dirname(destination), { recursive: true });
+				const result = await sharp(input).rotate().resize(320, 180, { fit: 'cover', withoutEnlargement: true }).webp({ quality: 80 }).toFile(destination);
+				Object.assign(image, { output, width: result.width, height: result.height, afterBytes: result.size, thumbnail: true });
+				report.optimizedImages.push(image);
+				return image;
+			}
 			// JPEG写真のみを縮小。透過画像・アニメ・図表の形式は変えない。
 			if (metadata.format === 'jpeg' && inputStat.size >= MIN_BYTES) {
 				const digest = createHash('sha256').update(await readFile(input)).update('body-1200-q85-v1').digest('hex').slice(0, 16);
@@ -70,23 +83,23 @@ export async function optimizeBuildImages({ root = ROOT, dist = path.join(root, 
 			}
 			return image;
 		})();
-		cache.set(src, work);
+		cache.set(cacheKey, work);
 		return work;
 	}
 
 	for (const file of await htmlFiles(dist)) {
 		const html = await readFile(file, 'utf8');
-		const images = articleImages(html);
+		const images = pageImages(html);
 		if (!images.length) continue;
 		const edits = [];
 		const page = { path: `/${path.relative(dist, file).split(path.sep).join('/').replace(/index\.html$/, '')}`, images: images.length, beforeBytes: 0, afterBytes: 0 };
-		for (const { node, attrs, inProse, inLink, hero, inPicture } of images) {
+		for (const { node, attrs, inProse, inLink, hero, inPicture, thumbnail } of images) {
 			// 既存のレスポンシブ画像はsrcsetとの整合を保ち、そのままにする。
 			if (inPicture || attrs.srcset) continue;
-			const image = await prepare(attrs.src ?? '');
+			const image = await prepare(attrs.src ?? '', thumbnail);
 			if (image) {
 				attrs.src = image.output;
-				if (!attrs.width && !attrs.height) {
+				if (thumbnail || (!attrs.width && !attrs.height)) {
 					attrs.width = String(image.width);
 					attrs.height = String(image.height);
 					report.dimensionedImages++;
@@ -117,6 +130,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 	optimizeBuildImages().then((report) => {
 		const before = report.optimizedImages.reduce((sum, image) => sum + image.beforeBytes, 0);
 		const after = report.optimizedImages.reduce((sum, image) => sum + image.afterBytes, 0);
-		console.log(`記事画像: ${report.optimizedImages.length}枚を軽量化 (${(before / 1e6).toFixed(2)}MB → ${(after / 1e6).toFixed(2)}MB)、${report.lazyImages}箇所を遅延読み込み`);
+		console.log(`記事・一覧画像: ${report.optimizedImages.length}枚を軽量化 (${(before / 1e6).toFixed(2)}MB → ${(after / 1e6).toFixed(2)}MB)、${report.lazyImages}箇所を遅延読み込み`);
 	}).catch((error) => { console.error(error); process.exitCode = 1; });
 }
