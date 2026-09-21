@@ -38,12 +38,14 @@ MNは米もちょっと珍しいものを用意してくれていた。Amazonで
   <span class="pr-label">PR</span>
   <div class="product-inner">
     <a href="https://amzn.to/4xBXZga" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
-      <img src="https://m.media-amazon.com/images/I/61Or5ao96EL._AC_SL1000_.jpg" alt="コヒノール バスマティライス 2kg（1kg×2袋）インド産" class="product-img" />
+      <img src="https://m.media-amazon.com/images/I/61Or5ao96EL._AC_SL1000_.jpg" alt="バスマティライス 2kg【1kg×2袋】Kohinoor コヒノール インド産" class="product-img" />
     </a>
     <div class="product-info">
-      <p class="product-name">コヒノール バスマティライス 2kg（1kg×2袋）インド産</p>
+      <p class="product-name">バスマティライス 2kg【1kg×2袋】Kohinoor コヒノール インド産</p>
       <div class="btn-group">
         <a href="https://amzn.to/4xBXZga" target="_blank" rel="nofollow sponsored noopener" class="btn-amazon">Amazonで見る</a>
+        <a href="https://hb.afl.rakuten.co.jp/hgc/39881198.5dba11f4.39881199.0eb4a102/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%2590%25E3%2582%25B9%25E3%2583%259E%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B9%2B%25E3%2582%25B3%25E3%2583%2592%25E3%2583%258E%25E3%2583%25BC%25E3%2583%25AB%2B2kg%2F%3Fsf%3D1&amp;link_type=hybrid_url&amp;ut=eyJwYWdlIjoidXJsIiwidHlwZSI6Imh5YnJpZF91cmwiLCJjb2wiOjF9" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
+        <a href="https://ck.jp.ap.valuecommerce.com/servlet/referral?sid=3769589&amp;pid=892609898&amp;vc_url=https%3A%2F%2Fshopping.yahoo.co.jp%2Fsearch%2F%25E3%2583%2590%25E3%2582%25B9%25E3%2583%259E%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25A9%25E3%2582%25A4%25E3%2582%25B9%2B%25E3%2582%25B3%25E3%2583%2592%25E3%2583%258E%25E3%2583%25BC%25E3%2583%25AB%2B2kg%2F0%2F" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
       </div>
     </div>
   </div>
