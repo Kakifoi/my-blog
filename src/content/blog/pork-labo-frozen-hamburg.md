@@ -4,6 +4,8 @@ description: '熊谷のポークラボで冷凍ハンバーグをリピート購
 pubDate: '2026-09-20T12:00:00+09:00'
 category: 'グルメ'
 tags: ['熊谷', '埼玉グルメ', '買い物', '家族', '日記']
+heroImage: '/images/pork-labo-frozen-hamburg-eyecatch.jpg'
+heroImageAlt: 'PORK LABOの看板と木目の外壁、ガラス張りの入口が見える店舗外観'
 ---
 
 熊谷にある豚肉の専門店「PORK LABO（ポークラボ）」で、冷凍ハンバーグを買ってきた。以前食べて気に入ったので、今回が2回目の購入だ。
