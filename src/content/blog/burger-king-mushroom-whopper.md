@@ -4,6 +4,8 @@ description: 'アリオ深谷のバーガーキングで持ち帰り、家族4�
 pubDate: '2026-09-21T12:00:00+09:00'
 category: 'グルメ'
 tags: ['深谷', '埼玉グルメ', 'ランチ', '家族', '日記']
+heroImage: '/images/burger-king-mushroom-whopper-eyecatch.jpg'
+heroImageAlt: 'きのこ、ビーフパティ、トマト、レタスとクリーミーなソースを挟んだハンバーガー'
 ---
 
 ## 🌀 誕生日会は翌日に延期
