@@ -4,6 +4,8 @@ description: '築55年ほどの祖父母の家の取り壊しをきっかけに�
 pubDate: '2026-09-29T12:00:00+09:00'
 category: '子育て・日常'
 tags: ['日記', '家族', 'ライフスタイル', '買い物', '節約']
+heroImage: '/images/grandparents-house-rebuilding-eyecatch.jpg'
+heroImageAlt: '外壁の一部を取り外した古い木造住宅と、手前に積まれた木材や重機を描いた解体工事のイメージ'
 ---
 
 実家の母から、家を取り壊している写真が送られてきた。祖父や祖母と過ごし、叔母が住んでいた家だ。
