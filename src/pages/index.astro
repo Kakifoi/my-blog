@@ -13,6 +13,7 @@ const tagCounts = new Map<string, number>();
 posts.forEach((post) => post.data.tags.forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)));
 const tags = [...tagCounts].sort((a, b) => b[1] - a[1]).slice(0, 28);
 const latestPosts = posts.slice(0, 5);
+const instagramUrl = 'https://www.instagram.com/kakifoi_blog/';
 const dateText = (date: Date) => new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Tokyo' }).format(date);
 const navLinks = [
 	{ href: '/about/', label: 'プロフィール' },
@@ -40,7 +41,7 @@ const navLinks = [
 				</a>
 				<div class="header-social" aria-label="SNSとサイト内メニュー">
 					<a href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
-					<span class="header-instagram" title="Instagramのリンクは後日設定"><svg viewBox="0 0 24 24" role="img" aria-label="Instagram（リンク未設定）"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+					<a class="header-instagram" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram（新しいタブで開きます）"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
 					<a href="/contact/" aria-label="お問い合わせ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg></a>
 					<a href="/search/" aria-label="サイト内検索"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></a>
 				</div>
@@ -101,7 +102,7 @@ const navLinks = [
 					<div class="profile-copy"><p class="profile-opening">／<br />家族との日常を、写真と本音で。<br />＼</p><p>妻と子供2人の4人家族。<br />育児・家事と仕事をこなしながら、等身大の日常をつづっています。</p><p>このブログでは、</p><ul><li>熊谷・深谷の食べ歩き</li><li>子供とのおでかけ・家族旅行</li><li>買って使ったものの感想</li><li>ゲームやジョギングの記録</li></ul><p>などを紹介しています。</p><p>詳しい自己紹介はこちらから。</p></div>
 					<a class="profile-button" href="/about/">プロフィール</a>
 					<p class="follow-label">＼ Follow me ／</p>
-					<div class="profile-social"><a href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="カキフォイのX">𝕏</a><a href="/contact/" aria-label="お問い合わせ">✉</a><a href="/rss.xml" aria-label="RSS">RSS</a></div>
+					<div class="profile-social"><a href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="カキフォイのX">𝕏</a><a class="profile-instagram" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="カキフォイのInstagram（新しいタブで開きます）"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="/contact/" aria-label="お問い合わせ">✉</a><a href="/rss.xml" aria-label="RSS">RSS</a></div>
 				</section>
 				<a class="sidebar-banner" href="/#recommended-products"><span>使って・食べてよかったもの</span><small>グリルとお肉の感想・購入先を見る</small><span aria-hidden="true">›</span></a>
 				<section class="sidebar-widget"><h2 class="widget-title">ブログ内検索</h2><a class="search-entry" href="/search/"><span>キーワードから記事を探す</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></a></section>
@@ -189,6 +190,7 @@ const navLinks = [
 	.follow-label { margin: 0 0 5px; font-size: 12px; }
 	.profile-social { display: flex; justify-content: center; align-items: center; gap: 18px; color: #CC0000; }
 	.profile-social a { font-size: 23px; }
+	.profile-instagram { display: flex; align-items: center; justify-content: center; }
 	.profile-social a:last-child { font-size: 12px; }
 	.sidebar-banner { display: block; position: relative; padding: 25px 25px 26px; text-align: center; background: #CC0000; margin: 0 0 35px; border: 6px solid #fff1f1; outline: 1px solid #efcccc; box-shadow: 0 2px 5px #0001; }
 	:global(.home-reference .sidebar-banner), :global(.home-reference .sidebar-banner:hover) { color: #fff; }
