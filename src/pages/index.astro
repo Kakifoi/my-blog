@@ -35,12 +35,12 @@ const navLinks = [
 			<div class="masthead">
 				<button class="mobile-menu-toggle" type="button" aria-label="メニューを開く" aria-controls="home-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
 				<a class="brand" href="/" aria-label={`${SITE_TITLE} ホーム`}>
+					<span class="brand-title">{SITE_TITLE}</span>
 					<span class="brand-tagline">熊谷・深谷の食べ歩きと、家族で出かけた日の記録。</span>
-					<span class="brand-line"><span class="brand-title">{SITE_TITLE}</span><img src="/images/profile.png" alt="" width="76" height="76" /></span>
 				</a>
 				<div class="header-social" aria-label="SNSとサイト内メニュー">
 					<a href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
-					<a href="/rss.xml" aria-label="RSS"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="19" r="2" fill="currentColor" stroke="none"/><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/></svg></a>
+					<span class="header-instagram" title="Instagramのリンクは後日設定"><svg viewBox="0 0 24 24" role="img" aria-label="Instagram（リンク未設定）"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
 					<a href="/contact/" aria-label="お問い合わせ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg></a>
 					<a href="/search/" aria-label="サイト内検索"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></a>
 				</div>
@@ -131,14 +131,15 @@ const navLinks = [
 	.skip-link { position: fixed; top: -60px; left: 10px; z-index: 200; padding: 10px 18px; background: #fff; }
 	.skip-link:focus { top: 10px; }
 	.home-header { position: relative; }
-	.masthead { position: relative; display: flex; align-items: center; justify-content: center; min-height: 112px; background: #CC0000; }
-	.brand { display: flex; flex-direction: column; align-items: center; color: #fff; }
-	.brand-tagline { padding-top: 7px; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.4; }
-	.brand-line { display: flex; align-items: center; justify-content: center; height: 84px; gap: 4px; }
-	.brand-title { font-family: 'Hiragino Maru Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; font-size: 43px; font-weight: 900; letter-spacing: -0.055em; color: #fff; -webkit-text-stroke: 6px #aa0000; paint-order: stroke fill; transform: rotate(-2deg); }
-	.brand-line img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; }
-	.header-social { position: absolute; right: max(30px, calc((100% - 1140px) / 2)); top: 20px; display: flex; align-items: center; gap: 13px; color: #fff; }
-	.header-social a { display: flex; align-items: center; justify-content: center; width: 18px; height: 23px; font-size: 22px; }
+	.masthead { position: relative; display: flex; align-items: center; justify-content: center; min-height: 140px; padding: 24px 150px; background: #CC0000; }
+	.brand { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+	:global(.home-reference .brand), :global(.home-reference .brand:hover) { color: #fff; }
+	.brand-title { font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; font-size: 40px; font-weight: 800; letter-spacing: 0.09em; line-height: 1.3; white-space: nowrap; }
+	.brand-tagline { color: #ffffffd9; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.6; }
+	.header-social { position: absolute; right: max(30px, calc((100% - 1140px) / 2)); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 13px; color: #fff; }
+	.header-social a, .header-instagram { display: flex; align-items: center; justify-content: center; width: 18px; height: 23px; font-size: 22px; }
+	:global(.home-reference .header-social a:hover), :global(.home-reference .mobile-search:hover) { color: #fff; opacity: 0.75; }
+	:global(.home-reference .masthead :focus-visible) { outline-color: #fff; }
 	svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 	.home-navigation { background: #fff; border-bottom: 1px solid #e0e0e0; box-shadow: 0 1px 4px #0000000d; }
 	.navigation-inner { max-width: 1140px; min-height: 46px; margin: 0 auto; display: flex; align-items: stretch; justify-content: space-around; }
@@ -229,20 +230,19 @@ const navLinks = [
 		.pickup { margin-left: 30px; margin-right: 30px; }
 		.home-shell { grid-template-columns: minmax(0, 1fr) 300px; gap: 25px; }
 		.header-social { right: 25px; }
-		.brand-title { font-size: 37px; }
+		.brand-title { font-size: 36px; }
 		.profile-widget { padding: 30px 18px 20px; }
 	}
 	@media (max-width: 767px) {
 		:global(body.home-reference) { font-size: 14px; }
-		.masthead { min-height: 64px; padding: 1px 42px 4px; }
-		.brand-tagline { font-size: 7px; padding-top: 0; letter-spacing: 0; white-space: nowrap; }
-		.brand-line { height: 49px; gap: 1px; }
-		.brand-title { font-size: 27px; -webkit-text-stroke-width: 4px; white-space: nowrap; }
-		.brand-line img { width: 44px; height: 44px; }
+		.masthead { min-height: 100px; padding: 18px 46px; }
+		.brand { gap: 8px; }
+		.brand-title { font-size: clamp(22px, 6.8vw, 30px); letter-spacing: 0.05em; }
+		.brand-tagline { max-width: 100%; font-size: 8px; letter-spacing: 0.02em; }
 		.header-social { display: none; }
-		.mobile-menu-toggle { display: flex; position: absolute; left: 12px; top: 23px; border: 0; padding: 5px; background: none; flex-direction: column; gap: 4px; }
+		.mobile-menu-toggle { display: flex; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); border: 0; padding: 5px; background: none; flex-direction: column; gap: 4px; }
 		.mobile-menu-toggle span { display: block; height: 2px; width: 18px; background: #fff; }
-		.mobile-search { display: flex; position: absolute; right: 17px; top: 27px; color: #fff; }
+		.mobile-search { display: flex; position: absolute; right: 17px; top: 50%; transform: translateY(-50%); color: #fff; }
 		.home-navigation { display: none; }
 		.home-navigation.is-open { display: block; }
 		.navigation-inner { display: grid; grid-template-columns: 1fr 1fr; padding: 8px; }
