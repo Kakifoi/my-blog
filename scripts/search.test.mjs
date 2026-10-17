@@ -10,7 +10,7 @@ const footer = [articleFooter.thanks, articleFooter.intro,
 
 test('only the complete ending is hidden from search; real article text and links remain searchable', async () => {
 	const filtered = await createMarkdownProcessor({ rehypePlugins: [rehypeAffiliateSearch] });
-	for (const variant of [footer, footer.replace('家で使っている', '家で 使っている')]) {
+	for (const variant of [footer, footer.replace('アラジンのグリル', 'アラジンの グリル')]) {
 		const input = `${articleFooter.thanks}\n\n楽天ブラックカードを解約した理由です。\n\n[楽天の商品を見る](https://example.com/product)\n\n---\n\n${variant}`;
 		const result = (await filtered.render(input)).code;
 		assert.equal((result.match(/data-pagefind-ignore/g) ?? []).length, 4);
