@@ -1,0 +1,393 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	/** Supply the blog collection in descending publication-date order. */
+	posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+const pageSize = 6;
+const instanceId = `home-post-grid-${crypto.randomUUID()}`;
+const tabs = [
+	{ key: 'latest', label: '最新記事', icon: '', category: '' },
+	{ key: 'food', label: 'グルメ', icon: '🍜', category: 'グルメ' },
+	{ key: 'family', label: '子育て・日常', icon: '🌿', category: '子育て・日常' },
+	{ key: 'travel', label: '旅行・おでかけ', icon: '✈️', category: '旅行・おでかけ' },
+	{ key: 'technology', label: 'ガジェット・テクノロジー', icon: '🎧', category: 'ガジェット・テクノロジー' },
+];
+const dateFormat = new Intl.DateTimeFormat('ja-JP', {
+	year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+});
+---
+
+<section class="home-post-grid" data-home-post-grid data-page-size={pageSize} aria-label="記事一覧">
+	<div class="hpg-tabs" data-hpg-tabs role="tablist" aria-label="記事のカテゴリ" hidden>
+		{tabs.map((tab, index) => (
+			<button
+				type="button"
+				class="hpg-tab"
+				id={`${instanceId}-${tab.key}`}
+				role="tab"
+				aria-controls={`${instanceId}-panel`}
+				aria-selected={index === 0 ? 'true' : 'false'}
+				tabindex={index === 0 ? 0 : -1}
+				data-category={tab.category}
+			>
+				{tab.icon && <span class="hpg-tab-icon" aria-hidden="true">{tab.icon}</span>}
+				<span>{tab.label}</span>
+			</button>
+		))}
+	</div>
+
+	<div
+		class="hpg-panel"
+		data-hpg-panel
+		id={`${instanceId}-panel`}
+		role="tabpanel"
+		aria-label="最新記事"
+		tabindex="0"
+	>
+		<ul class="hpg-grid" data-hpg-grid>
+			{posts.map((post, index) => {
+				// Each post occurs once: later cards are inert until their page is requested.
+				const Card = index < pageSize ? 'li' : 'template';
+				return (
+					<Card class="hpg-card" data-hpg-source data-category={post.data.category}>
+						<a class="hpg-card-link" href={`/blog/${post.id}/`}>
+							<div class="hpg-media">
+								{post.data.heroImage && (
+									<img
+										data-list-thumbnail
+										src={post.data.heroImage}
+										alt={post.data.heroImageAlt || post.data.title}
+										width="1200"
+										height="675"
+										loading="lazy"
+										decoding="async"
+									/>
+								)}
+								<span class="hpg-category">{post.data.category}</span>
+							</div>
+							<h2 class="hpg-title">{post.data.title}</h2>
+							<time class="hpg-date" datetime={post.data.pubDate.toISOString()}>
+								{dateFormat.format(post.data.pubDate)}
+							</time>
+						</a>
+					</Card>
+				);
+			})}
+		</ul>
+		<p class="hpg-empty" data-hpg-empty hidden={posts.length > 0}>このカテゴリの記事はまだありません。</p>
+		<nav class="hpg-pagination" data-hpg-pagination aria-label="記事のページ" hidden>
+			<button type="button" class="hpg-page" data-hpg-previous aria-label="前のページ">‹</button>
+			<div class="hpg-page-numbers" data-hpg-page-numbers></div>
+			<button type="button" class="hpg-page" data-hpg-next aria-label="次のページ">›</button>
+		</nav>
+	</div>
+	<p class="hpg-status" data-hpg-status role="status" aria-live="polite" aria-atomic="true"></p>
+	<p class="hpg-all-posts"><a href="/blog/">すべての記事を見る（{posts.length}件） →</a></p>
+	<!-- Cloning these also preserves Astro's scoped-style attributes. -->
+	<template data-hpg-page-button><button type="button" class="hpg-page"></button></template>
+	<template data-hpg-page-gap><span class="hpg-page-gap" aria-hidden="true">…</span></template>
+</section>
+
+<script>
+	function initializeHomePostGrids() {
+		document.querySelectorAll<HTMLElement>('[data-home-post-grid]').forEach((root) => {
+			if (root.dataset.hpgReady) return;
+			const tablist = root.querySelector<HTMLElement>('[data-hpg-tabs]')!;
+			const tabs = Array.from(tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+			const panel = root.querySelector<HTMLElement>('[data-hpg-panel]')!;
+			const grid = root.querySelector<HTMLUListElement>('[data-hpg-grid]')!;
+			const empty = root.querySelector<HTMLElement>('[data-hpg-empty]')!;
+			const pagination = root.querySelector<HTMLElement>('[data-hpg-pagination]')!;
+			const pageNumbers = root.querySelector<HTMLElement>('[data-hpg-page-numbers]')!;
+			const previous = root.querySelector<HTMLButtonElement>('[data-hpg-previous]')!;
+			const next = root.querySelector<HTMLButtonElement>('[data-hpg-next]')!;
+			const status = root.querySelector<HTMLElement>('[data-hpg-status]')!;
+			const buttonTemplate = root.querySelector<HTMLTemplateElement>('[data-hpg-page-button]')!;
+			const gapTemplate = root.querySelector<HTMLTemplateElement>('[data-hpg-page-gap]')!;
+			const sources = Array.from(grid.querySelectorAll<HTMLLIElement | HTMLTemplateElement>('[data-hpg-source]'));
+			const pageSize = Number(root.dataset.pageSize);
+			const pages = tabs.map(() => 1);
+			let activeTab = 0;
+			let pageCount = 1;
+
+			function cardFor(source: HTMLLIElement | HTMLTemplateElement): HTMLLIElement {
+				if (!(source instanceof HTMLTemplateElement)) return source;
+				const card = document.createElement('li');
+				// Copy trusted, server-rendered attributes, including Astro's CSS scope.
+				for (const attribute of source.attributes) card.setAttribute(attribute.name, attribute.value);
+				card.append(source.content.cloneNode(true));
+				return card;
+			}
+
+			function render() {
+				const category = tabs[activeTab].dataset.category;
+				const matches = sources.filter((source) => !category || source.dataset.category === category);
+				pageCount = Math.max(1, Math.ceil(matches.length / pageSize));
+				const page = pages[activeTab] = Math.min(pages[activeTab], pageCount);
+				const start = (page - 1) * pageSize;
+				grid.replaceChildren(...matches.slice(start, start + pageSize).map(cardFor));
+				empty.hidden = matches.length > 0;
+				panel.setAttribute('aria-labelledby', tabs[activeTab].id);
+				panel.removeAttribute('aria-label');
+				tabs.forEach((tab, index) => {
+					tab.setAttribute('aria-selected', String(index === activeTab));
+					tab.tabIndex = index === activeTab ? 0 : -1;
+				});
+
+				pageNumbers.replaceChildren();
+				pagination.hidden = pageCount <= 1;
+				previous.disabled = page === 1;
+				next.disabled = page === pageCount;
+				if (pageCount > 1) {
+					// First page: 1 2 3 4 5 … last. Later pages keep the current page visible.
+					const startPage = Math.max(1, Math.min(page - 2, pageCount - 4));
+					const numbers = new Set([1, pageCount]);
+					for (let number = startPage; number <= Math.min(pageCount, startPage + 4); number++) numbers.add(number);
+					const visible = Array.from(numbers).sort((a, b) => a - b);
+					let last = 0;
+					function addPage(number: number) {
+						const button = buttonTemplate.content.firstElementChild!.cloneNode(true) as HTMLButtonElement;
+						button.textContent = String(number);
+						button.dataset.page = String(number);
+						button.setAttribute('aria-label', `${number}ページ目`);
+						if (number === page) button.setAttribute('aria-current', 'page');
+						pageNumbers.append(button);
+					}
+					for (const number of visible) {
+						if (number - last === 2) addPage(last + 1);
+						else if (number - last > 2) pageNumbers.append(gapTemplate.content.cloneNode(true));
+						addPage(number);
+						last = number;
+					}
+				}
+				status.textContent = matches.length
+					? `${tabs[activeTab].textContent?.trim()}：${matches.length}件中${start + 1}〜${Math.min(start + pageSize, matches.length)}件、${page}／${pageCount}ページ`
+					: `${tabs[activeTab].textContent?.trim()}：記事はまだありません。`;
+			}
+
+			function selectTab(index: number) {
+				if (index !== activeTab) {
+					activeTab = index;
+					render();
+				}
+				// Never transfer focus to the results or scroll on a tab change.
+				tabs[index].focus({ preventScroll: true });
+			}
+
+			function goToPage(page: number) {
+				if (!Number.isInteger(page) || page < 1 || page > pageCount || page === pages[activeTab]) return;
+				pages[activeTab] = page;
+				render();
+				panel.focus({ preventScroll: true });
+				panel.scrollIntoView({ block: 'start', behavior: 'instant' });
+			}
+
+			tabs.forEach((tab, index) => {
+				tab.addEventListener('click', () => selectTab(index));
+				tab.addEventListener('keydown', (event) => {
+					if (event.altKey || event.ctrlKey || event.metaKey) return;
+					let target: number;
+					switch (event.key) {
+						case 'ArrowLeft': target = (index - 1 + tabs.length) % tabs.length; break;
+						case 'ArrowRight': target = (index + 1) % tabs.length; break;
+						case 'Home': target = 0; break;
+						case 'End': target = tabs.length - 1; break;
+						default: return;
+					}
+					event.preventDefault();
+					selectTab(target);
+				});
+			});
+			previous.addEventListener('click', () => goToPage(pages[activeTab] - 1));
+			next.addEventListener('click', () => goToPage(pages[activeTab] + 1));
+			pageNumbers.addEventListener('click', (event) => {
+				if (!(event.target instanceof Element)) return;
+				const button = event.target.closest<HTMLButtonElement>('button[data-page]');
+				if (button) goToPage(Number(button.dataset.page));
+			});
+
+			render();
+			tablist.hidden = false;
+			root.dataset.hpgReady = 'true';
+		});
+	}
+
+	initializeHomePostGrids();
+	document.addEventListener('astro:page-load', initializeHomePostGrids);
+</script>
+
+<style>
+	.home-post-grid {
+		width: 100%;
+		max-width: 760px;
+		min-width: 0;
+		margin: 0 auto;
+		color: #333;
+	}
+
+	.home-post-grid,
+	.home-post-grid * { box-sizing: border-box; }
+	.home-post-grid [hidden] { display: none !important; }
+
+	.hpg-tabs {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 4px;
+		width: 100%;
+	}
+
+	.hpg-tab {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 5px;
+		min-width: 0;
+		min-height: 70px;
+		border: 0;
+		border-radius: 0;
+		padding: 10px 6px;
+		background: #f1f1f1;
+		color: #555;
+		font: inherit;
+		font-size: 15px;
+		font-weight: 500;
+		line-height: 1.6;
+		overflow-wrap: anywhere;
+		cursor: pointer;
+	}
+
+	.hpg-tab-icon { flex: 0 0 auto; font-size: 18px; }
+	.hpg-tab > span:last-child { min-width: 0; }
+	.hpg-tab[aria-selected='true'] { background: var(--home-accent, #CC0000); color: #fff; }
+	.hpg-tab[aria-selected='true']::after {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		border-top: 9px solid var(--home-accent, #CC0000);
+		border-right: 9px solid transparent;
+		border-left: 9px solid transparent;
+		transform: translateX(-50%);
+		content: '';
+	}
+
+	.hpg-panel { margin-top: 40px; min-width: 0; scroll-margin-top: 24px; }
+	.hpg-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 20px;
+		list-style: none;
+		margin: 0;
+		padding: 0 24px;
+	}
+
+	.hpg-card {
+		min-width: 0;
+		min-height: 355px;
+		margin: 0;
+		padding: 0;
+		background: #fff;
+		box-shadow: 0 1px 3px #0003;
+	}
+
+	.hpg-card-link,
+	.hpg-card-link:hover {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		color: #333;
+		text-decoration: none;
+	}
+
+	.hpg-media { position: relative; aspect-ratio: 16 / 9; background: #f1f1f1; }
+	.hpg-media img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		aspect-ratio: 16 / 9;
+		border-radius: 0;
+		object-fit: cover;
+	}
+
+	.hpg-category {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		max-width: calc(100% - 20px);
+		border-radius: 20px;
+		padding: 2px 10px;
+		background: var(--home-accent, #CC0000);
+		color: #fff;
+		font-size: 13px;
+		font-weight: 500;
+		line-height: 1.6;
+		overflow-wrap: anywhere;
+	}
+
+	.hpg-title {
+		margin: 0;
+		padding: 15px 17px;
+		color: inherit;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 32px;
+		overflow-wrap: anywhere;
+	}
+
+	.hpg-date {
+		display: block;
+		margin-top: auto;
+		padding: 0 17px 13px;
+		color: #888;
+		font-size: 15px;
+		line-height: 1.6;
+		text-align: right;
+		overflow-wrap: anywhere;
+	}
+
+	.hpg-pagination,
+	.hpg-page-numbers { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; min-width: 0; }
+	.hpg-pagination { align-items: center; margin: 32px 0 0; padding: 0 8px; }
+	.hpg-page-numbers { max-width: 100%; }
+	.hpg-page {
+		min-width: 36px;
+		min-height: 36px;
+		border: 0;
+		border-radius: 0;
+		padding: 6px;
+		background: #f1f1f1;
+		color: #555;
+		font: inherit;
+		font-size: 15px;
+		line-height: 1.6;
+		cursor: pointer;
+	}
+	.hpg-page[aria-current='page'] { background: var(--home-accent, #CC0000); color: #fff; }
+	.hpg-page:disabled { opacity: 0.4; cursor: default; }
+	.hpg-page-gap { align-self: center; color: #888; }
+	.hpg-tab:focus-visible,
+	.hpg-page:focus-visible,
+	.hpg-card-link:focus-visible,
+	.hpg-panel:focus-visible,
+	.hpg-all-posts a:focus-visible { outline: 2px solid #aa0000; outline-offset: 3px; }
+	.hpg-empty { margin: 0; padding: 24px; text-align: center; }
+	.hpg-all-posts { margin: 24px 0 0; text-align: center; }
+	.hpg-all-posts a { color: #aa0000; text-decoration: underline; text-underline-offset: 3px; }
+	.hpg-status { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+	@media (max-width: 767px) {
+		.hpg-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
+		.hpg-tab { min-height: 64px; font-size: 15px; }
+		.hpg-tab:last-child { grid-column: 1 / -1; }
+		.hpg-grid { gap: 10px; padding: 0 2px; }
+		.hpg-card { min-height: 0; }
+		.hpg-category { top: 6px; left: 6px; max-width: calc(100% - 12px); padding: 2px 6px; font-size: 9px; }
+		.hpg-title { padding: 10px 8px; font-size: 12px; line-height: 1.8; }
+		.hpg-date { padding: 0 6px 10px; font-size: 10px; }
+		.hpg-page { min-width: 28px; }
+	}
+</style>

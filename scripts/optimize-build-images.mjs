@@ -37,6 +37,8 @@ function pageImages(html) {
 		const thumbnail = 'data-list-thumbnail' in attrs;
 		if ((inArticle || thumbnail) && node.tagName === 'img' && node.sourceCodeLocation) images.push({ node, attrs, inProse, inLink, hero, inPicture, thumbnail });
 		for (const child of node.childNodes ?? []) visit(child, inArticle, inProse, inLink, hero, inPicture);
+		// ページ送り用の未表示カードも、表示される前に一覧用画像へ変換する。
+		if (node.content) visit(node.content, inArticle, inProse, inLink, hero, inPicture);
 	}
 	visit(parse(html, { sourceCodeLocationInfo: true }));
 	return images;

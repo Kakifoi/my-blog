@@ -14,11 +14,36 @@ function elements(html, tag) {
 	function visit(node) {
 		if (node.tagName === tag) nodes.push(node);
 		for (const child of node.childNodes ?? []) visit(child);
+		if (node.content) visit(node.content);
 	}
 	visit(parse(html));
 	return nodes;
 }
 const attrs = (node) => Object.fromEntries(node.attrs.map(({ name, value }) => [name, value]));
+
+test('inert homepage card templates receive the same optimized thumbnails before pagination', async (t) => {
+	const root = await mkdtemp(path.join(os.tmpdir(), 'blog-home-templates-'));
+	t.after(() => rm(root, { recursive: true, force: true }));
+	await mkdir(path.join(root, 'public/images'), { recursive: true });
+	await mkdir(path.join(root, 'dist'), { recursive: true });
+	const image = await sharp({ create: { width: 1200, height: 675, channels: 3, background: '#82c45c' } }).jpeg().toBuffer();
+	await writeFile(path.join(root, 'public/images/hero.jpg'), image);
+	const card = '<a href="/blog/example/"><img src="/images/hero.jpg" data-list-thumbnail width="1200" height="675" loading="lazy" alt="記事"></a>';
+	await writeFile(path.join(root, 'dist/index.html'), `<ul><li>${card}</li><template class="card" data-category="グルメ">${card}</template></ul>`);
+	const report = await optimizeBuildImages({ root });
+	const output = await readFile(path.join(root, 'dist/index.html'), 'utf8');
+	const images = elements(output, 'img').map(attrs);
+	assert.equal(images.length, 2);
+	assert.equal(report.optimizedImages.length, 1);
+	assert.equal(images[0].src, images[1].src);
+	assert.match(images[1].src, /\.webp$/);
+	assert.equal(images[1].width, '320');
+	assert.equal(images[1].height, '180');
+	assert.equal(images[1].loading, 'lazy');
+	assert.ok(output.includes('<template class="card" data-category="グルメ">'));
+	assert.deepEqual(elements(output, 'a').map((node) => attrs(node).href), ['/blog/example/', '/blog/example/']);
+	assert.equal(digest(await readFile(path.join(root, 'public/images/hero.jpg'))), digest(image));
+});
 
 test('list thumbnails are small WebP files and do not replace article or unmarked images', async (t) => {
 	const root = await mkdtemp(path.join(os.tmpdir(), 'blog-images-thumbnails-'));
