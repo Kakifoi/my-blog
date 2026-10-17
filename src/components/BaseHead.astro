@@ -81,6 +81,30 @@ const ogImageUrl = ogImage ?? new URL(image.src, Astro.url).toString();
       script.async = true;
       script.src = 'https://www.googletagmanager.com/gtag/js?id=G-DH093PJDW2';
       document.head.appendChild(script);
+
+      document.addEventListener('click', (event) => {
+        if (event.button !== 0 || event.defaultPrevented) return;
+
+        try {
+          const link = event.target?.closest?.('a.article-footer-cta, a.home-products-cta');
+          if (!link) return;
+
+          const destination = new URL(link.href, window.location.href);
+          if (
+            destination.origin !== window.location.origin ||
+            destination.pathname !== '/' ||
+            destination.search !== '' ||
+            destination.hash !== '#recommended-products'
+          ) return;
+
+          window.gtag('event', 'affiliate_guide_click', {
+            placement: link.classList.contains('article-footer-cta') ? 'article_footer' : 'top_intro',
+            destination: 'home_products',
+          });
+        } catch {
+          // 計測できなくても、リンクの通常の動作は妨げない。
+        }
+      });
     })();
   </script>
 )}

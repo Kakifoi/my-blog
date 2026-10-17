@@ -3,24 +3,34 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import vm from 'node:vm';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
-import rehypeAffiliateSearch from './rehype-affiliate-search.mjs';
+import rehypeAffiliateSearch, { articleFooter } from './rehype-affiliate-search.mjs';
 
-test('common footer text stays visible; genuine article text and links stay searchable', async () => {
-	const source = await readFile(new URL('../src/content/blog/rakuten-black-card-cancel.md', import.meta.url), 'utf8');
-	const footer = source.split('\n').find((line) => line.startsWith('このブログの商品リンク'));
-	const baseline = await createMarkdownProcessor();
+const footer = [articleFooter.thanks, articleFooter.intro,
+	`[${articleFooter.linkText}](${articleFooter.href})`, articleFooter.notice].join('\n\n');
+
+test('only the complete ending is hidden from search; real article text and links remain searchable', async () => {
 	const filtered = await createMarkdownProcessor({ rehypePlugins: [rehypeAffiliateSearch] });
-	for (const variant of [footer, footer.replace('そのままAmazon', 'そのまま Amazon').replace('OK', ' OK '), footer.replace('リンク先の商品', '先の商品')]) {
-		const input = `楽天ブラックカードを解約した理由です。\n\n[楽天の商品を見る](https://example.com/product)\n\n---\n\n${variant}`;
-		const original = (await baseline.render(input)).code;
+	for (const variant of [footer, footer.replace('家で使っている', '家で 使っている')]) {
+		const input = `${articleFooter.thanks}\n\n楽天ブラックカードを解約した理由です。\n\n[楽天の商品を見る](https://example.com/product)\n\n---\n\n${variant}`;
 		const result = (await filtered.render(input)).code;
-		assert.equal(result.replace(' data-pagefind-ignore=""', ''), original);
-		assert.equal((result.match(/data-pagefind-ignore/g) ?? []).length, 1);
+		assert.equal((result.match(/data-pagefind-ignore/g) ?? []).length, 4);
+		assert.ok(result.includes(`<p>${articleFooter.thanks}</p>`));
 		assert.match(result, /<p>楽天ブラックカード/);
 		assert.match(result, /<p><a href="https:\/\/example.com\/product">/);
+		assert.match(result, /href="\/#recommended-products" class="article-footer-cta"/);
+		assert.ok(result.includes(articleFooter.notice));
 	}
-	const extraText = (await filtered.render(`${footer}\n楽天で注文した商品のレビューです。`)).code;
-	assert.doesNotMatch(extraText, /data-pagefind-ignore/);
+});
+
+test('partial footers, wrong destinations and non-ending copies cannot hide genuine article content', async () => {
+	const filtered = await createMarkdownProcessor({ rehypePlugins: [rehypeAffiliateSearch] });
+	for (const input of [footer, `---\n\n${footer.replace('/#recommended-products', '/wrong/')}`,
+		`---\n\n${footer}\n\n楽天で注文した商品のレビューです。`,
+		`---\n\n${articleFooter.thanks}\n\nこの記事だけの内容です。`]) {
+		const result = (await filtered.render(input)).code;
+		assert.doesNotMatch(result, /data-pagefind-ignore/);
+		assert.doesNotMatch(result, /class="article-footer-cta"/);
+	}
 });
 
 const source = await readFile(new URL('../src/pages/search.astro', import.meta.url), 'utf8');

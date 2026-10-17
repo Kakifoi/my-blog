@@ -11,8 +11,8 @@
   2. heroImage: public配下に実ファイルが存在すること [不在=ERROR]。
      寸法が1200x675であること [違い=WARN]。heroImage無し自体は [WARN]
   3. プレースホルダー「【ここに」「挿入】」が本文に残っていないこと [ERROR]
-  4. アフィリエイト定型文の直上の非空行が `---` であること [ERROR]。
-     定型文が無い記事は [WARN]（初期記事4本は意図的に無い）
+  4. 共通案内が `---` の直後かつ記事の最後にあり、新しい4段落と商品欄リンクが揃うこと [ERROR]。
+     旧式の支援目的の案内は [ERROR]。案内が無い初期記事は [WARN]
   5. 本文中のローカル画像参照 (/images/...) が public/images/ に実在すること [ERROR]
   6. 出現1回のタグ（その記事でしか使われていない）を「新規タグ・要確認」[WARN]
   7. Markdown表の数 [INFO]
@@ -20,6 +20,7 @@
 ERRORが1件以上あれば exit code 1。
 """
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -44,7 +45,15 @@ CATEGORIES = [
 ]
 
 REQUIRED_KEYS = ["title", "description", "pubDate", "category", "tags"]
-AFFILIATE_MARKER = "このブログの商品リンクから飛んで"
+FOOTER_COPY = json.loads((ROOT / "scripts" / "article-footer.json").read_text(encoding="utf-8"))
+AFFILIATE_MARKER = FOOTER_COPY["thanks"]
+AFFILIATE_FOOTER = "\n\n".join([
+    FOOTER_COPY["thanks"],
+    FOOTER_COPY["intro"],
+    f'[{FOOTER_COPY["linkText"]}]({FOOTER_COPY["href"]})',
+    FOOTER_COPY["notice"],
+])
+LEGACY_AFFILIATE_MARKER = "このブログの商品リンクから飛んで"
 PLACEHOLDERS = ["【ここに", "挿入】"]
 HERO_W, HERO_H = 1200, 675
 
@@ -152,12 +161,16 @@ def check_article(path, tag_counts):
         if ph in body:
             errors.append(f"プレースホルダー「{ph}」が本文に残っている")
 
-    # 4. アフィリエイト定型文の直上に `---`
+    # 4. 商品紹介への共通案内は区切り線の直後・記事の末尾に1回だけ置く。
+    if LEGACY_AFFILIATE_MARKER in body or "ブログへの応援になります" in body:
+        errors.append("旧式のアフィリエイト応援案内が残っている。承認済みの共通案内へ置き換えること")
     lines = body.splitlines()
-    marker_idxs = [i for i, l in enumerate(lines) if AFFILIATE_MARKER in l]
+    marker_idxs = [i for i, line in enumerate(lines) if line.strip() == AFFILIATE_MARKER]
     if not marker_idxs:
-        warns.append("アフィリエイト定型文が無い（初期記事なら意図的）")
+        warns.append("共通案内が無い（初期記事なら意図的）")
     else:
+        if len(marker_idxs) != 1:
+            errors.append("文末の共通案内が複数ある")
         for idx in marker_idxs:
             prev = None
             for j in range(idx - 1, -1, -1):
@@ -166,7 +179,9 @@ def check_article(path, tag_counts):
                     break
             if prev != "---":
                 errors.append(
-                    f"定型文(本文{idx + 1}行目)の直上の非空行が `---` でない: {prev!r}")
+                    f"共通案内(本文{idx + 1}行目)の直上の非空行が `---` でない: {prev!r}")
+            if "\n".join(lines[idx:]).strip() != AFFILIATE_FOOTER:
+                errors.append("記事末尾の共通案内が標準4段落と一致しない、リンク先が異なる、または後ろに本文・商品カードがある")
 
     # 5. ローカル画像参照の実在
     for ref in find_local_images(body):

@@ -226,3 +226,31 @@ table th { background: #f5f5f5; }
 }
 .prose .article-summary p { margin: 0 0 0.65em; }
 .prose .article-summary p:last-child { margin-bottom: 0; }
+
+/* 文末からトップページの商品紹介へ進む共通案内 */
+.prose .article-footer-thanks { margin: 0 0 0.5em; }
+.prose .article-footer-intro { margin: 0 0 0.8em; }
+.prose .article-footer-action { margin: 0 0 1em; }
+.article-footer-cta {
+	display: inline-block;
+	max-width: 100%;
+	padding: 0.65em 0.9em;
+	border: 1px solid #d9b6b6;
+	border-radius: 6px;
+	background: #fff4f4;
+	color: var(--red-dark);
+	font-weight: 700;
+	line-height: 1.6;
+	overflow-wrap: anywhere;
+}
+.article-footer-cta:focus-visible,
+.home-products-cta:focus-visible {
+	outline: 2px solid var(--red-dark);
+	outline-offset: 3px;
+}
+.prose .article-footer-disclosure {
+	margin: 0;
+	font-size: 0.76rem;
+	line-height: 1.7;
+	color: var(--text-light);
+}
