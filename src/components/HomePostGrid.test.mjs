@@ -242,6 +242,11 @@ test('category tabs retain the original four icons and include real technology p
 	assert.deepEqual(ui.tabs.map((tab) => tab.textContent.replace(/\s+/g, '')), [
 		'最新記事', '🍜グルメ', '🌿子育て・日常', '✈️旅行・おでかけ', '🎧ガジェット・テクノロジー',
 	]);
+	const technologyBreak = ui.tabs[4].querySelectorAll('br[class="hpg-desktop-break"]');
+	assert.equal(technologyBreak.length, 1);
+	assert.equal(technologyBreak[0].parent.textContent, 'ガジェット・テクノロジー');
+	assert.equal(ui.tabs[4].getAttribute('aria-label'), 'ガジェット・テクノロジー');
+	assert.equal(ui.tabs.slice(0, 4).flatMap((tab) => tab.querySelectorAll('br')).length, 0);
 	ui.tabs[4].click();
 	assert.equal(ui.grid.querySelectorAll('li').length, 4);
 	assert.ok(ui.grid.querySelectorAll('li').every((card) => card.dataset.category === 'ガジェット・テクノロジー'));

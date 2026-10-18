@@ -29,13 +29,14 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
 				class="hpg-tab"
 				id={`${instanceId}-${tab.key}`}
 				role="tab"
+				aria-label={tab.label}
 				aria-controls={`${instanceId}-panel`}
 				aria-selected={index === 0 ? 'true' : 'false'}
 				tabindex={index === 0 ? 0 : -1}
 				data-category={tab.category}
 			>
 				{tab.icon && <span class="hpg-tab-icon" aria-hidden="true">{tab.icon}</span>}
-				<span>{tab.label}</span>
+				<span>{tab.key === 'technology' ? <>ガジェット・<br class="hpg-desktop-break" />テクノロジー</> : tab.label}</span>
 			</button>
 		))}
 	</div>
@@ -263,6 +264,10 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
 
 	.hpg-tab-icon { flex: 0 0 auto; font-size: 18px; }
 	.hpg-tab > span:last-child { min-width: 0; }
+	.hpg-desktop-break { display: none; }
+	@media (min-width: 768px) {
+		.hpg-desktop-break { display: initial; }
+	}
 	.hpg-tab[aria-selected='true'] { background: var(--home-accent, #CC0000); color: #fff; }
 	.hpg-tab[aria-selected='true']::after {
 		position: absolute;
