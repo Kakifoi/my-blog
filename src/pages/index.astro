@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
 import HomePostGrid from '../components/HomePostGrid.astro';
 import HomeRecommendations from '../components/HomeRecommendations.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
@@ -112,10 +113,7 @@ const navLinks = [
 			</aside>
 		</div>
 
-		<footer class="home-footer">
-			<div class="footer-widgets"><section class="footer-about"><a href="/" class="footer-brand">{SITE_TITLE}</a><p>熊谷・深谷の食べ歩きと、家族で出かけた日の記録。</p><p>ブログの感想やご連絡は、<a href="/contact/">お問い合わせ</a>からお願いします。</p><p>当サイトはアフィリエイト広告を利用しています。</p></section><section><h2>カテゴリー</h2><ul>{categories.map((category) => <li><a href={`/categories/${category}/`}>› {category}</a></li>)}</ul></section><section><h2>このブログについて</h2><ul><li><a href="/about/">プロフィール</a></li><li><a href="/blog/why-i-started-blog/">ブログを始めた理由</a></li><li><a href="/contact/">お問い合わせ</a></li><li><a href="/privacy/">プライバシー＆免責事項</a></li><li><a href="/rss.xml">RSS</a></li></ul></section></div>
-			<p class="home-copyright">© {new Date().getFullYear()} {SITE_TITLE}</p>
-		</footer>
+		<Footer />
 		<a class="back-to-top" href="#" aria-label="ページの先頭へ戻る">⌃</a>
 		<script src="../scripts/homepage.ts"></script>
 	</body>
@@ -217,15 +215,6 @@ const navLinks = [
 	.feature-banner > span { align-self: center; padding: 15px 30px 15px 15px; text-align: center; font-size: 24px; font-weight: 700; }
 	.feature-small { display: block; font-size: 12px; margin-top: 8px; font-weight: 400; }
 	.feature-arrow { position: absolute; right: 12px; top: 30%; font-size: 36px; font-weight: 400; }
-	.home-footer { background: #fff1f1; padding: 60px 30px 14px; }
-	.footer-widgets { max-width: 1140px; display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 65px; margin: 0 auto 60px; font-size: 13px; }
-	.footer-brand { display: block; font-size: 25px; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 20px; }
-	.footer-widgets h2 { font-size: 18px; border-bottom: 1px solid #ddb7b7; font-weight: 400; padding-bottom: 12px; margin-bottom: 20px; }
-	.footer-widgets ul { list-style: none; padding: 0; margin: 0; }
-	.footer-widgets li { margin: 8px 0; }
-	.footer-about p { margin: 0 0 16px; }
-	.footer-about p a { text-decoration: underline; }
-	.home-copyright { text-align: center; font-size: 11px; margin: 0; }
 	.back-to-top { position: fixed; bottom: 20px; right: 22px; width: 40px; height: 40px; background: #cc0000bf; border-radius: 50%; text-align: center; font-size: 29px; line-height: 43px; z-index: 20; }
 	:global(.home-reference .back-to-top) { color: #fff; }
 	@media (min-width: 768px) and (max-width: 1199px) {
@@ -273,9 +262,6 @@ const navLinks = [
 		.feature-banner > span { font-size: 17px; padding: 10px 20px 10px 10px; }
 		.feature-small { font-size: 9px; margin-top: 4px; }
 		.feature-arrow { right: 6px; font-size: 28px; }
-		.home-footer { padding: 35px 24px 18px; }
-		.footer-widgets { grid-template-columns: 1fr; gap: 30px; margin-bottom: 30px; }
-		.footer-brand { text-align: center; font-size: 25px; }
 		.back-to-top { width: 32px; height: 32px; right: 12px; bottom: 12px; font-size: 24px; line-height: 35px; }
 	}
 	@media (prefers-reduced-motion: reduce) { .pickup-arrow { transition: none; } }
