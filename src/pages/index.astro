@@ -82,13 +82,13 @@ const navLinks = [
 				</div>
 				<HomePostGrid posts={posts} />
 				<div class="category-features">
-					<section class="category-feature">
-						<h2>子育て・日常の最新記事</h2>
-						<a href="/categories/子育て・日常/" class="feature-banner"><img src={posts.find((post) => post.data.category === '子育て・日常' && post.data.heroImage)?.data.heroImage} alt="" width="1200" height="675" loading="lazy" decoding="async" /><span>子育て・日常<span class="feature-small">家族と過ごす日々の記録</span><span class="feature-arrow">›</span></span></a>
+					<section class="category-feature" aria-labelledby="family-daily-feature-title">
+						<h2 id="family-daily-feature-title" class="sr-only">子育て・日常の最新記事</h2>
+						<a href="/categories/子育て・日常/" class="feature-banner"><img src="/images/parenting-daily-category-banner-v2.jpg" alt="子育て・日常の最新記事を読む" width="1200" height="428" loading="lazy" decoding="async" /></a>
 					</section>
-					<section class="category-feature">
-						<h2>旅行・おでかけの最新記事</h2>
-						<a href="/categories/旅行・おでかけ/" class="feature-banner"><img src={posts.find((post) => post.data.category === '旅行・おでかけ' && post.data.heroImage)?.data.heroImage} alt="" width="1200" height="675" loading="lazy" decoding="async" /><span>旅行・おでかけ<span class="feature-small">家族で出かけた日の記録</span><span class="feature-arrow">›</span></span></a>
+					<section class="category-feature" aria-labelledby="travel-outing-feature-title">
+						<h2 id="travel-outing-feature-title" class="sr-only">旅行・おでかけの最新記事</h2>
+						<a href="/categories/旅行・おでかけ/" class="feature-banner"><img src="/images/travel-outing-category-banner.jpg" alt="旅行・おでかけの最新記事を読む" width="1200" height="428" loading="lazy" decoding="async" /></a>
 					</section>
 				</div>
 				<HomeRecommendations />
@@ -209,12 +209,8 @@ const navLinks = [
 	.recent-posts time { display: block; font-size: 10px; color: #999; margin-top: 4px; text-align: right; }
 	.category-features { margin: 55px 24px 0; }
 	.category-feature { margin-bottom: 40px; }
-	.category-feature h2 { font-weight: 400; font-size: 21px; padding-bottom: 10px; border-bottom: 3px solid var(--home-accent); margin-bottom: 25px; }
-	.feature-banner { display: grid; position: relative; grid-template-columns: 40% 1fr; align-items: stretch; border: 6px solid #fff1f1; background: #fff1f1; border-radius: 2px; overflow: hidden; min-height: 150px; box-shadow: 0 1px 4px #0002; }
-	.feature-banner img { width: 100%; height: 100%; min-height: 150px; object-fit: cover; border-radius: 0; }
-	.feature-banner > span { align-self: center; padding: 15px 30px 15px 15px; text-align: center; font-size: 24px; font-weight: 700; }
-	.feature-small { display: block; font-size: 12px; margin-top: 8px; font-weight: 400; }
-	.feature-arrow { position: absolute; right: 12px; top: 30%; font-size: 36px; font-weight: 400; }
+	.feature-banner { display: block; border-radius: 2px; overflow: hidden; box-shadow: 0 1px 4px #0002; }
+	.feature-banner img { display: block; width: 100%; height: auto; object-fit: contain; border-radius: 0; }
 	.back-to-top { position: fixed; bottom: 20px; right: 22px; width: 40px; height: 40px; background: #cc0000bf; border-radius: 50%; text-align: center; font-size: 29px; line-height: 43px; z-index: 20; }
 	:global(.home-reference .back-to-top) { color: #fff; }
 	@media (min-width: 768px) and (max-width: 1199px) {
@@ -256,12 +252,6 @@ const navLinks = [
 		.profile-widget { padding: 30px 25px; }
 		.profile-copy { font-size: 14px; line-height: 1.9; }
 		.category-features { margin: 40px 0 0; }
-		.category-feature h2 { font-size: 18px; }
-		.feature-banner { min-height: 105px; border-width: 4px; }
-		.feature-banner img { min-height: 105px; }
-		.feature-banner > span { font-size: 17px; padding: 10px 20px 10px 10px; }
-		.feature-small { font-size: 9px; margin-top: 4px; }
-		.feature-arrow { right: 6px; font-size: 28px; }
 		.back-to-top { width: 32px; height: 32px; right: 12px; bottom: 12px; font-size: 24px; line-height: 35px; }
 	}
 	@media (prefers-reduced-motion: reduce) { .pickup-arrow { transition: none; } }
