@@ -37,8 +37,12 @@ const navLinks = [
 			<div class="masthead">
 				<button class="mobile-menu-toggle" type="button" aria-label="メニューを開く" aria-controls="home-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
 				<a class="brand" href="/" aria-label={`${SITE_TITLE} ホーム`}>
-					<span class="brand-title">{SITE_TITLE}</span>
-					<span class="brand-tagline">熊谷・深谷の食べ歩きと、家族で出かけた日の記録。</span>
+					<img class="brand-illustration brand-illustration-left" src="/images/home-header-travel-food-v2.jpg" alt="" width="1200" height="900" decoding="async" />
+					<span class="brand-copy">
+						<span class="brand-title">{SITE_TITLE}</span>
+						<span class="brand-tagline">熊谷・深谷の食べ歩きと、<br class="brand-tagline-break" />家族で出かけた日の記録。</span>
+					</span>
+					<img class="brand-illustration brand-illustration-right" src="/images/home-header-sisters-cat-v2.jpg" alt="" width="1200" height="900" decoding="async" />
 				</a>
 				<div class="header-social" aria-label="SNSとサイト内メニュー">
 					<a href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="X">𝕏</a>
@@ -130,20 +134,27 @@ const navLinks = [
 	.skip-link { position: fixed; top: -60px; left: 10px; z-index: 200; padding: 10px 18px; background: #fff; }
 	.skip-link:focus { top: 10px; }
 	.home-header { position: relative; }
-	.masthead { position: relative; display: flex; align-items: center; justify-content: center; min-height: 140px; padding: 24px 150px; background: #CC0000; }
-	.brand { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
-	:global(.home-reference .brand), :global(.home-reference .brand:hover) { color: #fff; }
-	.brand-title { font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; font-size: 40px; font-weight: 800; letter-spacing: 0.09em; line-height: 1.3; white-space: nowrap; }
-	.brand-tagline { color: #ffffffd9; font-size: 11px; font-weight: 400; letter-spacing: 0.08em; line-height: 1.6; }
-	.header-social { position: absolute; right: max(30px, calc((100% - 1140px) / 2)); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 13px; color: #fff; }
-	.header-social a, .header-instagram { display: flex; align-items: center; justify-content: center; width: 18px; height: 23px; font-size: 22px; }
-	:global(.home-reference .header-social a:hover), :global(.home-reference .mobile-search:hover) { color: #fff; opacity: 0.75; }
-	:global(.home-reference .masthead :focus-visible) { outline-color: #fff; }
+	.masthead { position: relative; display: flex; align-items: center; justify-content: center; min-height: 150px; padding: 0 164px; overflow: hidden; border-top: 2px solid #CC0000; background: #fffaf5; }
+	.brand { position: relative; display: flex; align-items: center; justify-content: center; width: min(100%, 900px); height: 148px; min-width: 0; text-align: center; isolation: isolate; }
+	.brand-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
+	:global(.home-reference .brand), :global(.home-reference .brand:hover) { color: #CC0000; }
+	.brand-title { font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; font-size: 40px; font-weight: 800; letter-spacing: 0.06em; line-height: 1.3; white-space: nowrap; }
+	.brand-tagline { color: #78635b; font-size: 11px; font-weight: 400; letter-spacing: 0.04em; line-height: 1.7; }
+	.brand-tagline-break { display: none; }
+	.brand-illustration { position: absolute; display: block; height: auto; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 0; mix-blend-mode: multiply; pointer-events: none; }
+	.brand-illustration-left { right: calc(50% + 148px); bottom: -24px; width: 260px; }
+	.brand-illustration-right { left: calc(50% + 148px); bottom: -3px; width: 210px; }
+	.header-social { position: absolute; right: max(24px, calc((100% - 1140px) / 2)); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; color: #CC0000; }
+	.header-social a, .header-instagram { display: flex; align-items: center; justify-content: center; width: 28px; height: 32px; font-size: 22px; }
+	:global(.home-reference .header-social a:hover), :global(.home-reference .mobile-search:hover) { color: #aa0000; }
+	:global(.home-reference .masthead :focus-visible) { outline-color: #CC0000; }
+	:global(.home-reference .brand:focus-visible) { outline-offset: -6px; }
 	svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-	.home-navigation { background: #fff; border-bottom: 1px solid #e0e0e0; box-shadow: 0 1px 4px #0000000d; }
-	.navigation-inner { max-width: 1140px; min-height: 46px; margin: 0 auto; display: flex; align-items: stretch; justify-content: space-around; }
-	:global(.home-reference .navigation-inner a) { display: flex; align-items: center; justify-content: center; padding: 9px 18px; color: #444; font-size: 14px; line-height: 2; }
-	:global(.home-reference .navigation-inner a:hover) { background: #fff3f3; color: #CC0000; }
+	.home-navigation { background: #CC0000; }
+	.navigation-inner { max-width: 1140px; min-height: 44px; margin: 0 auto; display: flex; align-items: stretch; justify-content: space-around; }
+	:global(.home-reference .navigation-inner a) { display: flex; align-items: center; justify-content: center; padding: 8px 18px; color: #fff; font-size: 14px; line-height: 2; }
+	:global(.home-reference .navigation-inner a:hover) { background: #b00000; color: #fff; }
+	:global(.home-reference .home-navigation :focus-visible) { outline-color: #fff; outline-offset: -5px; }
 	.mobile-menu-toggle, .mobile-search { display: none; }
 	.pickup { max-width: 1140px; margin: 30px auto 20px; min-height: 210px; }
 	.pickup-window { position: relative; }
@@ -216,24 +227,33 @@ const navLinks = [
 	@media (min-width: 768px) and (max-width: 1199px) {
 		.pickup { margin-left: 30px; margin-right: 30px; }
 		.home-shell { grid-template-columns: minmax(0, 1fr) 300px; gap: 25px; }
-		.header-social { right: 25px; }
-		.brand-title { font-size: 36px; }
+		.masthead { padding: 32px 24px 0; }
+		.header-social { top: 8px; right: 20px; transform: none; }
+		.brand { height: 138px; }
+		.brand-title { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: 0.04em; }
+		.brand-illustration-left { right: calc(50% + 140px); bottom: -20px; width: 220px; }
+		.brand-illustration-right { left: calc(50% + 140px); bottom: -6px; width: 200px; }
+		:global(.home-reference .navigation-inner a) { padding-inline: 12px; font-size: 13px; }
 		.profile-widget { padding: 30px 18px 20px; }
 	}
 	@media (max-width: 767px) {
 		:global(body.home-reference) { font-size: 14px; }
-		.masthead { min-height: 100px; padding: 18px 46px; }
-		.brand { gap: 8px; }
-		.brand-title { font-size: clamp(22px, 6.8vw, 30px); letter-spacing: 0.05em; }
-		.brand-tagline { max-width: 100%; font-size: 8px; letter-spacing: 0.02em; }
+		.masthead { min-height: 150px; padding: 0 48px; }
+		.brand { width: min(100%, 480px); height: 148px; }
+		.brand-copy { align-self: flex-start; padding-top: 20px; gap: 8px; }
+		.brand-title { font-size: clamp(20px, 6vw, 26px); letter-spacing: 0; }
+		.brand-tagline { max-width: 140px; font-size: 10px; letter-spacing: 0; line-height: 1.55; }
+		.brand-tagline-break { display: initial; }
+		.brand-illustration-left { right: auto; left: -42px; bottom: -12px; width: 110px; }
+		.brand-illustration-right { left: auto; right: -42px; bottom: 0; width: 110px; }
 		.header-social { display: none; }
-		.mobile-menu-toggle { display: flex; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); border: 0; padding: 5px; background: none; flex-direction: column; gap: 4px; }
-		.mobile-menu-toggle span { display: block; height: 2px; width: 18px; background: #fff; }
-		.mobile-search { display: flex; position: absolute; right: 17px; top: 50%; transform: translateY(-50%); color: #fff; }
+		.mobile-menu-toggle { display: flex; position: absolute; left: 4px; top: 14px; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; padding: 0; background: none; flex-direction: column; gap: 4px; cursor: pointer; }
+		.mobile-menu-toggle span { display: block; height: 2px; width: 18px; background: #CC0000; }
+		.mobile-search { display: flex; position: absolute; right: 4px; top: 14px; align-items: center; justify-content: center; width: 44px; height: 44px; color: #CC0000; }
 		.home-navigation { display: none; }
 		.home-navigation.is-open { display: block; }
 		.navigation-inner { display: grid; grid-template-columns: 1fr 1fr; padding: 8px; }
-		:global(.home-reference .navigation-inner a) { font-size: 11px; padding: 9px 6px; }
+		:global(.home-reference .navigation-inner a) { font-size: 12px; padding: 9px 6px; }
 		.pickup { margin: 20px 0 22px; min-height: 0; }
 		.pickup-track { gap: 12px; padding: 0 calc((100% - 42%) / 2); scroll-padding-inline: calc((100% - 42%) / 2); }
 		.pickup-item { flex-basis: 42vw; scroll-snap-align: center; }
@@ -253,6 +273,10 @@ const navLinks = [
 		.profile-copy { font-size: 14px; line-height: 1.9; }
 		.category-features { margin: 40px 0 0; }
 		.back-to-top { width: 32px; height: 32px; right: 12px; bottom: 12px; font-size: 24px; line-height: 35px; }
+	}
+	@media (max-width: 359px) {
+		.brand-tagline { max-width: 120px; font-size: 9px; }
+		.brand-illustration-left, .brand-illustration-right { width: 96px; }
 	}
 	@media (prefers-reduced-motion: reduce) { .pickup-arrow { transition: none; } }
 </style>
