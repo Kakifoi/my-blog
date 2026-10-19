@@ -1,0 +1,148 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import HomeHeader from '../components/HomeHeader.astro';
+import HomeSidebar from '../components/HomeSidebar.astro';
+import { SITE_TITLE } from '../consts';
+import { ARCHIVE_PAGE_SIZE, archivePageNumbers, archivePageUrl } from '../utils/archivePagination.mjs';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+	allPosts: CollectionEntry<'blog'>[];
+	currentPage: number;
+	category?: string;
+}
+
+const { posts, allPosts, currentPage, category } = Astro.props;
+const matchingPosts = category ? allPosts.filter((post) => post.data.category === category) : allPosts;
+const totalPages = Math.max(1, Math.ceil(matchingPosts.length / ARCHIVE_PAGE_SIZE));
+const start = (currentPage - 1) * ARCHIVE_PAGE_SIZE;
+const heading = category || 'すべての記事';
+const title = currentPage === 1 ? heading : `${heading} ${currentPage}ページ目`;
+const pageUrl = (page: number) => archivePageUrl(page, category);
+const description = category
+	? `「${category}」の最新記事を新しい順に掲載しています。${currentPage}／${totalPages}ページ。`
+	: `${SITE_TITLE}の記事一覧。熊谷・深谷のグルメ、家族のおでかけ、日々の暮らしの記録を新しい順に掲載しています。${currentPage}／${totalPages}ページ。`;
+const dateFormat = new Intl.DateTimeFormat('ja-JP', {
+	year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Tokyo',
+});
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead
+			title={`${title} | ${SITE_TITLE}`}
+			description={description}
+			ogImage="https://kakifoi.net/images/og-default.jpg"
+		/>
+		{currentPage > 1 && <link rel="prev" href={pageUrl(currentPage - 1)} />}
+		{currentPage < totalPages && <link rel="next" href={pageUrl(currentPage + 1)} />}
+	</head>
+	<body class="home-reference blog-archive">
+		<a class="skip-link" href="#archive-content">記事一覧へ移動</a>
+		<HomeHeader />
+		<div class="archive-shell">
+			<main id="archive-content" class="archive-main">
+				<nav class="breadcrumbs" aria-label="パンくずリスト">
+					<a href="/">ホーム</a><span aria-hidden="true">›</span>
+					{category && <><a href="/categories/">カテゴリ一覧</a><span aria-hidden="true">›</span></>}
+					{currentPage === 1 ? <span aria-current="page">{heading}</span> : <><a href={pageUrl(1)}>{heading}</a><span aria-hidden="true">›</span><span aria-current="page">{currentPage}ページ目</span></>}
+				</nav>
+				<header class="archive-heading">
+					<p class="archive-eyebrow" aria-hidden="true">{category ? '― CATEGORY ―' : '― ALL POSTS ―'}</p>
+					<h1>{heading}</h1>
+					<p class="archive-count">全{matchingPosts.length}件<span aria-hidden="true"> · </span>新しい順</p>
+				</header>
+				<ul class="archive-grid" aria-label="記事一覧" data-archive-grid>
+					{posts.map((post, index) => (
+						<li class="archive-card">
+							<a class="archive-card-link" href={`/blog/${post.id}/`}>
+								<div class="archive-media">
+									{post.data.heroImage ? (
+										<img src={post.data.heroImage} alt="" width="1200" height="675" data-list-thumbnail loading={index < 2 ? 'eager' : 'lazy'} decoding="async" />
+									) : <span class="archive-no-image" aria-hidden="true">{SITE_TITLE}</span>}
+									<span class="archive-category">{post.data.category}</span>
+								</div>
+								<h2>{post.data.title}</h2>
+								<time datetime={post.data.pubDate.toISOString()}>{dateFormat.format(post.data.pubDate)}</time>
+							</a>
+						</li>
+						))}
+					</ul>
+				{posts.length === 0 && <p class="archive-empty">記事はまだありません。</p>}
+				{totalPages > 1 && (
+					<nav class="archive-pagination" aria-label="記事のページ">
+						{currentPage > 1 && <a class="page-step" href={pageUrl(currentPage - 1)} rel="prev" aria-label="前のページ">‹</a>}
+						{archivePageNumbers(currentPage, totalPages).map((page) => page === null ? <span class="page-gap" aria-hidden="true">…</span> : page === currentPage ? <span class="page-number is-current" aria-current="page" aria-label={`${page}ページ目`}>{page}</span> : <a class="page-number" href={pageUrl(page)} aria-label={`${page}ページ目`}>{page}</a>)}
+						{currentPage < totalPages && <a class="page-step" href={pageUrl(currentPage + 1)} rel="next" aria-label="次のページ">›</a>}
+					</nav>
+				)}
+				<p class="archive-range">{matchingPosts.length ? `${matchingPosts.length}件中${start + 1}〜${start + posts.length}件を表示` : '0件'}（{currentPage}／{totalPages}ページ）</p>
+			</main>
+			<HomeSidebar posts={allPosts} />
+		</div>
+		<Footer />
+		<a class="back-to-top" href="#" aria-label="ページの先頭へ戻る">⌃</a>
+	</body>
+</html>
+
+<style>
+	:global(body.blog-archive) { --home-accent: #CC0000; background: #fff; color: #333; font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; font-size: 16px; font-weight: 400; line-height: 1.8; }
+	:global(.blog-archive a) { color: inherit; }
+	:global(.blog-archive a:hover) { color: #aa0000; text-decoration: none; }
+	:global(.blog-archive :focus-visible) { outline: 3px solid #aa0000; outline-offset: 4px; }
+	.skip-link { position: fixed; top: -60px; left: 10px; z-index: 200; padding: 10px 18px; background: #fff; }
+	.skip-link:focus { top: 10px; }
+	.archive-shell { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 40px; max-width: 1200px; margin: 30px auto 65px; padding: 0 30px; align-items: start; }
+	.archive-main { min-width: 0; max-width: none; margin: 0; padding: 0; }
+	.breadcrumbs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 18px; color: #888; font-size: 11px; }
+	.breadcrumbs a { text-decoration: underline; text-underline-offset: 3px; }
+	.archive-heading { border: 1px solid #eee; padding: 25px 16px 20px; margin-bottom: 24px; text-align: center; }
+	.archive-eyebrow { margin: 0 0 6px; color: #aaa; font-size: 12px; letter-spacing: 0.14em; }
+	.archive-heading h1 { margin: 0; font-size: 23px; line-height: 1.6; font-weight: 500; letter-spacing: 0.08em; }
+	.archive-count { margin: 7px 0 0; color: #888; font-size: 11px; }
+	.archive-count span { margin: 0 6px; }
+	.archive-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 22px; list-style: none; margin: 0; padding: 0; }
+	.archive-card { min-width: 0; margin: 0; background: #fff; box-shadow: 0 1px 4px #0002; transition: box-shadow 160ms ease; }
+	.archive-card:hover { box-shadow: 0 3px 12px #0002; }
+	.archive-card-link, .archive-card-link:hover { display: flex; flex-direction: column; height: 100%; color: #333; text-decoration: none; }
+	.archive-media { position: relative; aspect-ratio: 16 / 9; background: #fff4f0; overflow: hidden; }
+	.archive-media img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 0; }
+	.archive-no-image { display: grid; place-items: center; height: 100%; color: #b98578; font-size: 18px; }
+	.archive-category { position: absolute; top: 10px; left: 10px; max-width: calc(100% - 20px); padding: 2px 10px; border-radius: 20px; background: #CC0000; color: #fff; font-size: 11px; line-height: 1.6; overflow-wrap: anywhere; }
+	.archive-card h2 { margin: 0; padding: 15px 16px 18px; color: inherit; font-size: 17px; font-weight: 500; line-height: 1.8; overflow-wrap: anywhere; }
+	.archive-card time { display: block; margin-top: auto; padding: 0 16px 13px; color: #888; font-size: 12px; line-height: 1.8; text-align: right; }
+	.archive-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin: 34px 0 0; }
+	.page-number, .page-step { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; min-height: 40px; padding: 5px; background: #f1f1f1; font-size: 14px; line-height: 1.8; }
+	.page-number.is-current { background: #CC0000; color: #fff; }
+	.page-number:hover, .page-step:hover { background: #fff0f0; }
+	.page-step { font-size: 25px; }
+	.page-gap { min-width: 14px; color: #888; text-align: center; }
+	.archive-range { margin: 16px 0 0; color: #888; font-size: 11px; text-align: center; }
+	.archive-empty { padding: 30px; text-align: center; }
+	.back-to-top { position: fixed; bottom: 20px; right: 22px; width: 40px; height: 40px; background: #cc0000bf; border-radius: 50%; color: #fff !important; text-align: center; font-size: 29px; line-height: 43px; z-index: 20; }
+	@media (min-width: 768px) and (max-width: 1199px) {
+		.archive-shell { grid-template-columns: minmax(0, 1fr) 300px; gap: 25px; }
+		.archive-grid { gap: 20px 15px; }
+		.archive-card h2 { padding: 12px; font-size: 15px; }
+	}
+	@media (max-width: 767px) {
+		:global(body.blog-archive) { font-size: 14px; }
+		.archive-shell { display: block; max-width: 600px; padding: 0 14px; margin: 20px auto 45px; }
+		.breadcrumbs { margin-bottom: 14px; font-size: 10px; }
+		.archive-heading { margin-bottom: 20px; padding: 22px 12px 18px; }
+		.archive-heading h1 { font-size: 21px; }
+		.archive-grid { gap: 18px 12px; }
+		.archive-category { top: 6px; left: 6px; max-width: calc(100% - 12px); padding: 2px 6px; font-size: 9px; }
+		.archive-card h2 { padding: 10px 9px 14px; font-size: 13px; line-height: 1.8; }
+		.archive-card time { padding: 0 8px 10px; font-size: 10px; }
+		.archive-no-image { font-size: 12px; }
+		.archive-pagination { gap: 4px; margin-top: 28px; }
+		.page-number, .page-step { min-width: 33px; min-height: 40px; font-size: 13px; }
+		.page-step { font-size: 23px; }
+		.back-to-top { width: 32px; height: 32px; right: 12px; bottom: 12px; font-size: 24px; line-height: 35px; }
+	}
+	@media (prefers-reduced-motion: reduce) { .archive-card { transition: none; } }
+</style>

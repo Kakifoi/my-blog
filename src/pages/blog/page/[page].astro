@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BlogArchive from '../../../layouts/BlogArchive.astro';
+import { ARCHIVE_PAGE_SIZE } from '../../../utils/archivePagination.mjs';
+
+export async function getStaticPaths() {
+	const allPosts = (await getCollection('blog')).sort(
+		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+	);
+	const totalPages = Math.ceil(allPosts.length / ARCHIVE_PAGE_SIZE);
+	return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+		const currentPage = index + 2;
+		const start = (currentPage - 1) * ARCHIVE_PAGE_SIZE;
+		return {
+			params: { page: String(currentPage) },
+			props: {
+				posts: allPosts.slice(start, start + ARCHIVE_PAGE_SIZE),
+				allPosts,
+				currentPage,
+			},
+		};
+	});
+}
+---
+
+<BlogArchive {...Astro.props} />

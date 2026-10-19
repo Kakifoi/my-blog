@@ -1,19 +1,3 @@
-const menuToggle = document.querySelector<HTMLButtonElement>('.mobile-menu-toggle');
-const navigation = document.getElementById('home-navigation');
-menuToggle?.addEventListener('click', () => {
-	const expanded = menuToggle.getAttribute('aria-expanded') !== 'true';
-	menuToggle.setAttribute('aria-expanded', String(expanded));
-	menuToggle.setAttribute('aria-label', expanded ? 'メニューを閉じる' : 'メニューを開く');
-	navigation?.classList.toggle('is-open', expanded);
-});
-document.addEventListener('keydown', (event) => {
-	if (event.key !== 'Escape' || menuToggle?.getAttribute('aria-expanded') !== 'true') return;
-	menuToggle.setAttribute('aria-expanded', 'false');
-	menuToggle.setAttribute('aria-label', 'メニューを開く');
-	navigation?.classList.remove('is-open');
-	menuToggle.focus();
-});
-
 const carousel = document.querySelector<HTMLElement>('.pickup');
 const track = document.querySelector<HTMLElement>('.pickup-track');
 const items = [...document.querySelectorAll<HTMLElement>('.pickup-item')];
