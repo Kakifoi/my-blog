@@ -7,9 +7,10 @@ import HomePostGrid from '../components/HomePostGrid.astro';
 import HomeRecommendations from '../components/HomeRecommendations.astro';
 import HomeSidebar from '../components/HomeSidebar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getHomePicks } from '../data/home-picks.mjs';
 
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const pickupPosts = posts.filter((post) => post.data.heroImage).slice(0, 8);
+const pickupPosts = getHomePicks(posts);
 ---
 
 <!doctype html>
@@ -21,7 +22,8 @@ const pickupPosts = posts.filter((post) => post.data.heroImage).slice(0, 8);
 		<a class="skip-link" href="#home-content">記事一覧へ移動</a>
 		<HomeHeader />
 
-		<section class="pickup" aria-label="ピックアップ記事" aria-roledescription="カルーセル">
+		<section class="pickup" aria-labelledby="home-picks-title" aria-roledescription="カルーセル">
+			<h2 id="home-picks-title" class="pickup-title">まず読んでほしい記事</h2>
 			<div class="pickup-window">
 				<ul class="pickup-track" id="pickup-track">
 					{pickupPosts.map((post, index) => (
@@ -82,6 +84,7 @@ const pickupPosts = posts.filter((post) => post.data.heroImage).slice(0, 8);
 	.skip-link { position: fixed; top: -60px; left: 10px; z-index: 200; padding: 10px 18px; background: #fff; }
 	.skip-link:focus { top: 10px; }
 	.pickup { max-width: 1140px; margin: 30px auto 20px; min-height: 210px; }
+	.pickup-title { margin: 0 0 14px; color: var(--home-accent); font-size: 16px; font-weight: 500; line-height: 1.6; }
 	.pickup-window { position: relative; }
 	.pickup-track { display: flex; gap: 16px; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; }
 	.pickup-track::-webkit-scrollbar { display: none; }
@@ -118,6 +121,7 @@ const pickupPosts = posts.filter((post) => post.data.heroImage).slice(0, 8);
 	@media (max-width: 767px) {
 		:global(body.home-reference) { font-size: 14px; }
 		.pickup { margin: 20px 0 22px; min-height: 0; }
+		.pickup-title { margin-bottom: 12px; padding: 0 14px; font-size: 14px; }
 		.pickup-track { gap: 12px; padding: 0 calc((100% - 42%) / 2); scroll-padding-inline: calc((100% - 42%) / 2); }
 		.pickup-item { flex-basis: 42vw; scroll-snap-align: center; }
 		.pickup-item p { font-size: 13px; line-height: 1.5; min-height: 59px; margin-top: 5px; }

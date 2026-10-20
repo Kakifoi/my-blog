@@ -44,5 +44,5 @@ motionPreference.addEventListener('change', () => { if (motionPreference.matches
 window.addEventListener('resize', () => selectSlide(currentSlide));
 window.setInterval(() => { if (!paused && !pointerInside && !focusInside && !document.hidden) selectSlide(currentSlide + 1); }, 6000);
 updatePlayback();
-// On narrow screens start with neighbours on both sides, like the reference strip.
-selectSlide(window.matchMedia('(max-width: 767px)').matches ? 1 : 0);
+// Start with the first editorial pick on every screen size.
+selectSlide(0);
