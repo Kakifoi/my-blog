@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto';
-import { mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, realpath, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'parse5';
@@ -10,6 +10,18 @@ import { prepareImage } from './prepare-image.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const MIN_BYTES = 512 * 1024;
+const DISPLAY_IMAGE_QUALITY = 80;
+const DISPLAY_IMAGE_PRESETS = {
+	'header-left': {
+		widths: [220, 520, 780],
+		sizes: '(max-width: 359px) 96px, (max-width: 767px) 110px, (max-width: 1199px) 220px, 260px',
+	},
+	'header-right': {
+		widths: [220, 420, 630],
+		sizes: '(max-width: 359px) 96px, (max-width: 767px) 110px, (max-width: 1199px) 200px, 210px',
+	},
+	avatar: { widths: [110, 220, 330], sizes: '110px' },
+};
 const attrsOf = (node) => Object.fromEntries((node.attrs ?? []).map(({ name, value }) => [name, value]));
 const hasClass = (node, name) => attrsOf(node).class?.split(/\s+/).includes(name);
 const escapeAttribute = (value) => String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
@@ -35,7 +47,8 @@ function pageImages(html) {
 		hero ||= hasClass(node, 'hero-image');
 		inPicture ||= node.tagName === 'picture';
 		const thumbnail = 'data-list-thumbnail' in attrs;
-		if ((inArticle || thumbnail) && node.tagName === 'img' && node.sourceCodeLocation) images.push({ node, attrs, inProse, inLink, hero, inPicture, thumbnail });
+		const displayPreset = Object.hasOwn(DISPLAY_IMAGE_PRESETS, attrs['data-display-image']) ? attrs['data-display-image'] : undefined;
+		if ((inArticle || thumbnail || displayPreset) && node.tagName === 'img' && node.sourceCodeLocation) images.push({ node, attrs, inProse, inLink, hero, inPicture, thumbnail, displayPreset });
 		for (const child of node.childNodes ?? []) visit(child, inArticle, inProse, inLink, hero, inPicture);
 		// ページ送り用の未表示カードも、表示される前に一覧用画像へ変換する。
 		if (node.content) visit(node.content, inArticle, inProse, inLink, hero, inPicture);
@@ -89,31 +102,76 @@ export async function optimizeBuildImages({ root = ROOT, dist = path.join(root, 
 		return work;
 	}
 
+	async function prepareDisplay(src, displayPreset) {
+		const cacheKey = `display:${displayPreset}:${src}`;
+		if (cache.has(cacheKey)) return cache.get(cacheKey);
+		const work = (async () => {
+			const url = new URL(src, 'https://kakifoi.net');
+			if (!src.startsWith('/images/') || url.search || url.hash) return null;
+			const input = path.resolve(publicDir, `.${decodeURIComponent(url.pathname)}`);
+			const invalidPath = () => new Error(`表示用画像がpublic/images配下にありません: ${src}`);
+			if (!input.startsWith(`${path.join(publicDir, 'images')}${path.sep}`)) throw invalidPath();
+			if (!/\.(?:jpe?g|png|webp|avif|gif)$/i.test(input)) return null;
+			// opt-in画像も外部URLやシンボリックリンク経由でpublicの外を読み込まない。
+			const [actualInput, actualPublic] = await Promise.all([realpath(input), realpath(publicDir)]);
+			if (!actualInput.startsWith(`${path.join(actualPublic, 'images')}${path.sep}`)) throw invalidPath();
+			const original = await readFile(actualInput);
+			const metadata = await sharp(original).metadata();
+			const rotated = metadata.orientation >= 5 && metadata.orientation <= 8;
+			const naturalWidth = rotated ? metadata.height : metadata.width;
+			const preset = DISPLAY_IMAGE_PRESETS[displayPreset];
+			// 小さい原本は拡大せず、同じ実幅に丸められた候補を重複させない。
+			const widths = [...new Set(preset.widths.map((width) => Math.min(width, naturalWidth)))];
+			const variants = [];
+			for (const width of widths) {
+				const digest = createHash('sha256').update(original).update(`display-${displayPreset}-${width}w-webp-q${DISPLAY_IMAGE_QUALITY}-v1`).digest('hex').slice(0, 16);
+				const output = `/images/optimized/${path.parse(input).name}.${displayPreset}-${width}w.${digest}.webp`;
+				const destination = path.join(dist, output);
+				await mkdir(path.dirname(destination), { recursive: true });
+				// 幅だけを指定して縦横比と構図を維持する。切り抜きは行わない。
+				const result = await sharp(original).rotate().resize({ width, withoutEnlargement: true }).webp({ quality: DISPLAY_IMAGE_QUALITY }).toFile(destination);
+				const variant = { source: src, output, width: result.width, height: result.height, beforeBytes: original.length, afterBytes: result.size, displayPreset, quality: DISPLAY_IMAGE_QUALITY };
+				variants.push(variant);
+				report.optimizedImages.push(variant);
+			}
+			const fallback = variants.find((variant) => variant.width === Math.min(preset.widths[1], naturalWidth));
+			return { ...fallback, srcset: variants.map((variant) => `${variant.output} ${variant.width}w`).join(', '), sizes: preset.sizes };
+		})();
+		cache.set(cacheKey, work);
+		return work;
+	}
+
 	for (const file of await htmlFiles(dist)) {
 		const html = await readFile(file, 'utf8');
 		const images = pageImages(html);
 		if (!images.length) continue;
 		const edits = [];
 		const page = { path: `/${path.relative(dist, file).split(path.sep).join('/').replace(/index\.html$/, '')}`, images: images.length, beforeBytes: 0, afterBytes: 0 };
-		for (const { node, attrs, inProse, inLink, hero, inPicture, thumbnail } of images) {
+		for (const { node, attrs, inProse, inLink, hero, inPicture, thumbnail, displayPreset } of images) {
 			// 既存のレスポンシブ画像はsrcsetとの整合を保ち、そのままにする。
 			if (inPicture || attrs.srcset) continue;
-			const image = await prepare(attrs.src ?? '', thumbnail);
+			const image = displayPreset ? await prepareDisplay(attrs.src ?? '', displayPreset) : await prepare(attrs.src ?? '', thumbnail);
+			if (displayPreset && !image) continue;
 			if (image) {
 				attrs.src = image.output;
-				if (thumbnail || (!attrs.width && !attrs.height)) {
+				if (displayPreset) {
+					attrs.srcset = image.srcset;
+					attrs.sizes = image.sizes;
+				}
+				if ((!displayPreset && thumbnail) || (!attrs.width && !attrs.height)) {
 					attrs.width = String(image.width);
 					attrs.height = String(image.height);
 					report.dimensionedImages++;
 				}
 				page.beforeBytes += image.beforeBytes;
+				// srcsetの実転送量は表示幅とDPR次第なので、ページ集計はfallbackの値。
 				page.afterBytes += image.afterBytes;
 			}
-			attrs.loading = hero ? 'eager' : attrs.loading ?? 'lazy';
+			attrs.loading = displayPreset ? attrs.loading ?? (displayPreset === 'avatar' ? 'lazy' : 'eager') : hero ? 'eager' : attrs.loading ?? 'lazy';
 			attrs.decoding ??= 'async';
 			if (attrs.loading === 'lazy') report.lazyImages++;
 			let replacement = `<img${Object.entries(attrs).map(([key, value]) => ` ${key}="${escapeAttribute(value)}"`).join('')}>`;
-			if (image && image.output !== image.source && inProse && !inLink) {
+			if (!displayPreset && image && image.output !== image.source && inProse && !inLink) {
 				replacement = `<a href="${escapeAttribute(image.source)}" class="original-photo-link" target="_blank" rel="noopener" aria-label="${escapeAttribute(attrs.alt || '写真')}を元のサイズで開く" title="写真をタップして拡大">${replacement}</a>`;
 			}
 			edits.push({ start: node.sourceCodeLocation.startOffset, end: node.sourceCodeLocation.endOffset, replacement });
@@ -130,8 +188,15 @@ export async function optimizeBuildImages({ root = ROOT, dist = path.join(root, 
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
 	optimizeBuildImages().then((report) => {
-		const before = report.optimizedImages.reduce((sum, image) => sum + image.beforeBytes, 0);
+		const displaySources = new Set();
+		const before = report.optimizedImages.reduce((sum, image) => {
+			if (image.displayPreset) {
+				if (displaySources.has(image.source)) return sum;
+				displaySources.add(image.source);
+			}
+			return sum + image.beforeBytes;
+		}, 0);
 		const after = report.optimizedImages.reduce((sum, image) => sum + image.afterBytes, 0);
-		console.log(`記事・一覧画像: ${report.optimizedImages.length}枚を軽量化 (${(before / 1e6).toFixed(2)}MB → ${(after / 1e6).toFixed(2)}MB)、${report.lazyImages}箇所を遅延読み込み`);
+		console.log(`記事・一覧・表示画像: ${report.optimizedImages.length}ファイルを軽量化 (元画像${(before / 1e6).toFixed(2)}MB → 出力合計${(after / 1e6).toFixed(2)}MB)、${report.lazyImages}箇所を遅延読み込み`);
 	}).catch((error) => { console.error(error); process.exitCode = 1; });
 }

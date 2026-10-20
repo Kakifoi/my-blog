@@ -87,7 +87,7 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
 		</nav>
 	</div>
 	<p class="hpg-status" data-hpg-status role="status" aria-live="polite" aria-atomic="true"></p>
-	<p class="hpg-all-posts"><a href="/blog/">すべての記事を見る（{posts.length}件） →</a></p>
+	<p class="hpg-all-posts"><a href="/blog/" data-hpg-archive-link>すべての記事を見る（{posts.length}件） →</a></p>
 	<!-- Cloning these also preserves Astro's scoped-style attributes. -->
 	<template data-hpg-page-button><button type="button" class="hpg-page"></button></template>
 	<template data-hpg-page-gap><span class="hpg-page-gap" aria-hidden="true">…</span></template>
@@ -107,6 +107,7 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
 			const previous = root.querySelector<HTMLButtonElement>('[data-hpg-previous]')!;
 			const next = root.querySelector<HTMLButtonElement>('[data-hpg-next]')!;
 			const status = root.querySelector<HTMLElement>('[data-hpg-status]')!;
+			const archiveLink = root.querySelector<HTMLAnchorElement>('[data-hpg-archive-link]')!;
 			const buttonTemplate = root.querySelector<HTMLTemplateElement>('[data-hpg-page-button]')!;
 			const gapTemplate = root.querySelector<HTMLTemplateElement>('[data-hpg-page-gap]')!;
 			const sources = Array.from(grid.querySelectorAll<HTMLLIElement | HTMLTemplateElement>('[data-hpg-source]'));
@@ -127,6 +128,10 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
 			function render() {
 				const category = tabs[activeTab].dataset.category;
 				const matches = sources.filter((source) => !category || source.dataset.category === category);
+				archiveLink.setAttribute('href', category ? `/categories/${encodeURIComponent(category)}/` : '/blog/');
+				archiveLink.textContent = category
+					? `${category}の記事をすべて見る（${matches.length}件） →`
+					: `すべての記事を見る（${matches.length}件） →`;
 				pageCount = Math.max(1, Math.ceil(matches.length / pageSize));
 				const page = pages[activeTab] = Math.min(pages[activeTab], pageCount);
 				const start = (page - 1) * pageSize;
@@ -347,7 +352,7 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
 		display: block;
 		margin-top: auto;
 		padding: 0 17px 13px;
-		color: #888;
+		color: #666;
 		font-size: 15px;
 		line-height: 1.6;
 		text-align: right;
@@ -385,14 +390,16 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
 	.hpg-status { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 	@media (max-width: 767px) {
-		.hpg-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
-		.hpg-tab { min-height: 64px; font-size: 15px; }
-		.hpg-tab:last-child { grid-column: 1 / -1; }
+		.hpg-tabs { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+		.hpg-tab { grid-column: span 2; flex-direction: column; min-height: 58px; padding: 7px 4px; gap: 3px; font-size: 14px; line-height: 1.4; }
+		.hpg-tab:nth-child(n + 4) { grid-column: span 3; flex-direction: row; gap: 5px; }
+		.hpg-desktop-break { display: initial; }
+		.hpg-panel { margin-top: 24px; }
 		.hpg-grid { gap: 10px; padding: 0 2px; }
 		.hpg-card { min-height: 0; }
-		.hpg-category { top: 6px; left: 6px; max-width: calc(100% - 12px); padding: 2px 6px; font-size: 9px; }
-		.hpg-title { padding: 10px 8px; font-size: 12px; line-height: 1.8; }
-		.hpg-date { padding: 0 6px 10px; font-size: 10px; }
+		.hpg-category { top: 6px; left: 6px; max-width: calc(100% - 12px); padding: 2px 6px; font-size: 10px; }
+		.hpg-title { padding: 10px 8px; font-size: 14px; line-height: 1.7; }
+		.hpg-date { padding: 0 6px 10px; font-size: 11px; }
 		.hpg-page { min-width: 28px; }
 	}
 </style>

@@ -45,7 +45,7 @@ const pickupPosts = posts.filter((post) => post.data.heroImage).slice(0, 8);
 		<div class="home-shell">
 			<main id="home-content" class="home-main">
 				<div class="home-intro">
-					<h1>{SITE_TITLE}｜熊谷・深谷のグルメと家族の日常ブログ</h1>
+					<h1>{SITE_TITLE}<span class="home-intro-separator" aria-hidden="true">｜</span><span class="home-intro-topic">熊谷・深谷のグルメと家族の日常ブログ</span></h1>
 					<p>埼玉在住、2児の父・カキフォイが、行った場所や使ったものを写真と本音でつづります。ゲームや買い物、日々の出来事も。</p>
 				</div>
 				<HomePostGrid posts={posts} />
@@ -102,9 +102,9 @@ const pickupPosts = posts.filter((post) => post.data.heroImage).slice(0, 8);
 	.pickup-playback { border: 0; padding: 0 3px; background: none; color: #777; font-size: 10px; line-height: 17px; cursor: pointer; }
 	.home-shell { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 30px; max-width: 1200px; margin: 20px auto 65px; padding: 10px 30px 0; align-items: start; }
 	.home-main { min-width: 0; max-width: none; padding: 0; margin: 0; }
-	.home-intro { padding: 5px 25px 0; min-height: 96px; margin-bottom: 20px; }
-	.home-intro h1 { font-size: 10px; font-weight: 400; line-height: 1.5; margin: 0 0 17px; }
-	.home-intro p { font-size: 11px; line-height: 1.9; margin: 0; letter-spacing: 0.04em; }
+	.home-intro { padding: 5px 25px 0; margin-bottom: 24px; }
+	.home-intro h1 { font-size: 13px; font-weight: 500; line-height: 1.7; margin: 0 0 8px; }
+	.home-intro p { font-size: 14px; line-height: 1.8; margin: 0; letter-spacing: 0.04em; }
 	.category-features { margin: 55px 24px 0; }
 	.category-feature { margin-bottom: 40px; }
 	.feature-banner { display: block; border-radius: 2px; overflow: hidden; box-shadow: 0 1px 4px #0002; }
@@ -124,10 +124,11 @@ const pickupPosts = posts.filter((post) => post.data.heroImage).slice(0, 8);
 		.category-label { top: 4px; left: 4px; font-size: 8px; padding: 1px 6px; max-width: calc(100% - 8px); }
 		.pickup-arrow { opacity: 1; width: 24px; height: 24px; font-size: 27px; background: #fff9; color: #aaa; top: 33%; }
 		.pickup-controls { margin-top: 4px; }
-		.home-shell { display: block; padding: 0 14px; margin: 30px auto 45px; max-width: 600px; }
-		.home-intro { padding: 0 18px; min-height: 110px; margin-bottom: 20px; }
-		.home-intro h1 { font-size: 10px; line-height: 1.7; margin-bottom: 15px; }
-		.home-intro p { font-size: 10px; line-height: 2; letter-spacing: 0.03em; }
+		.home-shell { display: block; padding: 0 14px; margin: 22px auto 45px; max-width: 600px; }
+		.home-intro { padding: 0 4px; margin-bottom: 18px; }
+		.home-intro-separator { display: none; }
+		.home-intro-topic { display: block; }
+		.home-intro p { letter-spacing: 0.03em; }
 		.category-features { margin: 40px 0 0; }
 		.back-to-top { width: 32px; height: 32px; right: 12px; bottom: 12px; font-size: 24px; line-height: 35px; }
 	}
