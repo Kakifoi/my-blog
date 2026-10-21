@@ -64,10 +64,10 @@ const pickupPosts = getHomePicks(posts);
 				<HomeRecommendations />
 			</main>
 
-			<HomeSidebar posts={posts} />
+			<HomeSidebar posts={posts} showBlogmuraRanking={true} />
 		</div>
 
-		<Footer />
+		<Footer showBlogmuraRanking={false} />
 		<a class="back-to-top" href="#" aria-label="ページの先頭へ戻る">⌃</a>
 		<script src="../scripts/homepage.ts"></script>
 	</body>

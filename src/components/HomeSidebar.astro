@@ -1,12 +1,15 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import BlogmuraRanking from './BlogmuraRanking.astro';
+import BlogmuraSupport from './BlogmuraSupport.astro';
 import { tagSlug } from '../utils/tagSlug';
 
 interface Props {
 	posts: CollectionEntry<'blog'>[];
+	showBlogmuraRanking?: boolean;
 }
 
-const { posts } = Astro.props;
+const { posts, showBlogmuraRanking = false } = Astro.props;
 const categories = ['グルメ', '旅行・おでかけ', '子育て・日常', 'ゲーム・エンタメ', 'ガジェット・テクノロジー', 'お金・投資', '健康・ランニング'];
 const tagCounts = new Map<string, number>();
 posts.forEach((post) => post.data.tags.forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)));
@@ -27,6 +30,16 @@ const dateText = (date: Date) => new Intl.DateTimeFormat('ja-JP', { year: 'numer
 		<p class="follow-label">＼ Follow me ／</p>
 		<div class="profile-social"><a href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="カキフォイのX">𝕏</a><a class="profile-instagram" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="カキフォイのInstagram（新しいタブで開きます）"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="/contact/" aria-label="お問い合わせ">✉</a><a href="/rss.xml" aria-label="RSS">RSS</a></div>
 	</section>
+	{showBlogmuraRanking && (
+		<>
+			<div class="sidebar-blogmura-support" data-pagefind-ignore>
+				<BlogmuraSupport />
+			</div>
+			<div class="sidebar-widget sidebar-blogmura-ranking" data-pagefind-ignore>
+				<BlogmuraRanking />
+			</div>
+		</>
+	)}
 	<a class="sidebar-banner" href="/#recommended-products"><span>使って・食べてよかったもの</span><small>グリルとお肉の感想・購入先を見る</small><span aria-hidden="true">›</span></a>
 	<section class="sidebar-widget"><h2 class="widget-title">ブログ内検索</h2><a class="search-entry" href="/search/"><span>キーワードから記事を探す</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></a></section>
 	<section class="sidebar-widget"><h2 class="widget-title">カテゴリー</h2><ul class="category-list">{categories.map((category) => <li><a href={`/categories/${category}/`}><span>› {category}</span><span class="category-count">{posts.filter((post) => post.data.category === category).length}</span></a></li>)}</ul></section>
@@ -37,8 +50,8 @@ const dateText = (date: Date) => new Intl.DateTimeFormat('ja-JP', { year: 'numer
 <style>
 	svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 	.home-sidebar { min-width: 0; }
-	.widget-title { position: relative; font-size: 25px; line-height: 1.4; letter-spacing: 0.07em; font-weight: 400; padding: 0 0 10px; margin: 0 0 25px; }
-	.widget-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: repeating-linear-gradient(135deg, #CC0000 0, #CC0000 2px, #fff 2px, #fff 4px); }
+	.widget-title, .sidebar-blogmura-ranking :global(h2) { position: relative; font-size: 25px; line-height: 1.4; letter-spacing: 0.07em; font-weight: 400; border-bottom: 0; padding: 0 0 10px; margin: 0 0 25px; }
+	.widget-title::after, .sidebar-blogmura-ranking :global(h2)::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: repeating-linear-gradient(135deg, #CC0000 0, #CC0000 2px, #fff 2px, #fff 4px); }
 	.sponsor-guide .widget-title { margin: 0; }
 	.sponsor-guide .home-products-cta { display: block; margin: 12px 0 22px; text-align: center; color: #8c8a84; font-size: 11px; text-underline-offset: 3px; }
 	.profile-widget { border: 1px solid #eee; box-shadow: 0 0 2px #00000008; padding: 35px 25px 24px; margin: 0 0 34px; text-align: center; }
@@ -57,6 +70,7 @@ const dateText = (date: Date) => new Intl.DateTimeFormat('ja-JP', { year: 'numer
 	.profile-social a { font-size: 23px; }
 	.profile-instagram { display: flex; align-items: center; justify-content: center; }
 	.profile-social a:last-child { font-size: 12px; }
+	.sidebar-blogmura-support { min-width: 0; margin: 0 0 34px; }
 	.sidebar-banner { display: block; position: relative; padding: 25px 25px 26px; text-align: center; background: #CC0000; margin: 0 0 35px; border: 6px solid #fff1f1; outline: 1px solid #efcccc; box-shadow: 0 2px 5px #0001; }
 	:global(.home-reference .sidebar-banner), :global(.home-reference .sidebar-banner:hover) { color: #fff; }
 	.sidebar-banner > span:first-child { display: block; font-size: 17px; font-weight: 700; }
@@ -81,7 +95,7 @@ const dateText = (date: Date) => new Intl.DateTimeFormat('ja-JP', { year: 'numer
 		.home-sidebar { margin: 55px 6px 0; }
 		.sponsor-guide { margin-bottom: 25px; }
 		.sponsor-guide .home-products-cta { margin-bottom: 0; }
-		.widget-title { font-size: 22px; }
+		.widget-title, .sidebar-blogmura-ranking :global(h2) { font-size: 22px; }
 		.profile-widget { padding: 30px 25px; }
 		.profile-copy { font-size: 14px; line-height: 1.9; }
 	}
