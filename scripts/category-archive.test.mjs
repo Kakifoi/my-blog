@@ -4,6 +4,7 @@ import test from 'node:test';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { parse } from 'parse5';
 import { ARCHIVE_CATEGORIES, ARCHIVE_PAGE_SIZE, archivePageNumbers, archivePageUrl } from '../src/utils/archivePagination.mjs';
+import { getHomeSeries } from '../src/data/home-series.mjs';
 
 // Run after the main agent's single production build; this script never builds.
 const targetCategories = ['子育て・日常', '旅行・おでかけ'];
@@ -68,10 +69,10 @@ function checkSharedChrome(dom) {
 		const link = one(links.filter((node) => pathname(attr(node, 'href')) === rootUrl(category)));
 		assert.equal(text(one(byClass(link, 'category-count'))), String(categoryPosts(category).length), 'sidebar counts use ALL site posts');
 	}
-	const recent = one(byClass(sidebar, 'recent-posts'));
-	const recentUrls = elements(recent, 'a').map((node) => attr(node, 'href'));
-	assert.equal(recentUrls.length, Math.min(5, allPosts.length));
-	assert.deepEqual(recentUrls.map((url) => postsByUrl.get(url).date), allPosts.slice(0, 5).map((post) => post.date), 'recent posts are site-wide and newest-first');
+	assert.equal(byClass(sidebar, 'recent-posts').length, 0, 'latest articles are not repeated in the sidebar');
+	const series = one(byClass(sidebar, 'series-cards'));
+	const expectedSeries = getHomeSeries(allPosts.map((post) => ({ id: post.url.slice(6, -1), data: post })));
+	assert.deepEqual(elements(series, 'a').map((node) => attr(node, 'href')), expectedSeries.flatMap((group) => group.links.map(({ post }) => `/blog/${post.id}/`)), 'shared series use real site-wide posts in reading order');
 }
 
 test('category URLs encode the category and keep page 1 at the existing category root', () => {
