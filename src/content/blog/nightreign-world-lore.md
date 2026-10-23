@@ -53,30 +53,9 @@ MRはレート9999にすぐ行けるくらいの腕前で、MNは一回だけ深
 
 本編エルデンリング未プレイでも問題ない作りになっているし、知っているとニヤリとできる要素も用意されているみたい。どちらのプレイヤーにも刺さるバランスが絶妙だと思う。
 
-<div class="product-card">
-  <span class="pr-label">PR</span>
-  <div class="product-inner">
-    <a href="https://amzn.to/3PEIzbj" target="_blank" rel="nofollow sponsored noopener" class="product-img-link">
-      <img src="https://m.media-amazon.com/images/I/819xL53nK6L._AC_SL1500_.jpg" alt="Elden Ring Nightreign（エルデンリング ナイトレイン）" class="product-img" />
-    </a>
-    <div class="product-info">
-      <p class="product-name">Elden Ring Nightreign（エルデンリング ナイトレイン）</p>
-      <div class="btn-group">
-        <a href="https://amzn.to/3PEIzbj" target="_blank" rel="nofollow sponsored noopener" class="btn-amazon">Amazonで見る</a>
-        <a href="https://a.r10.to/hgDuZz" target="_blank" rel="nofollow sponsored noopener" class="btn-rakuten">楽天で見る</a>
-        <a href="https://shopping.yahoo.co.jp/search/4949776472047/0/?first=1&tab_ex=commerce&fr=shp-prop&mcr=2b220d062aa57fc0f1b1a3fff6cddcf6&ts=1780377756&sretry=1&sc_i=shopping-pc-web-search-suggest-h_srch-srchbtn-sgstfrom-detail-item-h_srch-kwd" target="_blank" rel="nofollow sponsored noopener" class="btn-yahoo">Yahoo!で見る</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 ---
 
 最後まで読んでいただき、ありがとうございます。
-
-家で焼肉を楽しみたい方へ。うちで使っているアラジンのグリルや、取り寄せて食べたお肉をトップページにまとめています。使い勝手や味、気になったところも記事にしているので、選ぶときの参考になればうれしいです。購入先もそこから見られます。
-
-[グリルとお肉の感想・購入先を見る →](/#recommended-products)
 
 ※商品リンクにはアフィリエイト広告を利用しています。リンク経由の購入が条件を満たすと、当ブログが紹介料を受け取る場合があります。
 

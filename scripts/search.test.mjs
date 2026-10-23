@@ -5,26 +5,25 @@ import vm from 'node:vm';
 import { createMarkdownProcessor } from '@astrojs/markdown-remark';
 import rehypeAffiliateSearch, { articleFooter } from './rehype-affiliate-search.mjs';
 
-const footer = [articleFooter.thanks, articleFooter.intro,
-	`[${articleFooter.linkText}](${articleFooter.href})`, articleFooter.notice].join('\n\n');
+const footer = [articleFooter.thanks, articleFooter.notice].join('\n\n');
 
 test('only the complete ending is hidden from search; real article text and links remain searchable', async () => {
 	const filtered = await createMarkdownProcessor({ rehypePlugins: [rehypeAffiliateSearch] });
-	for (const variant of [footer, footer.replace('アラジンのグリル', 'アラジンの グリル')]) {
+	for (const variant of [footer, footer.replace('ありがとうございます', 'ありがとう ございます')]) {
 		const input = `${articleFooter.thanks}\n\n楽天ブラックカードを解約した理由です。\n\n[楽天の商品を見る](https://example.com/product)\n\n---\n\n${variant}`;
 		const result = (await filtered.render(input)).code;
-		assert.equal((result.match(/data-pagefind-ignore/g) ?? []).length, 4);
+		assert.equal((result.match(/data-pagefind-ignore/g) ?? []).length, 2);
 		assert.ok(result.includes(`<p>${articleFooter.thanks}</p>`));
 		assert.match(result, /<p>楽天ブラックカード/);
 		assert.match(result, /<p><a href="https:\/\/example.com\/product">/);
-		assert.match(result, /href="\/#recommended-products" class="article-footer-cta"/);
+		assert.doesNotMatch(result, /article-footer-cta|recommended-products/);
 		assert.ok(result.includes(articleFooter.notice));
 	}
 });
 
 test('partial footers, wrong destinations and non-ending copies cannot hide genuine article content', async () => {
 	const filtered = await createMarkdownProcessor({ rehypePlugins: [rehypeAffiliateSearch] });
-	for (const input of [footer, `---\n\n${footer.replace('/#recommended-products', '/wrong/')}`,
+	for (const input of [footer, `---\n\n${footer.replace(articleFooter.notice, 'この記事だけの注記')}`,
 		`---\n\n${footer}\n\n楽天で注文した商品のレビューです。`,
 		`---\n\n${articleFooter.thanks}\n\nこの記事だけの内容です。`]) {
 		const result = (await filtered.render(input)).code;
