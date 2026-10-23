@@ -1,20 +1,20 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import BlogmuraRanking from './BlogmuraRanking.astro';
 import BlogmuraSupport from './BlogmuraSupport.astro';
 import { getHomeSeries } from '../data/home-series.mjs';
 import { tagSlug } from '../utils/tagSlug';
 
 interface Props {
 	posts: CollectionEntry<'blog'>[];
-	showBlogmuraRanking?: boolean;
+	showBlogmuraSupport?: boolean;
 }
 
-const { posts, showBlogmuraRanking = false } = Astro.props;
+const { posts, showBlogmuraSupport = false } = Astro.props;
 const categories = ['グルメ', '旅行・おでかけ', '子育て・日常', 'ゲーム・エンタメ', 'ガジェット・テクノロジー', 'お金・投資', '健康・ランニング'];
 const tagCounts = new Map<string, number>();
 posts.forEach((post) => post.data.tags.forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)));
-const tags = [...tagCounts].sort((a, b) => b[1] - a[1]).slice(0, 28);
+// 地域はメイン欄の専用入口へ。汎用的な「日記」は一覧に残し、ここでは主題を優先する。
+const tags = [...tagCounts].filter(([tag]) => !['日記', '熊谷', '深谷'].includes(tag)).sort((a, b) => b[1] - a[1]).slice(0, 18);
 const series = getHomeSeries(posts);
 const instagramUrl = 'https://www.instagram.com/kakifoi_blog/';
 ---
@@ -23,29 +23,36 @@ const instagramUrl = 'https://www.instagram.com/kakifoi_blog/';
 	<section class="profile-widget" aria-labelledby="profile-name">
 		<a href="/about/" class="profile-avatar"><img src="/images/profile.png" data-display-image="avatar" alt="カキフォイ" width="110" height="110" loading="lazy" decoding="async" /></a>
 		<h2 id="profile-name">カキフォイ</h2>
-		<p class="profile-subtitle">埼玉在住、2児の父</p>
+		<p class="profile-subtitle">熊谷で暮らす、2人の娘の父</p>
 		<div class="profile-copy">
-			<p>妻と子供2人の4人家族。育児・家事と仕事をしながら、日常をつづっています。</p>
-			<p>熊谷・深谷の食べ歩き、子供とのおでかけや家族旅行、買って使ったものの感想、ゲームやジョギングの記録を紹介しています。</p>
+			<p>埼玉・熊谷で暮らす、2人の娘の父です。家族で出かけた場所や熊谷・深谷の食べ歩き、買って使ったものを日記にしています。ゲームとジョギングも好き。よかったところも気になったところも、日々の体験を写真と本音でつづっています。</p>
 		</div>
-		<a class="profile-button" href="/about/">プロフィール</a>
-		<p class="follow-label">＼ Follow me ／</p>
-		<div class="profile-social"><a href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="カキフォイのX">𝕏</a><a class="profile-instagram" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="カキフォイのInstagram（新しいタブで開きます）"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="/contact/" aria-label="お問い合わせ">✉</a><a href="/rss.xml" aria-label="RSS">RSS</a></div>
+		<a class="profile-button" href="/about/">詳しいプロフィール <span aria-hidden="true">›</span></a>
+		<div class="profile-follow" aria-labelledby="profile-follow-title">
+			<h3 id="profile-follow-title">Follow me</h3>
+			<p class="profile-follow-caption">更新や日々の写真はこちらから</p>
+			<div class="profile-social">
+				<a class="profile-social-link" href="https://x.com/amekagari" target="_blank" rel="noopener noreferrer" aria-label="カキフォイのX（新しいタブで開きます）">
+					<svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+					<span><strong>X</strong><small>更新情報と日々のこと</small></span><span class="social-external" aria-hidden="true">↗</span>
+				</a>
+				<a class="profile-social-link" href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="カキフォイのInstagram（新しいタブで開きます）">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+					<span><strong>Instagram</strong><small>食べ歩き・おでかけの写真</small></span><span class="social-external" aria-hidden="true">↗</span>
+				</a>
+			</div>
+		</div>
 	</section>
-	{showBlogmuraRanking && (
-		<>
-			<div class="sidebar-blogmura-support" data-pagefind-ignore>
-				<BlogmuraSupport />
-			</div>
-			<div class="sidebar-widget sidebar-blogmura-ranking" data-pagefind-ignore>
-				<BlogmuraRanking />
-			</div>
-		</>
+	<nav class="profile-utility" aria-label="ご連絡と購読"><a href="/contact/">お問い合わせ</a><span aria-hidden="true">·</span><a href="/rss.xml">RSSで読む</a></nav>
+	{showBlogmuraSupport && (
+		<div class="sidebar-blogmura-support" data-pagefind-ignore>
+			<BlogmuraSupport />
+		</div>
 	)}
 	<a class="sidebar-banner" href="/#recommended-products"><span>使って・食べてよかったもの</span><small>グリルとお肉の感想・購入先を見る</small><span aria-hidden="true">›</span></a>
 	<section class="sidebar-widget"><h2 class="widget-title">ブログ内検索</h2><a class="search-entry" href="/search/"><span>キーワードから記事を探す</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg></a></section>
 	<section class="sidebar-widget"><h2 class="widget-title">カテゴリー</h2><ul class="category-list">{categories.map((category) => <li><a href={`/categories/${category}/`}><span>› {category}</span><span class="category-count">{posts.filter((post) => post.data.category === category).length}</span></a></li>)}</ul></section>
-	<section class="sidebar-widget"><h2 class="widget-title">タグ</h2><div class="sidebar-tags">{tags.map(([tag, count]) => <a href={`/tags/${tagSlug(tag)}/`} title={`${tag}の記事 ${count}件`}><span aria-hidden="true">♧ </span>{tag}</a>)}</div><a class="all-tags" href="/tags/">すべてのタグを見る ›</a></section>
+	<section class="sidebar-widget"><h2 class="widget-title">テーマから探す</h2><div class="sidebar-tags">{tags.map(([tag, count]) => <a href={`/tags/${tagSlug(tag)}/`} title={`${tag}の記事 ${count}件`}><span aria-hidden="true">#</span> {tag}</a>)}</div><a class="all-tags" href="/tags/">すべてのタグを見る <span aria-hidden="true">›</span></a></section>
 	{series.length > 0 && (
 		<section class="sidebar-widget" aria-labelledby="sidebar-series-title">
 			<h2 class="widget-title" id="sidebar-series-title">続けて読める体験記</h2>
@@ -68,21 +75,34 @@ const instagramUrl = 'https://www.instagram.com/kakifoi_blog/';
 <style>
 	svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 	.home-sidebar { min-width: 0; }
-	.widget-title, .sidebar-blogmura-ranking :global(h2) { position: relative; font-size: 25px; line-height: 1.4; letter-spacing: 0.07em; font-weight: 400; border-bottom: 0; padding: 0 0 10px; margin: 0 0 25px; }
-	.widget-title::after, .sidebar-blogmura-ranking :global(h2)::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: repeating-linear-gradient(135deg, #CC0000 0, #CC0000 2px, #fff 2px, #fff 4px); }
-	.profile-widget { border: 1px solid #eee; box-shadow: 0 0 2px #00000008; padding: 35px 25px 24px; margin: 0 0 34px; text-align: center; }
-	.profile-avatar { display: inline-block; }
-	.profile-avatar img { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; }
-	.profile-widget h2 { font-size: 20px; font-weight: 500; margin: 8px 0 0; }
-	.profile-subtitle { font-size: 12px; color: #aaa; margin: 0 0 18px; }
-	.profile-copy { font-size: 16px; line-height: 1.65; text-align: left; }
-	.profile-copy p { margin: 0 0 18px; }
-	.profile-button { display: block; width: 170px; border: 1px solid #CC0000; border-radius: 2px; margin: 18px auto 22px; padding: 7px; font-size: 14px; }
-	.follow-label { margin: 0 0 5px; font-size: 12px; }
-	.profile-social { display: flex; justify-content: center; align-items: center; gap: 18px; color: #CC0000; }
-	.profile-social a { font-size: 23px; }
-	.profile-instagram { display: flex; align-items: center; justify-content: center; }
-	.profile-social a:last-child { font-size: 12px; }
+	.widget-title { position: relative; font-size: 25px; line-height: 1.4; letter-spacing: 0.07em; font-weight: 400; border-bottom: 0; padding: 0 0 10px; margin: 0 0 25px; }
+	.widget-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: repeating-linear-gradient(135deg, #CC0000 0, #CC0000 2px, #fff 2px, #fff 4px); }
+	.profile-widget { border: 1px solid #eadbd6; border-radius: 16px; box-shadow: 0 4px 20px #60342b08; padding: 28px 24px 0; margin: 0; text-align: center; overflow: hidden; }
+	.profile-avatar { display: inline-flex; border: 5px solid #fff5f1; border-radius: 50%; }
+	.profile-avatar img { display: block; width: 100px; height: 100px; border-radius: 50%; object-fit: cover; }
+	.profile-widget h2 { font-size: 20px; font-weight: 700; margin: 12px 0 3px; line-height: 1.6; }
+	.profile-subtitle { font-size: 12px; color: #735b55; margin: 0 0 20px; line-height: 1.8; }
+	.profile-copy { font-size: 14px; line-height: 1.9; text-align: left; }
+	.profile-copy p { margin: 0; }
+	.profile-button { box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 18px; width: 100%; min-height: 46px; border: 1px solid #bc3333; border-radius: 24px; margin: 22px auto 24px; padding: 9px 14px; color: #a32226; background: #fff; font-size: 13px; font-weight: 600; line-height: 1.6; }
+	.profile-button:hover { background: #fff4f1; }
+	.profile-button > span { font-size: 20px; line-height: 1; }
+	.profile-follow { margin: 0 -24px; padding: 20px 20px 22px; background: #b3262b; color: #fff; }
+	.profile-follow h3 { margin: 0; color: inherit; font-size: 18px; font-weight: 600; line-height: 1.6; letter-spacing: 0.06em; }
+	.profile-follow-caption { margin: 3px 0 14px; font-size: 11px; line-height: 1.8; }
+	.profile-social { display: grid; gap: 9px; }
+	.profile-social-link { box-sizing: border-box; display: grid; grid-template-columns: 24px minmax(0, 1fr) 12px; align-items: center; gap: 12px; min-height: 60px; padding: 10px 12px; border: 1px solid #ffffff65; border-radius: 8px; background: #ffffff0a; text-align: left; }
+	:global(.home-reference .profile-social-link), :global(.home-reference .profile-social-link:hover) { color: #fff; }
+	.profile-social-link:hover { background: #ffffff20; }
+	.profile-social-link svg { width: 22px; height: 22px; }
+	.profile-social-link .x-icon { fill: currentColor; stroke: none; }
+	.profile-social-link strong, .profile-social-link small { display: block; }
+	.profile-social-link strong { font-size: 14px; line-height: 1.5; font-weight: 600; }
+	.profile-social-link small { margin-top: 2px; font-size: 10px; line-height: 1.7; }
+	.social-external { font-size: 14px; }
+	.profile-social-link:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+	.profile-utility { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 6px 0 26px; color: #76655f; font-size: 11px; }
+	.profile-utility a { display: inline-flex; align-items: center; min-height: 44px; }
 	.sidebar-blogmura-support { min-width: 0; margin: 0 0 34px; }
 	.sidebar-banner { display: block; position: relative; padding: 25px 25px 26px; text-align: center; background: #CC0000; margin: 0 0 35px; border: 6px solid #fff1f1; outline: 1px solid #efcccc; box-shadow: 0 2px 5px #0001; }
 	:global(.home-reference .sidebar-banner), :global(.home-reference .sidebar-banner:hover) { color: #fff; }
@@ -94,10 +114,11 @@ const instagramUrl = 'https://www.instagram.com/kakifoi_blog/';
 	.category-list { padding: 0; list-style: none; margin: 0; }
 	.category-list a { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 14px; }
 	.category-count { color: #aaa; font-size: 11px; }
-	.sidebar-tags { display: flex; gap: 7px 5px; flex-wrap: wrap; }
-	.sidebar-tags a { background: #f4f4f4; border-radius: 2px; padding: 3px 7px; font-size: 11px; }
+	.sidebar-tags { display: flex; gap: 8px 6px; flex-wrap: wrap; }
+	.sidebar-tags a { display: inline-flex; align-items: center; gap: 4px; min-height: 32px; box-sizing: border-box; background: #faf7f5; border: 1px solid #eee5e1; border-radius: 6px; padding: 4px 9px; font-size: 12px; }
+	.sidebar-tags a > span { color: #a45b54; }
 	.sidebar-tags a:hover { background: #fff1f1; }
-	.all-tags { display: block; text-align: right; margin-top: 15px; font-size: 12px; }
+	.all-tags { display: flex; justify-content: flex-end; align-items: center; gap: 10px; min-height: 44px; margin-top: 10px; font-size: 12px; }
 	.series-cards { display: grid; gap: 14px; }
 	.series-card { min-width: 0; border: 1px solid #efcccc; border-top: 3px solid #CC0000; border-radius: 4px; padding: 14px; background: #fff; }
 	.series-card h3 { font-size: 15px; font-weight: 600; line-height: 1.6; color: #aa0000; margin: 0 0 8px; }
@@ -109,12 +130,14 @@ const instagramUrl = 'https://www.instagram.com/kakifoi_blog/';
 	.series-links a:hover { background: #fff1f1; }
 	.series-links a:focus-visible { outline: 2px solid #CC0000; outline-offset: 2px; border-radius: 2px; }
 	@media (min-width: 768px) and (max-width: 1199px) {
-		.profile-widget { padding: 30px 18px 20px; }
+		.profile-widget { padding: 26px 20px 0; }
+		.profile-follow { margin-inline: -20px; padding-inline: 16px; }
 	}
 	@media (max-width: 767px) {
 		.home-sidebar { margin: 55px 6px 0; }
-		.widget-title, .sidebar-blogmura-ranking :global(h2) { font-size: 22px; }
-		.profile-widget { padding: 30px 25px; }
+		.widget-title { font-size: 22px; }
+		.profile-widget { padding: 28px 24px 0; }
 		.profile-copy { font-size: 14px; line-height: 1.9; }
+		.sidebar-tags a { min-height: 44px; }
 	}
 </style>

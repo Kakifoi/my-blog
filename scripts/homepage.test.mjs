@@ -146,3 +146,32 @@ test('homepage display images use real responsive WebP files and keep original a
 		}
 	}
 });
+
+test('two local entries use existing city tags, correct counts, and real generated archive pages', async () => {
+	const local = byClass('local-entry');
+	assert.equal(local.length, 1);
+	const links = walk(local[0], (node) => node.tagName === 'a');
+	assert.equal(links.length, 2);
+	for (const [index, tag] of ['熊谷', '深谷'].entries()) {
+		const count = sourcePosts.filter((post) => post.data.tags.includes(tag)).length;
+		assert.ok(count > 0);
+		assert.equal(attr(links[index], 'href'), `/tags/${tag}/`);
+		assert.equal(text(links[index]).replace(/\s+/g, ''), `${tag}の記事${count}件›`);
+		assert.ok((await stat(new URL(`../dist/tags/${tag}/index.html`, import.meta.url))).isFile());
+	}
+});
+
+test('detail profile leads with family and blog topics, retains work facts, and names both social links', async () => {
+	const about = parse(await readFile(new URL('../dist/about/index.html', import.meta.url), 'utf8'));
+	const main = walk(about, (node) => node.tagName === 'main')[0];
+	assert.deepEqual(walk(main, (node) => node.tagName === 'h2').map(text), ['家族と日々の暮らし', 'このブログについて', '仕事について', '趣味・ハマっていること']);
+	const profile = byClass('profile-copy')[0];
+	const bio = walk(main, (node) => (attr(node, 'class') ?? '').split(/\s+/).includes('profile-bio'))[0];
+	assert.equal(text(bio).trim(), text(profile).trim());
+	assert.match(text(main), /物販事業を個人経営/);
+	assert.match(text(main), /Mac Mini M4/);
+	const social = walk(main, (node) => (attr(node, 'class') ?? '').split(/\s+/).includes('sns-btn'));
+	assert.equal(social.length, 2);
+	assert.match(text(social[0]), /X/);
+	assert.match(text(social[1]), /Instagram/);
+});

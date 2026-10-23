@@ -8,9 +8,14 @@ import HomeRecommendations from '../components/HomeRecommendations.astro';
 import HomeSidebar from '../components/HomeSidebar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getHomePicks } from '../data/home-picks.mjs';
+import { tagSlug } from '../utils/tagSlug';
 
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const pickupPosts = getHomePicks(posts);
+const localTags = ['熊谷', '深谷'].map((tag) => ({
+	tag,
+	count: posts.filter((post) => post.data.tags.includes(tag)).length,
+})).filter(({ count }) => count > 0);
 ---
 
 <!doctype html>
@@ -50,6 +55,14 @@ const pickupPosts = getHomePicks(posts);
 					<h1>{SITE_TITLE}<span class="home-intro-separator" aria-hidden="true">｜</span><span class="home-intro-topic">熊谷・深谷のグルメと家族の日常ブログ</span></h1>
 					<p>埼玉在住、2児の父・カキフォイが、行った場所や使ったものを写真と本音でつづります。ゲームや買い物、日々の出来事も。</p>
 				</div>
+				{localTags.length > 0 && (
+					<section class="local-entry" aria-labelledby="local-entry-title">
+						<h2 id="local-entry-title">地域から探す</h2>
+						<nav aria-label="地域別の記事">
+							{localTags.map(({ tag, count }) => <a href={`/tags/${tagSlug(tag)}/`}><span>{tag}の記事</span><small>{count}件</small><span class="local-entry-arrow" aria-hidden="true">›</span></a>)}
+						</nav>
+					</section>
+				)}
 				<HomePostGrid posts={posts} />
 				<div class="category-features">
 					<section class="category-feature" aria-labelledby="family-daily-feature-title">
@@ -64,10 +77,10 @@ const pickupPosts = getHomePicks(posts);
 				<HomeRecommendations />
 			</main>
 
-			<HomeSidebar posts={posts} showBlogmuraRanking={true} />
+			<HomeSidebar posts={posts} showBlogmuraSupport={true} />
 		</div>
 
-		<Footer showBlogmuraRanking={false} />
+		<Footer />
 		<a class="back-to-top" href="#" aria-label="ページの先頭へ戻る">⌃</a>
 		<script src="../scripts/homepage.ts"></script>
 	</body>
@@ -108,6 +121,13 @@ const pickupPosts = getHomePicks(posts);
 	.home-intro { padding: 5px 25px 0; margin-bottom: 24px; }
 	.home-intro h1 { font-size: 13px; font-weight: 500; line-height: 1.7; margin: 0 0 8px; }
 	.home-intro p { font-size: 14px; line-height: 1.8; margin: 0; letter-spacing: 0.04em; }
+	.local-entry { display: flex; align-items: center; gap: 16px; margin: 0 24px 28px; padding: 16px 0; border-block: 1px solid #eee5e1; }
+	.local-entry h2 { flex: none; margin: 0; color: #735b55; font-size: 12px; font-weight: 500; line-height: 1.7; }
+	.local-entry nav { display: flex; flex: 1; gap: 10px; }
+	.local-entry a { display: flex; flex: 1; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 3px 10px; border: 1px solid #e8c5bf; border-radius: 24px; background: #fff9f6; font-size: 13px; font-weight: 600; line-height: 1.6; white-space: nowrap; }
+	.local-entry a:hover { background: #fff0e9; }
+	.local-entry small { color: #806761; font-size: 10px; font-weight: 400; }
+	.local-entry-arrow { color: #b3262b; font-size: 20px; font-weight: 400; line-height: 1; }
 	.category-features { margin: 55px 24px 0; }
 	.category-feature { margin-bottom: 40px; }
 	.feature-banner { display: block; border-radius: 2px; overflow: hidden; box-shadow: 0 1px 4px #0002; }
@@ -133,6 +153,10 @@ const pickupPosts = getHomePicks(posts);
 		.home-intro-separator { display: none; }
 		.home-intro-topic { display: block; }
 		.home-intro p { letter-spacing: 0.03em; }
+		.local-entry { display: block; margin: 0 4px 22px; padding: 14px 0; }
+		.local-entry h2 { margin-bottom: 9px; }
+		.local-entry nav { gap: 8px; }
+		.local-entry a { gap: 7px; font-size: 12px; padding-inline: 8px; }
 		.category-features { margin: 40px 0 0; }
 		.back-to-top { width: 32px; height: 32px; right: 12px; bottom: 12px; font-size: 24px; line-height: 35px; }
 	}

@@ -34,9 +34,23 @@ for (const route of ['index.html', 'blog/index.html', 'categories/子育て・�
 		}
 		const profile = walk(sidebar[0], (node) => hasClass(node, 'profile-copy'))[0];
 		assert.ok(profile);
-		assert.equal(walk(profile, (node) => node.tagName === 'p').length, 2);
-		assert.ok(text(profile).length < 180, 'profile stays a concise introduction');
+		assert.equal(walk(profile, (node) => node.tagName === 'p').length, 1);
+		assert.ok(text(profile).trim().length >= 100 && text(profile).trim().length <= 150, 'profile stays a concise introduction');
+		const social = walk(sidebar[0], (node) => hasClass(node, 'profile-social-link'));
+		assert.equal(social.length, 2);
+		assert.deepEqual(social.map((node) => attr(node, 'href')), ['https://x.com/amekagari', 'https://www.instagram.com/kakifoi_blog/']);
+		for (const link of social) {
+			assert.ok(walk(link, (node) => node.tagName === 'strong').some((node) => text(node).trim()));
+			assert.equal(attr(link, 'target'), '_blank');
+			assert.match(attr(link, 'rel'), /noopener/);
+		}
+		const topicTags = walk(sidebar[0], (node) => hasClass(node, 'sidebar-tags'))[0];
+		assert.ok(walk(topicTags, (node) => node.tagName === 'a').length <= 18);
 		assert.equal(walk(dom, (node) => attr(node, 'data-type') === 'pv').length, 1, 'PV is never duplicated');
+		assert.equal(walk(sidebar[0], (node) => attr(node, 'data-type') === 'pv').length, 0, 'ranking is not in the sidebar');
+		const footer = walk(dom, (node) => hasClass(node, 'site-footer'))[0];
+		assert.ok(footer);
+		assert.equal(walk(footer, (node) => attr(node, 'data-type') === 'pv').length, 1, 'ranking appears once inside the pink footer');
 	});
 }
 
