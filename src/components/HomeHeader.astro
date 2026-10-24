@@ -55,11 +55,14 @@ const navLinks = [
 </script>
 
 <style>
-	.home-header { position: relative; }
+	.home-header { position: relative; color: #333; font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; font-size: 16px; font-weight: 400; line-height: 1.8; }
+	a { color: inherit; text-decoration: none; }
+	a:hover { text-decoration: none; }
+	:focus-visible { outline: 3px solid #aa0000; outline-offset: 4px; }
 	.masthead { position: relative; display: flex; align-items: center; justify-content: center; min-height: 150px; padding: 0 164px; overflow: hidden; border-top: 2px solid #CC0000; background: #fffaf5; }
 	.brand { position: relative; display: flex; align-items: center; justify-content: center; width: min(100%, 900px); height: 148px; min-width: 0; text-align: center; isolation: isolate; }
 	.brand-copy { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; }
-	:global(.home-reference .brand), :global(.home-reference .brand:hover) { color: #CC0000; }
+	.brand, .brand:hover { color: #CC0000; }
 	.brand-title { font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif; font-size: 40px; font-weight: 800; letter-spacing: 0.06em; line-height: 1.3; white-space: nowrap; }
 	.brand-tagline { color: #78635b; font-size: 11px; font-weight: 400; letter-spacing: 0.04em; line-height: 1.7; }
 	.brand-tagline-break { display: none; }
@@ -68,15 +71,15 @@ const navLinks = [
 	.brand-illustration-right { left: calc(50% + 148px); bottom: -3px; width: 210px; }
 	.header-social { position: absolute; right: max(24px, calc((100% - 1140px) / 2)); top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; color: #CC0000; }
 	.header-social a, .header-instagram { display: flex; align-items: center; justify-content: center; width: 28px; height: 32px; font-size: 22px; }
-	:global(.home-reference .header-social a:hover), :global(.home-reference .mobile-search:hover) { color: #aa0000; }
-	:global(.home-reference .masthead :focus-visible) { outline-color: #CC0000; }
-	:global(.home-reference .brand:focus-visible) { outline-offset: -6px; }
+	.header-social a:hover, .mobile-search:hover { color: #aa0000; }
+	.masthead :focus-visible { outline-color: #CC0000; }
+	.brand:focus-visible { outline-offset: -6px; }
 	svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 	.home-navigation { background: #CC0000; }
 	.navigation-inner { max-width: 1140px; min-height: 44px; margin: 0 auto; display: flex; align-items: stretch; justify-content: space-around; }
-	:global(.home-reference .navigation-inner a) { display: flex; align-items: center; justify-content: center; padding: 8px 18px; color: #fff; font-size: 14px; line-height: 2; }
-	:global(.home-reference .navigation-inner a:hover) { background: #b00000; color: #fff; }
-	:global(.home-reference .home-navigation :focus-visible) { outline-color: #fff; outline-offset: -5px; }
+	.navigation-inner a { display: flex; align-items: center; justify-content: center; padding: 8px 18px; color: #fff; font-size: 14px; line-height: 2; }
+	.navigation-inner a:hover { background: #b00000; color: #fff; }
+	.home-navigation :focus-visible { outline-color: #fff; outline-offset: -5px; }
 	.mobile-menu-toggle, .mobile-search { display: none; }
 	@media (min-width: 768px) and (max-width: 1199px) {
 		.masthead { padding: 32px 24px 0; }
@@ -85,7 +88,7 @@ const navLinks = [
 		.brand-title { font-size: clamp(28px, 3.4vw, 38px); letter-spacing: 0.04em; }
 		.brand-illustration-left { right: calc(50% + 140px); bottom: -20px; width: 220px; }
 		.brand-illustration-right { left: calc(50% + 140px); bottom: -6px; width: 200px; }
-		:global(.home-reference .navigation-inner a) { padding-inline: 12px; font-size: 13px; }
+		.navigation-inner a { padding-inline: 12px; font-size: 13px; }
 	}
 	@media (max-width: 767px) {
 		.masthead { min-height: 150px; padding: 0 48px; }
@@ -103,7 +106,7 @@ const navLinks = [
 		.home-navigation { display: none; }
 		.home-navigation.is-open { display: block; }
 		.navigation-inner { display: grid; grid-template-columns: 1fr 1fr; padding: 8px; }
-		:global(.home-reference .navigation-inner a) { font-size: 12px; padding: 9px 6px; }
+		.navigation-inner a { font-size: 12px; padding: 9px 6px; }
 	}
 	@media (max-width: 359px) {
 		.brand-tagline { max-width: 120px; font-size: 9px; }
