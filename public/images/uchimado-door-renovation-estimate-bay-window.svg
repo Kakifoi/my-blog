@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="710" viewBox="0 0 640 710" role="img" aria-labelledby="title desc">
+  <title id="title">出窓の棚の手前に付ける2枚建て内窓</title>
+  <desc id="desc">出窓を上から見た模式図。青灰色の奥の正面窓と左右の小窓、出窓の棚を残し、棚の手前の室内側に赤色の平面の2枚建て内窓を追加する。左右の側面には内窓を付けない。寸法や納まりを確定した施工図ではない。</desc>
+  <rect width="640" height="710" rx="20" fill="#fffdf9"/>
+  <g font-family="'Hiragino Kaku Gothic ProN','Noto Sans CJK JP','Yu Gothic',sans-serif" fill="#343434" text-anchor="middle">
+    <text x="320" y="49" font-size="31" font-weight="700">出窓の手前に付ける内窓</text>
+    <rect x="41" y="79" width="28" height="21" rx="3" fill="#607b8b"/>
+    <text x="157" y="102" font-size="28">既存の窓</text>
+    <rect x="349" y="79" width="28" height="21" rx="3" fill="#b83f42"/>
+    <text x="465" y="102" font-size="28">新設の内窓</text>
+    <text x="320" y="147" font-size="27" fill="#606060">上から見た図 ／ 屋外側</text>
+    <text x="320" y="195" font-size="28" fill="#415d6d">奥の正面窓（既存）</text>
+    <path d="M320 203v17" stroke="#607b8b" stroke-width="3"/>
+    <rect x="90" y="243" width="460" height="247" fill="#f4e7ce" stroke="#d5bd96" stroke-width="3"/>
+    <g stroke="#607b8b" stroke-width="5" fill="#e7eff3">
+      <rect x="80" y="223" width="480" height="20"/>
+      <path d="M320 223v20"/>
+      <rect x="80" y="243" width="20" height="228"/>
+      <rect x="540" y="243" width="20" height="228"/>
+    </g>
+    <g fill="#415d6d" font-size="27">
+      <text x="179" y="294">左の小窓</text>
+      <text x="461" y="294">右の小窓</text>
+    </g>
+    <g stroke="#607b8b" stroke-width="3" fill="none">
+      <path d="M113 302l-23 27M527 302l23 27"/>
+    </g>
+    <text x="320" y="386" font-size="31" font-weight="700">出窓の棚</text>
+    <text x="320" y="427" font-size="27">（残す）</text>
+    <g stroke="#b83f42" stroke-width="6" fill="#fff1ee">
+      <rect x="80" y="490" width="240" height="26"/>
+      <rect x="320" y="490" width="240" height="26"/>
+    </g>
+    <text x="320" y="564" font-size="28" fill="#9b3034">新設：平面の2枚建て内窓</text>
+    <text x="320" y="606" font-size="28">側面に内窓は付けない</text>
+    <text x="320" y="651" font-size="27" fill="#606060">室内側（棚の手前）</text>
+    <text x="320" y="689" font-size="25" fill="#64605b">取付位置を示す模式図</text>
+  </g>
+</svg>
