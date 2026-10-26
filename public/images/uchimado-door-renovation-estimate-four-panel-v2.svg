@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="850" viewBox="0 0 640 850" role="img" aria-labelledby="title desc">
+  <title id="title">今ある外窓を残し、室内側に4枚建ての内窓を追加する</title>
+  <desc id="desc">室内から斜めに見た取付位置の模式図。奥の青灰色の外窓は取り外さず、手前の室内側に赤い4枚建ての内窓を加える。二つの窓の位置関係を見せるため間隔を広げて描いており、寸法や納まりを確定した施工図ではない。</desc>
+  <rect width="640" height="850" rx="20" fill="#fffdf9"/>
+  <g font-family="'Hiragino Kaku Gothic ProN','Noto Sans CJK JP','Yu Gothic',sans-serif" fill="#343434">
+    <text x="32" y="49" font-size="31" font-weight="700">大きな窓は「手前にもう1つ」</text>
+    <rect x="32" y="80" width="576" height="64" rx="12" fill="#eaf1f5"/>
+    <text x="54" y="122" font-size="30" font-weight="700" fill="#415d6d">① 残す：今ある外窓</text>
+    <path d="M475 144v82" stroke="#607b8b" stroke-width="3" fill="none"/>
+    <text x="159" y="177" font-size="26" fill="#415d6d">奥＝屋外側</text>
+    <!-- 窓枠の奥行きを示す面。実際の寸法・納まりは示さない。 -->
+    <path d="M150 190 70 310v240l80-120Z" fill="#f0ebe3"/>
+    <path d="M580 260 500 380v240l80-120Z" fill="#e6dfd5"/>
+    <g stroke="#607b8b" fill="#e9f3f6" stroke-linejoin="round">
+      <path d="M150 190 580 260v240l-430-70Z" stroke-width="7"/>
+      <path d="M257.5 207.5v240m107.5-222.5v240m107.5-222.5v240" stroke-width="4" fill="none"/>
+    </g>
+    <path d="M150 430 580 500 500 620 70 550Z" fill="#f4e7ce" stroke="#d5c4a7" stroke-width="2"/>
+    <path d="M70 550 500 620v15L70 565Z" fill="#dfc9a7"/>
+    <path d="M580 500v15l-80 120v-15Z" fill="#cfb58d"/>
+    <!-- 新設する内窓を手前の独立した面として強調。 -->
+    <path d="M70 310 500 380v240L70 550Z" fill="#fff3ef" fill-opacity="0.96" stroke="#b83f42" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M177.5 327.5v240m107.5-222.5v240m107.5-222.5v240" stroke="#b83f42" stroke-width="5"/>
+    <path d="M273 446v27m24-23v27" stroke="#b83f42" stroke-width="4" stroke-linecap="round"/>
+    <text x="70" y="663" font-size="28" font-weight="700" fill="#9b3034">手前＝室内側</text>
+    <path d="M500 620 550 657v39" stroke="#b83f42" stroke-width="3" fill="none"/>
+    <rect x="32" y="696" width="576" height="66" rx="12" fill="#fbeae7"/>
+    <text x="54" y="739" font-size="28" font-weight="700" fill="#9b3034">② 追加：室内側の4枚建て内窓</text>
+    <text x="320" y="799" text-anchor="middle" font-size="25" fill="#64605b">取付位置を示す模式図</text>
+    <text x="320" y="832" text-anchor="middle" font-size="24" fill="#64605b">説明のため、窓の間隔を広げています</text>
+  </g>
+</svg>

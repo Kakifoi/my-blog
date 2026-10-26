@@ -18,13 +18,13 @@ heroImageAlt: '窓と玄関のリフォーム見積書を机で確認するイ�
 
 大きな窓2か所は、どちらも高さが約2.2mあって4枚建て。広い方は幅も約3.5mあるので、窓3つといっても結構な大きさだ。カーテンレールは今の場所のままでよく、3窓以上だと標準取付工事費が無料になる特典も付いていた。
 
-![既存の外窓を残し、その室内側に4枚建ての内窓を追加する取付位置の模式図](/images/uchimado-door-renovation-estimate-four-panel.svg)
+![奥の既存外窓を残し、手前の室内側に4枚建ての内窓を追加する位置関係を斜めから示した模式図](/images/uchimado-door-renovation-estimate-four-panel-v2.svg)
 
 <p class="table-note">取付位置を示す模式図です。寸法や納まりを確定した施工図ではありません。形状の参考：<a href="https://cad.ykkap.co.jp/downloads/file/housing/pdf/E25067010.pdf">YKK AP公式資料</a></p>
 
 出窓の方は、正面だけでなく左右にも小さな窓がある。ただ、今回付けるのは棚の手前を仕切る2枚の内窓だそうで、棚を今までどおりには使えなくなる。
 
-![正面窓・左右の小窓・棚を残し、棚の手前を平面の2枚建て内窓で仕切る取付位置の模式図。側面には内窓を付けない](/images/uchimado-door-renovation-estimate-bay-window.svg)
+![奥と左右の既存窓・出窓の棚を残し、手前だけを平面の2枚建て内窓で仕切る立体模式図。側面に内窓は付けない](/images/uchimado-door-renovation-estimate-bay-window-v2.svg)
 
 <p class="table-note">取付位置を示す模式図です。寸法や納まりを確定した施工図ではありません。</p>
 
