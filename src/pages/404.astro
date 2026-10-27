@@ -1,0 +1,90 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import HomeHeader from '../components/HomeHeader.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const title = `404 ページが見つかりませんでした | ${SITE_TITLE}`;
+const description = 'お探しのページが見つかりませんでした。ホームや記事一覧、サイト内検索から記事をお探しください。';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={title} description={description} />
+		<meta name="robots" content="noindex, follow" />
+	</head>
+	<body>
+		<HomeHeader />
+		<main class="not-found" data-pagefind-ignore aria-labelledby="not-found-title">
+			<p class="not-found-code" aria-hidden="true">404</p>
+			<h1 id="not-found-title">ページが見つかりませんでした</h1>
+			<p class="not-found-description">
+				お探しのページは、移動または削除されたか、URLが間違っている可能性があります。
+				ホームや記事一覧、サイト内検索から記事をお探しください。
+			</p>
+			<nav aria-label="記事を探す">
+				<ul class="not-found-links">
+					<li><a href="/">ホーム</a></li>
+					<li><a href="/blog/">記事一覧</a></li>
+					<li><a href="/search/">検索</a></li>
+				</ul>
+			</nav>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.not-found {
+		width: calc(100% - 2rem);
+		max-width: 780px;
+		margin: 3rem auto 0;
+		padding: clamp(1.25rem, 4vw, 3rem);
+		border: 1px solid var(--border);
+		border-top: 4px solid var(--red);
+		border-radius: 8px;
+		background: var(--white);
+		text-align: center;
+		overflow-wrap: anywhere;
+	}
+	.not-found-code {
+		margin: 0 0 0.5rem;
+		color: var(--red);
+		font-size: clamp(3rem, 10vw, 5rem);
+		font-weight: 700;
+		line-height: 1.2;
+	}
+	h1 {
+		font-size: clamp(1.5rem, 4vw, 2rem);
+		text-wrap: balance;
+	}
+	.not-found-description { max-width: 36rem; margin: 1.25rem auto 2rem; }
+	.not-found-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.not-found-links li { flex: 1 1 10rem; min-width: 0; }
+	.not-found-links a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--red);
+		border-radius: 4px;
+		color: var(--red);
+		font-weight: 700;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	.not-found-links a:hover { background: #fff1f1; color: var(--red-dark); }
+	.not-found-links a:focus-visible { outline: 3px solid var(--red-dark); outline-offset: 4px; }
+	@media (max-width: 600px) {
+		.not-found { margin-top: 1.5rem; }
+	}
+</style>
