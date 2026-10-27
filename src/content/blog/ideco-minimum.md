@@ -2,7 +2,7 @@
 title: '満額で縛るより、5000円で流動性を残す。iDeCoを最低額にした理由'
 description: 'iDeCoを満額に寄せるか、月5000円で続けるか。既存残高と今後の積立を同じ20年間で試算し、受取時の税金・所得控除・手数料・新NISAとの違いを確認した。資金を自由に使えることを重視する、俺なりの結論。'
 pubDate: '2026-07-01T12:00:00+09:00'
-updatedDate: '2026-10-27T00:00:00+09:00'
+updatedDate: '2026-10-27'
 category: 'お金・投資'
 tags: ['iDeCo', '新NISA', '資産運用', '節税', 'サイドFIRE', '自営業']
 heroImage: '/images/ideco-minimum-eyecatch.jpg'
