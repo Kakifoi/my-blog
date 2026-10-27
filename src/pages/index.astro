@@ -6,9 +6,12 @@ import HomeHeader from '../components/HomeHeader.astro';
 import HomePostGrid from '../components/HomePostGrid.astro';
 import HomeRecommendations from '../components/HomeRecommendations.astro';
 import HomeSidebar from '../components/HomeSidebar.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { SITE_TITLE } from '../consts';
 import { getHomePicks } from '../data/home-picks.mjs';
 import { tagSlug } from '../utils/tagSlug';
+
+const homeTitle = 'カキフォイの日記｜熊谷・深谷のグルメと家族のおでかけ';
+const homeDescription = '埼玉・熊谷で暮らす2児の父、カキフォイの日記。熊谷・深谷の食べ歩き、子連れのおでかけ、家族旅行、買って使ったものの感想を、写真と本音でつづります。';
 
 const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const pickupPosts = getHomePicks(posts);
@@ -21,7 +24,7 @@ const localTags = ['熊谷', '深谷'].map((tag) => ({
 <!doctype html>
 <html lang="ja">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} ogImage="https://kakifoi.net/images/og-default.jpg" />
+		<BaseHead title={homeTitle} description={homeDescription} ogImage="https://kakifoi.net/images/og-default.jpg" />
 	</head>
 	<body class="home-reference">
 		<a class="skip-link" href="#home-content">記事一覧へ移動</a>
