@@ -17,7 +17,7 @@ heroImage: '/images/etax-withholding-zero-eyecatch.jpg'
 
 封筒には、扶養控除等申告書や保険料控除申告書、源泉徴収簿などが入っていた。
 
-![年末調整の封筒に同封されていた4枚の税務書類](/images/etax-withholding-zero-documents.jpg)
+![年末調整の封筒に同封されていた4枚の税務書類](/images/etax-withholding-zero-documents-v2.jpg)
 
 俺は自営業で、住宅ローンなどの控除は個人の確定申告にまとめている。扶養控除等申告書など、会社に必要な書類は記入して保管する。
 
