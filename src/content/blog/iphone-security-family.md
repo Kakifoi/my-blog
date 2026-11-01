@@ -12,7 +12,36 @@ heroImageAlt: '青い盾と鍵のマークでiPhoneのセキュリティ対策�
 
 夫婦の分は大体済んだ。次は親の分も見たいので、実際に変えたことと、iPhoneでの設定方法をここに残しておく。
 
-[設定するときに見返すメモへ](#memo)
+<nav id="article-toc" class="article-toc" aria-labelledby="article-toc-title" tabindex="-1">
+  <h2 id="article-toc-title" class="article-toc-title">記事の目次</h2>
+  <ul class="article-toc-list">
+    <li><a href="#story-password">🔑 6文字くらいのパスワードを変えた</a></li>
+    <li><a href="#story-watchtower">😅 Watchtowerは正直手に負えない</a></li>
+    <li><a href="#story-recovery">🔐 iPhoneの復旧用連絡先も設定した</a></li>
+    <li><a href="#story-family">📱 家族がiPhoneだとこういうときに助かる</a></li>
+    <li><a href="#story-parents">🤝 今度は親と一緒に確認したい</a></li>
+    <li>
+      <a href="#memo">🛠️ 設定するときに見返すメモ</a>
+      <details class="article-toc-details">
+        <summary>設定メモの11項目を選ぶ</summary>
+        <ul class="article-toc-list">
+          <li><a href="#s1">始める前に確認しておくこと</a></li>
+          <li><a href="#s2">iPhoneの更新と画面ロック</a></li>
+          <li><a href="#s3">1Password</a></li>
+          <li><a href="#s4">Apple Account</a></li>
+          <li><a href="#s5">Googleアカウント</a></li>
+          <li><a href="#s6">メールとChrome</a></li>
+          <li><a href="#s7">LINEとSNS</a></li>
+          <li><a href="#s8">銀行と証券とカード</a></li>
+          <li><a href="#s9">家のルーター</a></li>
+          <li><a href="#s10">探すと盗難デバイスの保護</a></li>
+          <li><a href="#s11">最後の確認と困ったとき</a></li>
+        </ul>
+      </details>
+    </li>
+    <li><a href="#summary">📝 まとめ</a></li>
+  </ul>
+</nav>
 
 <h2 id="story-password">🔑<strong> 6文字くらいのパスワードを変えた</strong></h2>
 
@@ -60,13 +89,22 @@ Apple製品はちょっと高い。でも、動作が遅くて何をするにも
 
 設定方法も、あとで探し回らずに済むように残しておく。自分の設定を見直すときも、家族の分を手伝うときも、必要な項目から開いて使ってもらえれば。
 
-[始める前](#s1)　／　[更新と画面ロック](#s2)　／　[1Password](#s3)
-
-[Apple](#s4)　／　[Google](#s5)　／　[メールとChrome](#s6)
-
-[LINEとSNS](#s7)　／　[銀行と証券](#s8)　／　[ルーター](#s9)
-
-[盗難対策](#s10)　／　[最後の確認と紛失時](#s11)
+<nav id="memo-toc" class="article-toc" aria-labelledby="memo-toc-title" tabindex="-1">
+  <h3 id="memo-toc-title" class="article-toc-title">設定メモの目次</h3>
+  <ul class="article-toc-list">
+    <li><a href="#s1">始める前に確認しておくこと</a></li>
+    <li><a href="#s2">iPhoneの更新と画面ロック</a></li>
+    <li><a href="#s3">1Password</a></li>
+    <li><a href="#s4">Apple Account</a></li>
+    <li><a href="#s5">Googleアカウント</a></li>
+    <li><a href="#s6">メールとChrome</a></li>
+    <li><a href="#s7">LINEとSNS</a></li>
+    <li><a href="#s8">銀行と証券とカード</a></li>
+    <li><a href="#s9">家のルーター</a></li>
+    <li><a href="#s10">探すと盗難デバイスの保護</a></li>
+    <li><a href="#s11">最後の確認と困ったとき</a></li>
+  </ul>
+</nav>
 
 画面名はiOSやアプリの版で少し違うことがある。見つからないときに開けるよう、各項目に公式の案内も付けた。
 
@@ -81,6 +119,8 @@ Appleの「パスワード」アプリと1Passwordのどちらにログイン情
 一つのサービスで「変更する→保存内容を更新する→ログインを試す」まで終えてから、次へ進む。先に更新とバックアップ、次に復旧情報と各サービスの認証、最後に盗難対策、という順で進めるとよい。
 
 メールが必要なら[メールとChrome](#s6)、1Passwordを新しく使う人は[Familiesへの追加](#s3invite)へ。盗難デバイスの保護がすでに有効なら、待機の案内に従って進める。
+
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
 <h3 id="s2"><strong>iPhoneの更新と画面ロック</strong></h3>
 
@@ -111,6 +151,8 @@ Appleの「パスワード」アプリと1Passwordのどちらにログイン情
 「写真」「ファイル」に残った本人確認書類や、パスワード・認証用QRコードの画像も整理する。必要なものの保管先を確保してから、不要なコピーを削除。写真の「最近削除した項目」からも消すと戻せず、iCloud写真を使っていればほかの端末にも削除が反映される。
 
 公式の案内：[バックアップ](https://support.apple.com/ja-jp/108366) ／ [iOS更新](https://support.apple.com/ja-jp/118575) ／ [アプリ更新](https://support.apple.com/ja-jp/102629) ／ [パスコード](https://support.apple.com/ja-jp/119586) ／ [権限](https://support.apple.com/ja-jp/102515) ／ [写真の削除](https://support.apple.com/ja-jp/104967)
+
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
 <h3 id="s3"><strong>1Password</strong></h3>
 
@@ -168,6 +210,8 @@ Emergency Kit、Secret Key、復旧コードは別のもの。名前と保管場
 
 公式の案内：[Watchtower](https://support.1password.com/watchtower/) ／ [生成](https://support.1password.com/generate-website-password/) ／ [自動入力](https://support.1password.com/ios-autofill/) ／ [Emergency Kit](https://support.1password.com/emergency-kit/) ／ [復旧コード](https://support.1password.com/recovery-codes/) ／ [2要素認証](https://support.1password.com/two-factor-authentication/) ／ [家族の復旧](https://support.1password.com/family-recovery-plan/) ／ [招待と承認](https://support.1password.com/add-remove-family-members/) ／ [iPhoneアプリ](https://1password.com/downloads/ios)
 
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
+
 <h3 id="s4"><strong>Apple Account</strong></h3>
 
 <h4><strong>2ファクタ認証と電話番号</strong></h4>
@@ -204,6 +248,8 @@ iPhoneの同期とiCloud.com/findでの端末探しは引き続き使える。PC
 
 公式の案内：[2ファクタ認証](https://support.apple.com/ja-jp/102660) ／ [電話番号](https://support.apple.com/ja-jp/122621) ／ [パスワード変更](https://support.apple.com/ja-jp/101567) ／ [復旧用連絡先](https://support.apple.com/ja-jp/102641) ／ [復旧を手伝う操作](https://support.apple.com/ja-jp/102608) ／ [端末一覧](https://support.apple.com/ja-jp/102649) ／ [Webアクセス](https://support.apple.com/ja-jp/102630)
 
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
+
 <h3 id="s5"><strong>Googleアカウント</strong></h3>
 
 Chromeで[Googleアカウント](https://myaccount.google.com/)を開く。Gmailアプリなら右上の写真→「Google アカウントの管理」でもよい。最初にメールアドレスを見て、設定するアカウントか確かめる。
@@ -234,6 +280,8 @@ Chromeで[Googleアカウント](https://myaccount.google.com/)を開く。Gmail
 
 公式の案内：[再設定用情報](https://support.google.com/accounts/answer/183723?co=GENIE.Platform%3DiOS&hl=ja) ／ [診断](https://support.google.com/accounts/answer/46526?hl=ja) ／ [端末一覧](https://support.google.com/accounts/answer/3067630?hl=ja) ／ [アプリ連携](https://support.google.com/accounts/answer/13533235?hl=ja) ／ [パスワード変更](https://support.google.com/accounts/answer/41078?co=GENIE.Platform%3DiOS&hl=ja) ／ [2段階認証](https://support.google.com/accounts/answer/185839?co=GENIE.Platform%3DiOS&hl=ja) ／ [バックアップコード](https://support.google.com/accounts/answer/1187538?co=GENIE.Platform%3DiOS&hl=ja) ／ [パスキー](https://support.google.com/accounts/answer/13548313?hl=ja) ／ [転送](https://support.google.com/mail/answer/10957?hl=ja) ／ [フィルタ](https://support.google.com/mail/answer/6579?hl=ja)
 
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
+
 <h3 id="s6"><strong>メールとChrome</strong></h3>
 
 <h4><strong>Gmailを用意して登録メールを変更する場合</strong></h4>
@@ -255,6 +303,8 @@ Chromeで銀行などの公式サイトを開き、「…」→「ブックマ�
 Chromeの「…」→「設定」→「プライバシーとセキュリティ」→「セーフ ブラウジング」で「保護なし」になっていないか見る。保護強化機能はURLやページ内容などの追加情報を送信するので、家族の設定なら説明して選ぶ。金融用のChromeプロフィールを分ける機能はPC向けで、iPhoneには同じものがない。
 
 公式の案内：[Googleアカウント作成](https://support.google.com/accounts/answer/27441?co=GENIE.Platform%3DiOS&hl=ja) ／ [Gmailへの追加](https://support.google.com/mail/answer/6078445?co=GENIE.Platform%3DiOS&hl=ja) ／ [既存アカウントへのGmail追加](https://support.google.com/accounts/answer/76194?hl=ja) ／ [ブックマーク](https://support.google.com/chrome/answer/188842?co=GENIE.Platform%3DiOS&hl=ja) ／ [保護設定](https://support.google.com/chrome/answer/9890866?co=GENIE.Platform%3DiOS&hl=ja)
+
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
 <h3 id="s7"><strong>LINEとSNS</strong></h3>
 
@@ -281,6 +331,8 @@ Face IDでPCなどにログインするなら、iPhoneの「設定」→「ア�
 設定の「アカウントセンター」または「Metaアカウント」のセキュリティ設定から、対象プロフィールのパスワードと二段階認証を見直す。画面が移行中なので表示に合わせ、認証アプリの登録・コード入力・バックアップコードの保存まで進める。ほかのSNSも普段使うものから確認する。
 
 公式の案内：[LINEの不正ログイン対策](https://help.line.me/line/smartphone?contentId=20000438&lang=ja) ／ [LINEのパスワード変更](https://help.line.me/line/smartphone?contentId=20000060&lang=ja) ／ [生体認証](https://help.line.me/line/smartphone?contentId=20018577&lang=ja) ／ [端末一覧](https://help.line.me/line/ios/?contentId=20008468&lang=ja) ／ [Xの2要素認証](https://help.x.com/en/managing-your-account/two-factor-authentication) ／ [Metaの画面変更](https://about.fb.com/ja/news/2026/04/meta-account/)
+
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
 <h3 id="s8"><strong>銀行と証券とカード</strong></h3>
 
@@ -326,6 +378,8 @@ iPhoneの「設定」→「通知」→銀行・カードアプリ側でも通�
 
 公式の案内：[楽天証券のパスキー](https://www.rakuten-sec.co.jp/smartphone/security/passkey/guide/) ／ [取引制限](https://www.rakuten-sec.co.jp/smartphone/security/account_lock/) ／ [楽天銀行の上限](https://www.rakuten-bank.co.jp/security/howto/account_management/payment_limit/) ／ [取引通知](https://www.rakuten-bank.co.jp/security/howto/account_management/notice_mail/setting.html) ／ [Vpassの通知](https://faq-mem.smbc-card.com/--69969bb710cec11a1c8f8c2d) ／ [楽天カードの通知](https://www.rakuten-card.co.jp/security/information-mail/)
 
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
+
 <h3 id="s9"><strong>家のルーター</strong></h3>
 
 本体のメーカーと型番を見て、公式サイトで更新とサポートの状況を確認する。使用年数だけでなく、更新が続いているかも見る。
@@ -344,6 +398,8 @@ AirStationアプリ（旧StationRadar）→「管理」→ルーター→「設�
 
 公式の案内：[ASUSの更新](https://www.asus.com/jp/support/faq/1045788/) ／ [管理者パスワード](https://www.asus.com/jp/support/faq/1047761/) ／ [AirStationの設定画面](https://www.buffalo.jp/support/faq/detail/124160320.html) ／ [自動更新の例](https://www.buffalo.jp/support/faq/detail/15923.html)
 
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
+
 <h3 id="s10"><strong>探すと盗難デバイスの保護</strong></h3>
 
 <h4><strong>「iPhoneを探す」をオンにする</strong></h4>
@@ -361,6 +417,8 @@ AirStationアプリ（旧StationRadar）→「管理」→ルーター→「設�
 「常に」ではApple Accountのパスワード変更などに、生体認証と原則1時間の待機が必要になる。一部の操作はパスコードで代用できず、設定を手伝うときも持ち主の顔や指紋が必要だ。仕組みを確認し、重要な変更を済ませてから設定する。
 
 公式の案内：[探す](https://support.apple.com/ja-jp/102648) ／ [盗難デバイスの保護](https://support.apple.com/ja-jp/120340) ／ [保護する場所の選択](https://support.apple.com/ja-jp/guide/iphone/iph17105538b/27/ios/27)
+
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
 <h3 id="s11"><strong>最後の確認と困ったとき</strong></h3>
 
@@ -382,6 +440,16 @@ AIに設定を相談するときも、パスワード・復旧コード・認証
 
 公式の案内：[Appleの紛失時の対処](https://support.apple.com/ja-jp/120837) ／ [警察庁の注意喚起](https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/241218/02.html)
 
+<p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
+
 <h2 id="summary">📝<strong> まとめ</strong></h2>
 
-俺たち夫婦の次は、母と妻の父の分。今度会ったら、このメモを開きながら一緒に確認したい。銀行の設定や復旧方法も、納得してもらいながら進めるつもりだ。
+「8割くらいはできている」と思っていたのに、見直したら重要なアカウントに短いパスワードが残っていた。普段使えていると、設定したときのままでも気にならなくなる。俺もそのままにしていたところがあった。
+
+Watchtowerに並ぶ昔の登録を全部片付けるのは、正直なかなか大変だ。まずはGoogleやApple、普段使うSNSなど、破られたら困るものから。全部終わらせようとすると手に負えないので、一件ずつ進めていきたい。
+
+パスワードを長くするだけでなく、入れなくなったときの復旧方法も一緒に確認しておきたい。家族の分は、俺だけ分かっていても困る。使う本人にも、何のための設定か、復旧に必要なものをどこに置くか、分かるようにしたい。
+
+次は母と妻の父に会ったとき、このメモを開きながら説明して進めたい。最初から全部やるのではなく、必要なところから一緒に確認する。銀行の設定も含め、納得してもらいながら見ていくつもりだ。
+
+<p class="toc-return"><a href="#article-toc">↑ 記事の目次へ戻る</a></p>
