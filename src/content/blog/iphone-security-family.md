@@ -116,9 +116,11 @@ Apple製品はちょっと高い。でも、動作が遅くて何をするにも
 
 Appleの「パスワード」アプリと1Passwordのどちらにログイン情報やパスキーが入っているかも見ておく。設定済みの証券パスキーは、保存先が分からないまま消さない。
 
-一つのサービスで「変更する→保存内容を更新する→ログインを試す」まで終えてから、次へ進む。先に更新とバックアップ、次に復旧情報と各サービスの認証、最後に盗難対策、という順で進めるとよい。
+これは全部の設定を必ず変えるための一覧ではない。設定済みで問題のないものは確認だけにし、家族の分は本人に説明してから進める。今使えている端末や旧メールは、新しい方法で入れることを確かめるまで残しておく。
 
-メールが必要なら[メールとChrome](#s6)、1Passwordを新しく使う人は[Familiesへの追加](#s3invite)へ。盗難デバイスの保護がすでに有効なら、待機の案内に従って進める。
+一つのサービスで、復旧手段の確認から変更・保存内容の照合・ログイン確認まで終えてから、次へ進む。先にバックアップと更新、次に復旧情報と各サービスの認証、最後に盗難対策、という順で進めるとよい。
+
+メールが必要なら[メールとChrome](#s6)、1Passwordを新しく使う人は[Familiesへの追加](#s3invite)へ。盗難デバイスの保護がすでに有効なら、パスコードや復旧用連絡先の変更でも待機が出ることがある。急ぐために保護を切らず、画面の案内に従って進める。
 
 <p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
@@ -160,13 +162,15 @@ Appleの「パスワード」アプリと1Passwordのどちらにログイン情
 
 1. 1Passwordを開いて解除→「Watchtower」→使い回し・弱いパスワードの項目を選ぶ。
 
-2. 対象サービスの公式アプリ・公式サイトで変更画面を開く。現在のパスワードを求められたら、保存内容を書き換える前に入力する。
+2. 対象サービスの公式アプリ・公式サイトで変更画面を開く。現在使えるパスワードが1Passwordに保存されているかを確認し、現在のパスワードを求められたら、保存内容を書き換える前に入力する。
 
 3. 1Passwordの対象ログイン→「編集（Edit）」→パスワード欄→新規生成（Create a New Password）。サービスの条件に合わせて作り、保存する。
 
 4. 生成したものをサービス側の新しいパスワード欄に入れ、変更を確定。新しいものでログインできるか、1Passwordと内容が一致するか試す。
 
 文字数はサービスが許す範囲で16文字以上など十分に長くし、使える記号も条件に合わせる。名前・誕生日や、ほかで使っているものは避ける。1Passwordだけを書き換えてもサービス側は変わらないので、一件ずつ最後まで終える。
+
+サービス側で変更が通らなかった場合は、そこで止めて内容を照合する。元のパスワードが必要なら、iPhoneの1Passwordで対象項目のパスワードを長押し→「View password history」から以前のものを確認できる。通らないまま次のサービスへ進んだり、何度もログインを試したりしない。
 
 <h4><strong>iPhoneの自動入力</strong></h4>
 
@@ -192,7 +196,9 @@ Emergency Kit、Secret Key、復旧コードは別のもの。名前と保管場
 
 3. 設定用の16文字のシークレットを安全に控え、認証アプリに出た6桁のコードを1Password側に入力して確定する。
 
-この設定用シークレットも復旧コードとは別。Familiesでは管理者が1Password.comの「People」→家族の名前→役割を「Family Organizer」にして、もう一人、復旧を手伝える管理者を用意しておく。
+この設定用シークレットも復旧コードとは別だ。復旧コードを使っても、1Passwordの2要素認証は有効なままになる。16文字のシークレットは、Emergency Kitと一緒に安全に保管し、iPhoneや1Passwordを開けなくても取り出せるようにする。
+
+Familiesでは管理者が1Password.comの「People」→家族の名前→役割を「Family Organizer」にして、もう一人、復旧を手伝える管理者を用意しておく。
 
 <h4 id="s3invite"><strong>これから家族をFamiliesへ追加する場合</strong></h4>
 
@@ -208,7 +214,7 @@ Emergency Kit、Secret Key、復旧コードは別のもの。名前と保管場
 
 現行アプリはiOS 18以降が必要。家族でもログイン情報は一人ずつ。個人のものは「Private」、見せたいものだけ「Shared」に入れる。
 
-公式の案内：[Watchtower](https://support.1password.com/watchtower/) ／ [生成](https://support.1password.com/generate-website-password/) ／ [自動入力](https://support.1password.com/ios-autofill/) ／ [Emergency Kit](https://support.1password.com/emergency-kit/) ／ [復旧コード](https://support.1password.com/recovery-codes/) ／ [2要素認証](https://support.1password.com/two-factor-authentication/) ／ [家族の復旧](https://support.1password.com/family-recovery-plan/) ／ [招待と承認](https://support.1password.com/add-remove-family-members/) ／ [iPhoneアプリ](https://1password.com/downloads/ios)
+公式の案内：[Watchtower](https://support.1password.com/watchtower/) ／ [生成](https://support.1password.com/generate-website-password/) ／ [パスワード履歴](https://support.1password.com/item-history/) ／ [自動入力](https://support.1password.com/ios-autofill/) ／ [Emergency Kit](https://support.1password.com/emergency-kit/) ／ [復旧コード](https://support.1password.com/recovery-codes/) ／ [2要素認証](https://support.1password.com/two-factor-authentication/) ／ [家族の復旧](https://support.1password.com/family-recovery-plan/) ／ [招待と承認](https://support.1password.com/add-remove-family-members/) ／ [iPhoneアプリ](https://1password.com/downloads/ios)
 
 <p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
@@ -232,7 +238,7 @@ Emergency Kit、Secret Key、復旧コードは別のもの。名前と保管場
 
 3. 設定したiPhoneの一覧に相手の名前が出たか確認する。
 
-双方にiOS 15以降などの対応端末とiMessageが必要で、2ファクタ認証も求められる。古い端末がアカウントに残っていると、更新が必要なこともある。相手が写真やメールを見られる設定ではない。
+本人と相手の両方でiMessageを有効にし、2ファクタ認証も確認する。設定する本人のAppleデバイスは、すべてiOS 15・iPadOS 15・macOS Monterey 12以降が必要で、相手にも対応端末が必要だ。古い端末が残っている場合は、表示された更新案内を確認する。相手が写真やメールを見られる設定ではない。
 
 <h4><strong>実際に復旧を手伝うとき</strong></h4>
 
@@ -270,15 +276,19 @@ Chromeで[Googleアカウント](https://myaccount.google.com/)を開く。Gmail
 
 2. 同じ設定の「バックアップコード」を取得し、iPhoneをなくしても取り出せる場所へ。各コードは1回限りで、新しく発行すると古い一式は使えなくなる。
 
-パスキーは普段使うiPhoneで[設定画面](https://myaccount.google.com/signinoptions/passkeys)→「パスキーを作成する」→作成→画面ロックで本人確認。保存先がAppleの「パスワード」か1Passwordかを確認し、作成後に一覧と実際のログインを試す。
+Googleからの確認メッセージを使う場合、iPhoneのGmailなど対応アプリに、対象アカウントでログインしている必要がある。Chromeで開いただけでは受信できるとは限らない。届かないときは、画面の「別の方法を試す」から設定済みの認証方法を確認する。
+
+パスキーは、設定する本人が所有し使っているiPhoneで作る。家族を手伝う場合も、自分の端末や保管庫には保存しない。[設定画面](https://myaccount.google.com/signinoptions/passkeys)でも対象のGoogleアカウントか確かめ、「パスキーを作成する」→作成→画面ロックで本人確認。保存先がAppleの「パスワード」か1Passwordかを確認する。Apple側へ保存する場合はiCloudキーチェーンも有効にしておく。
+
+作成後は一覧と実際のログインを試す。ただし、新しいパスキーがログインに使えるまで7日ほど待つ場合がある。すぐに使えなくても作り直しを繰り返さず、従来のログイン手段を残して確認する。
 
 パスキーで入るときは、2段階認証の追加手順は省略される。パスワードで入る方法も残るなら、そのための2段階認証は有効にしておく。追加した電話番号などに待機期間が出たら、その案内で進める。
 
 <h4><strong>Gmailの転送とフィルタはPCで</strong></h4>
 
-ここだけはPC版Gmailで確認する。歯車→「すべての設定を表示」→「メール転送とPOP/IMAP」または「転送」で、知らない転送先がないか見る。「フィルタとブロック中のアドレス」も開き、身に覚えのない転送・削除の設定を確認して、不要なら外す。
+ここだけはPC版Gmailで確認する。歯車→「すべての設定を表示」→「メール転送とPOP/IMAP」または「転送」で、知らない転送先がないか見る。不要な全体転送は「転送を無効にする」を選び、下部の「変更を保存」で確定する。「フィルタとブロック中のアドレス」も開き、身に覚えのない転送・削除の設定を確認して、不要なら外す。全体転送とフィルタの設定は別々に確認する。
 
-公式の案内：[再設定用情報](https://support.google.com/accounts/answer/183723?co=GENIE.Platform%3DiOS&hl=ja) ／ [診断](https://support.google.com/accounts/answer/46526?hl=ja) ／ [端末一覧](https://support.google.com/accounts/answer/3067630?hl=ja) ／ [アプリ連携](https://support.google.com/accounts/answer/13533235?hl=ja) ／ [パスワード変更](https://support.google.com/accounts/answer/41078?co=GENIE.Platform%3DiOS&hl=ja) ／ [2段階認証](https://support.google.com/accounts/answer/185839?co=GENIE.Platform%3DiOS&hl=ja) ／ [バックアップコード](https://support.google.com/accounts/answer/1187538?co=GENIE.Platform%3DiOS&hl=ja) ／ [パスキー](https://support.google.com/accounts/answer/13548313?hl=ja) ／ [転送](https://support.google.com/mail/answer/10957?hl=ja) ／ [フィルタ](https://support.google.com/mail/answer/6579?hl=ja)
+公式の案内：[再設定用情報](https://support.google.com/accounts/answer/183723?co=GENIE.Platform%3DiOS&hl=ja) ／ [診断](https://support.google.com/accounts/answer/46526?hl=ja) ／ [端末一覧](https://support.google.com/accounts/answer/3067630?hl=ja) ／ [アプリ連携](https://support.google.com/accounts/answer/13533235?hl=ja) ／ [パスワード変更](https://support.google.com/accounts/answer/41078?co=GENIE.Platform%3DiOS&hl=ja) ／ [2段階認証](https://support.google.com/accounts/answer/185839?co=GENIE.Platform%3DiOS&hl=ja) ／ [確認メッセージ](https://support.google.com/accounts/answer/7026266?co=GENIE.Platform%3DiOS&hl=ja) ／ [バックアップコード](https://support.google.com/accounts/answer/1187538?co=GENIE.Platform%3DiOS&hl=ja) ／ [パスキー](https://support.google.com/accounts/answer/13548313?hl=ja) ／ [転送](https://support.google.com/mail/answer/10957?hl=ja) ／ [フィルタ](https://support.google.com/mail/answer/6579?hl=ja)
 
 <p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
@@ -294,7 +304,7 @@ Chromeで[Googleアカウント](https://myaccount.google.com/)を開く。Gmail
 
 4. メールがログインIDも兼ねるなら、ログインを試して1Passwordのユーザー名も更新する。済んだサービスをメモして次へ。
 
-旧メールをGmailアプリに追加するだけでは、サービスの登録先は変わらない。変更と受信確認が済むまで旧メールは残しておく。Gmail以外のメールで作ったGoogleアカウントにGmailを追加する場合は、Googleへのログイン用メールも変わる。
+旧メールをGmailアプリに追加するだけでは、サービスの登録先は変わらない。変更と受信確認が済むまで旧メールは残しておく。Gmail以外のメールで作ったGoogleアカウントにGmailを追加する操作は別で、メインのユーザー名がGmailアドレスへ永続的に変わる。Googleでログインしているサービスへの影響も確認し、単にメールを読みたいだけなら混同しない。
 
 <h4><strong>公式サイトを開く入口を作る</strong></h4>
 
@@ -312,15 +322,15 @@ Chromeの「…」→「設定」→「プライバシーとセキュリティ�
 
 1. 「メールアドレス」が今も受信できるものか見る。変更するなら認証まで終える。
 
-2. 「パスワード」を使い回しのないものへ変更し、1Passwordも更新。LINEは8～20文字で、英大文字・英小文字・数字・記号のうち3種類以上を使う。
+2. 「パスワード」を使い回しのないものへ変更し、1Passwordも更新。LINEは8～20文字で、半角の英大文字・英小文字・数字・記号のうち3種類以上を使う。
 
 3. 「Webログインの2要素認証」をオン。「ログイン中の端末」で知らないものがあればログアウトさせる。
 
-4. iPhoneだけで使う人は「ログイン許可」をオフ。PC・iPadでも使う人はオンのまま、「パスワードでログイン」をオフにすると、サブ端末へのログインをQRコードや生体情報に限定できる。普段の方法でログインできるか試す。
+4. iPhoneだけで使う人は「ログイン許可」をオフ。PC・iPadでも使う人はオンにし、先にサブ端末でQRコードか生体情報によるログインを確認する。その後「パスワードでログイン」をオフにすると、サブ端末へのログインをこの2つの方法に限定できる。変更後もQRコードか生体情報で再ログインを試す。
 
-この3つのスイッチは別々の設定だ。「パスワードでログイン」を切っても、すでにログイン中の端末は残るので、一覧も確認する。機種変更・引き継ぎ直後は、変更まで待つ案内が出る場合もある。
+この3つのスイッチは別々の設定だ。「パスワードでログイン」を切っても、すでにログイン中の端末は残るので、一覧も確認する。アカウント引き継ぎ後24時間以内は、メールアドレスとパスワードを変更できない。
 
-Face IDでPCなどにログインするなら、iPhoneの「設定」→「アプリ」→「LINE」→「Face ID」をオン。LINE側も「ホーム」→歯車→「アカウント」→「Face ID／Touch ID」→「許可する」で、連携済みになったか確認する。
+Face IDでPCなどにログインするなら、iPhoneの「設定」→「アプリ」→「LINE」→「Face ID」をオン。LINE側も「ホーム」→歯車→「アカウント」→「Face ID／Touch ID」→「許可する」へ。「連携解除」と表示されれば設定済みなので、確認のために押して解除しない。解除すると、利用中のサブ端末もログアウトされる。
 
 <h4><strong>X</strong></h4>
 
@@ -328,9 +338,9 @@ Face IDでPCなどにログインするなら、iPhoneの「設定」→「ア�
 
 <h4><strong>Instagramなど</strong></h4>
 
-設定の「アカウントセンター」または「Metaアカウント」のセキュリティ設定から、対象プロフィールのパスワードと二段階認証を見直す。画面が移行中なので表示に合わせ、認証アプリの登録・コード入力・バックアップコードの保存まで進める。ほかのSNSも普段使うものから確認する。
+設定の「アカウントセンター」または「Metaアカウント」のセキュリティ設定から、パスワードと二段階認証を見直す。画面が移行中なので、表示された対象アカウント・プロフィールを確認し、認証アプリの登録・コード入力・バックアップコードの保存まで進める。Metaアカウントへ移行済みの場合、二段階認証はWhatsAppを除く同じMetaアカウント内のプロフィールとデバイス全体に適用される。Instagramだけへの設定とは限らないので、適用先を見てから進める。ほかのSNSも普段使うものから確認する。
 
-公式の案内：[LINEの不正ログイン対策](https://help.line.me/line/smartphone?contentId=20000438&lang=ja) ／ [LINEのパスワード変更](https://help.line.me/line/smartphone?contentId=20000060&lang=ja) ／ [生体認証](https://help.line.me/line/smartphone?contentId=20018577&lang=ja) ／ [端末一覧](https://help.line.me/line/ios/?contentId=20008468&lang=ja) ／ [Xの2要素認証](https://help.x.com/en/managing-your-account/two-factor-authentication) ／ [Metaの画面変更](https://about.fb.com/ja/news/2026/04/meta-account/)
+公式の案内：[LINEの不正ログイン対策](https://help.line.me/line/smartphone?contentId=20000438&lang=ja) ／ [LINEのパスワード変更](https://help.line.me/line/smartphone?contentId=20000060&lang=ja) ／ [生体認証](https://help.line.me/line/smartphone?contentId=20018577&lang=ja) ／ [端末一覧](https://help.line.me/line/ios/?contentId=20008468&lang=ja) ／ [Xの2要素認証](https://help.x.com/en/managing-your-account/two-factor-authentication) ／ [Metaの画面変更](https://about.fb.com/ja/news/2026/04/meta-account/) ／ [Metaの設定の適用範囲](https://www.meta.com/ja-jp/help/meta-account/1575911950009923/)
 
 <p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
@@ -340,7 +350,9 @@ Face IDでPCなどにログインするなら、iPhoneの「設定」→「ア�
 
 <h4><strong>楽天証券のパスキー</strong></h4>
 
-設定済みなら、普段の公式サイト・アプリからログインを試す。新規設定は公式サイトにログイン→「マイメニュー」→「セキュリティ設定」→再認証→「パスキー認証に変更」などの作成案内へ。保存先を確認して作り、パスキーで入れるか試す。
+設定済みなら作り直さず、普段の公式サイト・アプリからパスキーでログインできるか試す。iPhoneで新しく作る場合、公式の推奨環境はiOS 17以上・Safari・iCloudキーチェーン（Appleの「パスワード」）だ。GoogleアプリやYahoo!アプリ内の画面ではなく、Safariで楽天証券の公式サイトを開く。
+
+ログイン後の案内で「パスキーを作成する」→自分のログインIDを確認→「パスキーを追加」と進み、画面の案内に従って本人確認と保存を済ませる。案内が出ない場合は「マイメニュー」→「セキュリティ設定」→再認証→「パスキー認証に変更」から進む。すでに1Passwordなどに保存しているものを、点検のためだけに削除・移動する必要はない。
 
 <h4><strong>楽天証券で取引を制限する場合</strong></h4>
 
@@ -362,21 +374,25 @@ Face IDでPCなどにログインするなら、iPhoneの「設定」→「ア�
   </table>
 </div>
 
-似た名前でも、売却・出金まで止まるかが違う。取り崩しや出金の予定に合わせて選ぶ。変更・解除も同じ画面で本人確認が必要になる。ログイン自体の停止は、普段の点検のついでには選ばない。
+似た名前でも、売却・出金まで止まるかが違う。取り崩しや出金の予定に合わせて選ぶ。変更・解除も同じ画面で本人確認が必要になる。表の2種類では投信の積立を続けられるが、「すべての取引を停止」など投信の買付も止める設定では積立注文がエラーになる。ログイン自体の停止は、普段の点検のついでには選ばない。
 
 <h4><strong>楽天銀行の振込上限と通知</strong></h4>
 
 楽天銀行アプリ→左上のアカウント→「セキュリティ設定」→「振込限度額設定」で一日の上限を変更する。必要な振込ができる金額にしておく。
 
-通知はアカウント→「登録情報のメール設定」→通知先メール→「設定内容を変更する」→「取引通知メール」。宛先と受信設定を確認し、翌朝にまとめて届く時間帯なども使い方に合わせる。ほかの銀行も、ログイン・送金時の認証、振込上限、通知、登録連絡先を公式アプリで確認する。
+通知はアカウント→登録情報の「メール設定」→通知先のメールアドレス→「設定内容を変更する」へ。「取引通知メール」で「受け取る」を選び、「変更内容を確認する」→「変更を確定する」まで済ませる。
+
+「夜間配信」を受け取らない設定では、21:00～8:00の通知は8:00以降に送られる。夜間も通知を受けたいなら、この設定も確認する。ほかの銀行も、ログイン・送金時の認証、振込上限、通知、登録連絡先を公式アプリで確認する。
 
 <h4><strong>カードの利用通知</strong></h4>
 
-三井住友カードはVpass→「メニュー」→「安心・安全サービス」→「ご利用通知サービス」→「設定の確認・変更」で通知方法を選ぶ。楽天カードはアプリ→「メニュー」→「アプリの設定」→「通知」で利用・明細のお知らせを設定する。複数枚ならカードごとに見る。
+三井住友カードはVpass→「メニュー」→「安心・安全サービス」→「ご利用通知サービス」→「設定の確認・変更はこちら」→「変更手続きに進む」で通知方法を選ぶ。複数枚ならカードごとに設定する。
 
-iPhoneの「設定」→「通知」→銀行・カードアプリ側でも通知を許可する。通知されない取引もあるので、明細も確認。使わない口座やカードを整理するなら、残高・引き落とし・継続課金を先に見る。
+楽天カードはアプリ→「メニュー」→「アプリの設定」→「通知」で、「カードご利用通知」（「カードのご利用」と表示される場合もある）を設定する。「ご利用明細への反映通知」は、確定した明細を知らせる別の通知だ。家族カードのアプリ通知は、家族カード会員の登録IDでログインしたアプリに配信され、本カード会員のアプリには届かない。家族それぞれの受信先を確認する。
 
-公式の案内：[楽天証券のパスキー](https://www.rakuten-sec.co.jp/smartphone/security/passkey/guide/) ／ [取引制限](https://www.rakuten-sec.co.jp/smartphone/security/account_lock/) ／ [楽天銀行の上限](https://www.rakuten-bank.co.jp/security/howto/account_management/payment_limit/) ／ [取引通知](https://www.rakuten-bank.co.jp/security/howto/account_management/notice_mail/setting.html) ／ [Vpassの通知](https://faq-mem.smbc-card.com/--69969bb710cec11a1c8f8c2d) ／ [楽天カードの通知](https://www.rakuten-card.co.jp/security/information-mail/)
+iPhoneの「設定」→「通知」→銀行・カードアプリ側でも通知を許可する。楽天カードの500円未満の利用など、通知されない取引もあるので、通知だけでなく明細も確認する。使わない口座やカードを整理するなら、残高・引き落とし・継続課金を先に見る。
+
+公式の案内：[楽天証券のパスキー](https://www.rakuten-sec.co.jp/smartphone/security/passkey/guide/) ／ [取引制限](https://www.rakuten-sec.co.jp/smartphone/security/account_lock/) ／ [楽天銀行の上限](https://www.rakuten-bank.co.jp/security/howto/account_management/payment_limit/) ／ [取引通知の設定](https://www.rakuten-bank.co.jp/security/howto/account_management/notice_mail/setting.html) ／ [配信時間と注意事項](https://www.rakuten-bank.co.jp/security/howto/account_management/notice_mail/) ／ [Vpassの通知](https://faq-mem.smbc-card.com/--69969bb710cec11a1c8f8c2d) ／ [楽天カードの通知](https://www.rakuten-card.co.jp/security/information-mail/)
 
 <p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
@@ -392,9 +408,13 @@ iPhoneをそのルーターのWi-Fiにつなぎ、アプリで対象を開く。
 
 <h4><strong>バッファローの対応機種</strong></h4>
 
-AirStationアプリ（旧StationRadar）→「管理」→ルーター→「設定画面を表示する」→「設定画面を開く」からログイン。対応機種では「詳細設定」→「管理」→「ファームウェア更新」→「拡張設定」で自動更新を設定できる。機種ごとの説明書も確認する。
+こちらもiPhoneを対象ルーターのWi-Fiにつなぐ。AirStationアプリ（旧StationRadar）→「管理」→ルーター→「設定画面を表示する」→「設定画面を開く」からログイン。対応機種では「詳細設定」→「管理」→「ファームウェア更新」→「拡張設定」で自動更新を設定できる。機種ごとの説明書も確認する。
 
-管理画面用のパスワードと、Wi-Fi接続用は別のもの。更新中は電源を切らない。管理情報が不明だからと初期化すると、インターネットの設定まで消えてしまう。
+自動更新にする場合は「重要な更新のみ行う」か「常に最新版に更新する」など、希望する範囲を選び、「設定」で確定する。「更新せずに通知のみ行う」は、更新の通知だけで適用はしない。
+
+自動更新を設定したことと、現在のバージョンが最新になったことは別なので、更新後のバージョンも確かめる。管理画面用のパスワードと、Wi-Fi接続用は別のものだ。
+
+更新時は再起動で通信が一時的に切れる。家族が通話やオンライン作業をしていない時間に行い、更新中は電源を切らない。管理情報が不明だからと初期化すると、インターネットの設定まで消えてしまう。
 
 公式の案内：[ASUSの更新](https://www.asus.com/jp/support/faq/1045788/) ／ [管理者パスワード](https://www.asus.com/jp/support/faq/1047761/) ／ [AirStationの設定画面](https://www.buffalo.jp/support/faq/detail/124160320.html) ／ [自動更新の例](https://www.buffalo.jp/support/faq/detail/15923.html)
 
@@ -412,11 +432,11 @@ AirStationアプリ（旧StationRadar）→「管理」→ルーター→「設�
 
 2. iOS 17.3以降が対象で、2ファクタ認証・生体認証・「探す」・位置情報の「利用頻度の高い場所」も必要になる。位置情報は「設定」→「プライバシーとセキュリティ」→「位置情報サービス」→「システムサービス」→「利用頻度の高い場所と経路」（旧名「利用頻度の高い場所」）で確認できる。
 
-3. 自宅でも追加保護をかけるなら「セキュリティ継続が必要」などの選択欄で「常に」を選ぶ。
+3. 自宅でも追加保護をかけるなら「セキュリティ継続が必要」などの選択欄で「常に」を選ぶ。この選択肢はiOS 17.4以降で使える。
 
-「常に」ではApple Accountのパスワード変更などに、生体認証と原則1時間の待機が必要になる。一部の操作はパスコードで代用できず、設定を手伝うときも持ち主の顔や指紋が必要だ。仕組みを確認し、重要な変更を済ませてから設定する。
+「常に」ではApple Accountのパスワード変更などに、生体認証→原則1時間の待機→もう一度生体認証、という手順が必要になる。一部の操作はパスコードで代用できず、設定を手伝うときも持ち主の顔や指紋が必要だ。仕組みを確認し、重要な変更を済ませてから設定する。すでに有効なら、そのまま案内に従う。
 
-公式の案内：[探す](https://support.apple.com/ja-jp/102648) ／ [盗難デバイスの保護](https://support.apple.com/ja-jp/120340) ／ [保護する場所の選択](https://support.apple.com/ja-jp/guide/iphone/iph17105538b/27/ios/27)
+公式の案内：[探す](https://support.apple.com/ja-jp/102648) ／ [盗難デバイスの保護](https://support.apple.com/ja-jp/120340) ／ [保護する場所の選択](https://support.apple.com/ja-jp/guide/iphone/iph17105538b/27/ios/27) ／ [iOS 17.4の変更内容](https://support.apple.com/ja-jp/118723)
 
 <p class="toc-return"><a href="#memo-toc">↑ 設定メモの目次へ戻る</a></p>
 
