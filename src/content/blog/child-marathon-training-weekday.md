@@ -3,7 +3,7 @@ title: '子供のマラソン練習を再開。平日15時半に公園へ行け�
 description: '子供のマラソン練習を再開し、平日15時半から公園で走った一日と、自営業だからこそ子供の時間に付き合える今の暮らしを振り返る。'
 pubDate: '2026-09-07T12:00:00+09:00'
 heroImage: '/images/child-marathon-training-weekday-eyecatch.jpg'
-category: '健康・ランニング'
+category: '健康'
 tags: ['子育て', '自営業', 'ジョギング', '健康', '日記', '家族']
 ---
 

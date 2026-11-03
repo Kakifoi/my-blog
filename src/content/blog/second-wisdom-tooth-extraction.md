@@ -2,7 +2,7 @@
 title: '左下の親知らずも抜歯 深夜は激痛でも翌日は前回より楽だった'
 description: '深谷日赤で左下の親知らずを抜いた日と翌日の記録。処置中の様子、深夜の痛み、翌日の食事や腫れの違いを、前回の右下の抜歯と比べて振り返った。'
 pubDate: 2026-10-29T12:00:00+09:00
-category: '健康・ランニング'
+category: '医療'
 tags: ['親知らず', '抜歯', '健康', '深谷', '日記']
 heroImage: '/images/wisdom-tooth-suture-removal-eyecatch.jpg'
 heroImageAlt: '青空の下に建つ深谷赤十字病院と、正面入口へ続く屋根付きの通路のイメージ'

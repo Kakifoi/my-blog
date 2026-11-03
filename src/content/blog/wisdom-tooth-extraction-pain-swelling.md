@@ -2,7 +2,7 @@
 title: '親知らずの抜歯後に頬が腫れた 薬が切れる夜がつらい'
 description: '10月7日に、深谷日赤で右下の親知らずを1本抜いた。翌朝の腫れや、痛み止めが切れる夜がつらかった。'
 pubDate: 2026-10-10T12:00:00+09:00
-category: '健康・ランニング'
+category: '医療'
 tags: ['親知らず', '抜歯', '健康', '深谷', '自営業', 'ナイトレイン']
 heroImage: '/images/wisdom-tooth-extraction-pain-swelling-eyecatch.jpg'
 heroImageAlt: '夜の木製テーブルに置かれた錠剤のシートと水の入ったグラスのイメージ'

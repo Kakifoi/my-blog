@@ -8,7 +8,7 @@ import { getHomeSeries } from '../src/data/home-series.mjs';
 
 // Run after the main agent's single production build; this script never builds.
 const targetCategories = ['子育て・日常', '旅行・おでかけ'];
-const categories = ['グルメ', '旅行・おでかけ', '子育て・日常', 'ゲーム・エンタメ', 'ガジェット・テクノロジー', 'お金・投資', '健康・ランニング'];
+const categories = ['グルメ', '旅行・おでかけ', '子育て・日常', 'ゲーム・エンタメ', 'ガジェット・テクノロジー', 'お金・投資', '健康', '医療', '美容'];
 const site = 'https://kakifoi.net';
 const sourceRoot = new URL('../src/content/blog/', import.meta.url);
 const files = (await readdir(sourceRoot, { recursive: true })).filter((file) => /\.mdx?$/.test(file));
@@ -171,6 +171,16 @@ for (const category of categories.filter((category) => !targetCategories.include
 		const back = one(byClass(dom, 'back-link'));
 		assert.equal(attr(back, 'href'), '/categories');
 		assert.equal(text(back), '← カテゴリ一覧へ戻る');
+		const relatedCategories = ['健康', '医療', '美容'];
+		const relatedNavs = byClass(dom, 'related-categories');
+		if (relatedCategories.includes(category)) {
+			const nav = one(relatedNavs, 'one related category navigation');
+			assert.equal(attr(nav, 'aria-label'), '健康・医療・美容のカテゴリ');
+			const links = elements(nav, 'a');
+			assert.deepEqual(links.map((link) => pathname(attr(link, 'href'))), relatedCategories.map(rootUrl));
+			const current = one(links.filter((link) => attr(link, 'aria-current') === 'page'));
+			assert.equal(text(current), category);
+		} else assert.equal(relatedNavs.length, 0);
 		for (const name of ['home-header', 'home-sidebar', 'archive-grid', 'archive-pagination', 'blog-archive']) assert.equal(byClass(dom, name).length, 0);
 		const cards = byClass(one(byClass(dom, 'post-list')), 'post-card');
 		assert.equal(cards.length, expected.length, 'legacy categories are not paginated');
@@ -194,7 +204,7 @@ for (const category of categories.filter((category) => !targetCategories.include
 	});
 }
 
-test('built category index retains the legacy list and all seven original category counts', async () => {
+test('built category index retains the legacy list and all nine category counts', async () => {
 	const dom = await readPage('/categories/');
 	checkCanonical(dom, '/categories/');
 	assert.deepEqual(elements(dom, 'h1').map(text), ['カテゴリ一覧']);
@@ -221,4 +231,22 @@ test('built category routes contain only roots plus pages 2..N of the two target
 		for (let page = 2; page <= pageCount(category); page++) expected.push(`${category}/page/${page}/index.html`);
 	}
 	assert.deepEqual(actual, expected.sort(), 'no /page/1/, empty extra pages, or non-target pagination');
+});
+
+test('retired combined category URLs redirect directly to an existing new category', async () => {
+	const redirects = (await readFile(new URL('../dist/_redirects', import.meta.url), 'utf8'))
+		.split('\n')
+		.map((line) => line.trim().split(/\s+/))
+		.filter(([from]) => from.startsWith('/'));
+	for (const [oldCategory, category] of [
+		['健康・ランニング', '健康'],
+		['ジョギング・健康', '健康'],
+		['美容・健康', '美容'],
+	]) {
+		const rule = one(redirects.filter(([from]) => from === rootUrl(oldCategory)), `one redirect for ${oldCategory}`);
+		assert.deepEqual(rule, [rootUrl(oldCategory), rootUrl(category), '301']);
+		checkCanonical(await readPage(rootUrl(category)), rootUrl(category));
+		assert.ok(categoryPosts(category).length > 0, 'redirect destination contains current posts');
+		assert.equal(redirects.some(([from]) => from === rootUrl(category)), false, 'no redirect chain');
+	}
 });

@@ -3,7 +3,7 @@ title: '祖母の一周忌。家族三人の「老い」から考えた、80歳�
 description: '祖母の一周忌で聞いた話をきっかけに、祖父・祖母・父という家族三人の「老い」と最期を振り返る。糖尿病や脳梗塞、認知症、DIE WITH ZERO、そして健康管理の差から、80歳まで元気に生きるために今から何をするかを考えた記録。'
 pubDate: '2026-07-20T12:00:00+09:00'
 heroImage: '/images/sobo-isshuki-rouka-hero.jpg'
-category: '健康・ランニング'
+category: '健康'
 tags: ['健康', '家族', '日記', 'DIE WITH ZERO', 'ライフスタイル', '認知症']
 ---
 

@@ -2,7 +2,7 @@
 title: '11月の同窓会に向けてAIで減量ラン計画を作った'
 description: '11月22日の中学校同窓会に向け、AIと減量計画を作成。71.5kgから68kg前後を目標に、週3回のジョギングと食事管理を始めた初日の記録。'
 pubDate: '2026-08-02T12:00:00+09:00'
-category: '健康・ランニング'
+category: '健康'
 tags: ['健康', 'ジョギング', 'AI活用', '日記', 'ナイトレイン', '友人']
 heroImage: '/images/ai-weight-loss-running-plan-eyecatch.jpg'
 ---

@@ -2,7 +2,7 @@
 title: '40歳の節目健診に行ってきた'
 description: '40歳の節目健診で深谷寄居医師会メディカルセンターへ。協会けんぽの生活習慣病予防健診で、眼底検査や腹部エコー、肺機能検査を初体験。採血やバリウム、中性脂肪154mg/dLの結果まで振り返った。'
 pubDate: '2026-08-04T12:00:00+09:00'
-category: '健康・ランニング'
+category: '健康'
 tags: ['健康', '深谷', '自営業', '日記', 'ライフスタイル']
 heroImage: '/images/40th-milestone-health-checkup-eyecatch.jpg'
 ---

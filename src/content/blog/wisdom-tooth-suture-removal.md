@@ -4,7 +4,7 @@ description: '深谷日赤で右下の親知らずを抜いて1週間。痛み�
 pubDate: 2026-10-14T12:00:00+09:00
 heroImage: '/images/wisdom-tooth-suture-removal-eyecatch.jpg'
 heroImageAlt: '青空の下に建つ深谷赤十字病院と、正面入口へ続く屋根付きの通路のイメージ'
-category: '健康・ランニング'
+category: '医療'
 tags: ['親知らず', '抜歯', '健康', '深谷', '日記']
 ---
 

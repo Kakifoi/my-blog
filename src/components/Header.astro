@@ -104,4 +104,9 @@ header {
 	.tagline { display: none; }
 	.nav-inner a { padding: 0.65em 0.6em; font-size: 0.78rem; }
 }
+
+@media (max-width: 400px) {
+	.nav-inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.nav-inner a { text-align: center; }
+}
 </style>

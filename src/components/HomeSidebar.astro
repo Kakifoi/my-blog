@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { posts, showBlogmuraSupport = false } = Astro.props;
-const categories = ['グルメ', '旅行・おでかけ', '子育て・日常', 'ゲーム・エンタメ', 'ガジェット・テクノロジー', 'お金・投資', '健康・ランニング'];
+const categories = ['グルメ', '旅行・おでかけ', '子育て・日常', 'ゲーム・エンタメ', 'ガジェット・テクノロジー', 'お金・投資', '健康', '医療', '美容'];
 const tagCounts = new Map<string, number>();
 posts.forEach((post) => post.data.tags.forEach((tag) => tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1)));
 // 地域はメイン欄の専用入口へ。汎用的な「日記」は一覧に残し、ここでは主題を優先する。

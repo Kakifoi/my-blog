@@ -2,7 +2,7 @@
 title: '深谷日赤で親知らずを1本抜いた 思ったより痛くなくて拍子抜け'
 description: '深谷日赤で右下の親知らずを1本抜いた日の記録。上の2本を残す判断、抜歯中と帰宅後の痛み、会計と次の予定をまとめた。'
 pubDate: '2026-10-07T12:00:00+09:00'
-category: '健康・ランニング'
+category: '医療'
 tags: ['親知らず','抜歯','健康','深谷','日記']
 heroImage: '/images/fukaya-nisseki-wisdom-tooth-extraction-eyecatch.jpg'
 heroImageAlt: '秋の青空の下に建つ病院と、正面玄関へ続く屋根付きの通路'

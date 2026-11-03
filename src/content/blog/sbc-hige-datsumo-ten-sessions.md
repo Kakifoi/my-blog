@@ -2,7 +2,7 @@
 title: 'SBCのヒゲ脱毛10回目で感じた効果とコース選び'
 description: 'SBC（湘南美容クリニック）のヒゲ脱毛10回目の記録。髭剃りの変化、顔とわきのコース選び、白髭のニードル脱毛を追加するかについてまとめた。'
 pubDate: '2026-10-23'
-category: '健康・ランニング'
+category: '美容'
 tags: ['髭脱毛', '湘南美容クリニック', 'ニードル脱毛', '白髭', '時短', '健康']
 heroImage: '/images/sbc-hige-datsumo-ten-sessions-hero.jpg'
 heroImageAlt: '医療レーザー脱毛機と施術用ベッドのある明るい施術室'

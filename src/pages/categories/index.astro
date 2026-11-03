@@ -71,4 +71,11 @@ const categories = [...catMap.entries()].sort((a, b) => b[1] - a[1]);
 .arrow { color: #CC0000; }
 
 .empty { color: #999; }
+
+@media (max-width: 560px) {
+	.cat-badge { display: none; }
+	.cat-link { gap: 0.6em; padding: 0.9em 1em; }
+	.cat-name { min-width: 0; overflow-wrap: anywhere; }
+	.cat-count, .arrow { flex-shrink: 0; white-space: nowrap; }
+}
 </style>

@@ -7,7 +7,7 @@
 
 検査項目:
   1. frontmatter必須項目 (title/description/pubDate/category/tags) と
-     categoryが固定7種のいずれかであること [ERROR]
+     categoryが固定9種のいずれかであること [ERROR]
   2. heroImage: public配下に実ファイルが存在すること [不在=ERROR]。
      寸法が1200x675であること [違い=WARN]。heroImage無し自体は [WARN]
   3. プレースホルダー「【ここに」「挿入】」が本文に残っていないこと [ERROR]
@@ -41,7 +41,9 @@ CATEGORIES = [
     "ゲーム・エンタメ",
     "ガジェット・テクノロジー",
     "お金・投資",
-    "健康・ランニング",
+    "健康",
+    "医療",
+    "美容",
 ]
 
 REQUIRED_KEYS = ["title", "description", "pubDate", "category", "tags"]
@@ -137,7 +139,7 @@ def check_article(path, tag_counts):
         if fm.get("category"):
             cat = strip_quotes(fm["category"])
             if cat not in CATEGORIES:
-                errors.append(f"category「{cat}」は固定7種に無い")
+                errors.append(f"category「{cat}」は固定{len(CATEGORIES)}種に無い")
 
     # 2. heroImage
     hero = strip_quotes(fm.get("heroImage", ""))

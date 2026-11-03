@@ -2,7 +2,7 @@
 title: 'SBCで白髭ニードル脱毛の初回相談へ。100本想定で60,480円、麻酔はクリームに変えた'
 description: 'SBC大宮東口院で白髭ニードル脱毛の初回カウンセリングと採血を受け、100本想定60,480円の見積もり、麻酔の変更、施術予約までの流れをまとめた。'
 pubDate: '2026-09-04T12:00:00+09:00'
-category: '健康・ランニング'
+category: '美容'
 tags: ['健康', '髭脱毛', '湘南美容クリニック', 'ニードル脱毛', '白髭']
 heroImage: '/images/sbc-needle-hair-removal-counseling-eyecatch.jpg'
 ---
