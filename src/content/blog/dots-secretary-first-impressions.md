@@ -2,7 +2,7 @@
 title: 'Dotsを秘書として試してみた。まだ得意なことを探している'
 description: 'ChatGPTのDotsを秘書として試し、朝のチェックリストや子どもとの昼食先の相談を頼んでみました。リコのパソコン画面を見られることも確認した、使い始めの記録です。'
 pubDate: 2026-11-02
-heroImage: '/images/dots-secretary-first-impressions-eyecatch.jpg'
+heroImage: '/images/dots-secretary-first-impressions-eyecatch-v2.jpg'
 heroImageAlt: 'スマートフォンを手にしたカキフォイと、サングラスをかけた紫色のリコのイラスト'
 category: 'ガジェット・テクノロジー'
 tags: ['AI活用', 'ChatGPT']
