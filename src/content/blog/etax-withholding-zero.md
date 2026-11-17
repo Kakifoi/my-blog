@@ -2,6 +2,7 @@
 title: '源泉所得税0円でもe-Taxの送信は必要。去年の控えで確認する年2回の手続き'
 description: '年末調整の封筒をきっかけに、納期の特例で年2回送る源泉所得税の計算書を確認。納付税額0円でも必要なe-Tax送信と、去年の控えの見方を振り返った。'
 pubDate: 2026-10-27T12:00:00+09:00
+updatedDate: 2026-11-17
 category: 'お金・投資'
 tags: ['自営業', '日記', '税金', 'e-Tax']
 heroImage: '/images/etax-withholding-zero-eyecatch.jpg'
@@ -17,7 +18,9 @@ heroImage: '/images/etax-withholding-zero-eyecatch.jpg'
 
 封筒には、扶養控除等申告書や保険料控除申告書、源泉徴収簿などが入っていた。
 
-![年末調整の封筒に同封されていた4枚の税務書類](/images/etax-withholding-zero-documents-v2.jpg)
+![年末調整の書類をもとに生成・編集した説明用画像](/images/etax-withholding-zero-documents-v2.jpg)
+
+※2026年11月17日補足：画像は書類をもとに生成・編集したもので、細かな文字や様式は実物と異なります。手続きの確認には、実際の書類や本文の国税庁・e-Taxの案内を参照してください。
 
 俺は自営業で、住宅ローンなどの控除は個人の確定申告にまとめている。扶養控除等申告書など、会社に必要な書類は記入して保管する。
 
